@@ -1,7 +1,9 @@
 
 # Serbon
-## Tech: Typescript/JavaScript ECMA6 Template Literals, CustomEvents, Custom Tags.
-## Alternative for reactjs and vue. Must be simple and usefull.
+
+### Tech: Typescript/JavaScript ECMA6 Template Literals, CustomEvents, Custom Tags.
+### Alternative software - High Performace
+### Objective: Must be simple and usefull. Performace must be `100%` full PWA
 
 
 ## Basics
