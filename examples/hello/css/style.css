@@ -1,0 +1,102 @@
+:root.light {
+  --theme-primary: #d75894;
+  --theme-secondary: #9b3dca;
+  --theme-surface: #fff;
+  --theme-background: #fafafa;
+  --theme-on-primary: #fff;
+  --theme-on-secondary: #fff;
+  --theme-on-surface: #000;
+}
+
+:root.dark {
+  --theme-primary: #f34c83;
+  --theme-secondary: #c298dc;
+  --theme-surface: #2f2b2b;
+  --theme-background: #1b1918;
+  --theme-on-primary: #443e41;
+  --theme-on-secondary: #000;
+  --theme-on-surface: #f5f1f2;
+}
+
+@font-face {
+  font-family: Accuratist;
+  src: url(../assets/fonts/Accuratist.ttf);
+}
+
+@font-face {
+  font-family: Closeness;
+  src: url(../assets/fonts/Closeness.ttf);
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+button {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 100%;
+}
+
+button input {
+  height: 100%;
+}
+
+button input {
+  position: absolute;
+  bottom: -3px;
+  width: 100%;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid #cecece;
+  height: calc(100% + 3px);
+}
+
+button button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  z-index: 1;
+  width: 20%;
+  border: 1px solid;
+  border-radius: 4px;
+}
+
+button button:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-transform: translateY(3px);
+          transform: translateY(3px);
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/*# sourceMappingURL=style.css.map */

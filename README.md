@@ -1,9 +1,12 @@
 
-# Serbon
+# Popular Destroyer
 
-### Tech: Typescript/JavaScript ECMA6 Template Literals, CustomEvents, Custom Tags.
+### Tech: Based on Typescript/ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.
 ### Alternative software - High Performace
-### Objective: Must be simple and usefull. Performace must be `100%` full PWA
+### Objective: 
+ - Must be simple and usefull.
+ - Performace must be `100%`with full PWA support.
+ - For any platform adapted.
 
 
 ## Basics

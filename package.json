@@ -1,0 +1,43 @@
+{
+  "name": "popular-destroyer",
+  "version": "1.0.0",
+  "description": "Tech: Based on Typescript/ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.",
+  "main": "index.js",
+  "dependencies": {
+    "browser-resolve": "^2.0.0"
+  },
+  "devDependencies": {
+    "@webcomponents/webcomponentsjs": "^2.6.0",
+    "browserify": "^17.0.0",
+    "esmify": "^2.1.1",
+    "tsify": "^5.0.4",
+    "typescript": "^4.8.4",
+    "watchify": "^4.0.0"
+  },
+  "scripts": {
+    "build.example": "browserify src/main.ts -p [tsify --noImplicitAny] > library/example.js",
+    "example": "watchify examples/hello/demo1.ts -p [tsify --noImplicitAny] -o library/example.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zlatnaspirala/popular-killer.git"
+  },
+  "keywords": [
+    "Typescript",
+    "ECMA6",
+    "programming",
+    "paradigms",
+    "Template",
+    "Literals",
+    "CustomEvents",
+    "Custom",
+    "Tags"
+  ],
+  "author": "Nikola Lukic @zlatnaspirala",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zlatnaspirala/popular-killer/issues"
+  },
+  "homepage": "https://github.com/zlatnaspirala/popular-killer#readme"
+}
