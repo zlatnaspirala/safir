@@ -17,6 +17,8 @@ There are two way for creating web components:
 ## From code
 TYPESCRIPT/ECMA6
 
+It is very similar to the reactjs and vue.
+
 ```typescript
 import MyButton from "./button";
 import { IDestroyerComponent } from "../../../index";
@@ -89,10 +91,6 @@ WEB/HTML/JS/CSS (ecma6)
   };
 </script>
 ```
-
-## Construct help classes for components creating procces.
-## How to update without timer or any loop ? Try custom events
-
 
 
 ## Hosting
