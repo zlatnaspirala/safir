@@ -1,16 +1,33 @@
 
-export default class MyButton {
+import { BaseComponent, IDestroyerComponent } from "../../../index";
+
+export default class MyButton  extends BaseComponent implements IDestroyerComponent {
 
   id: string = 'my-button';
-  slogan: string = 'welcome here';
+  text: string = 'welcome here';
+  counter: number = 0;
 
-  onClick: () => void = () => {
-    console.info('CLick');
+  get getCounter () {
+    return this.counter;
+  }
+
+  constructor(arg: string | any) {
+    super(arg);
+    this.initial(arg);
+  }
+
+  onClick = () => {
+    console.info('Click trigger event. ->' + this);
+    console.info('Click trigger event. access props ->' + (this as any).getAttribute('data-counter'));
+    (this as any).setAttribute('data-counter', 2)
   }
 
   render = () => `
-    <button onClick="${ this.onClick }">
-      ${this.slogan}
-    </button>
-  `
+    <div id="${this.id}">
+      <button data-counter="${this.getCounter}" onclick="(${ this.onClick })()">
+        ${this.text} with ${this.getCounter}
+      </button>
+    </div>
+  `;
+
 }

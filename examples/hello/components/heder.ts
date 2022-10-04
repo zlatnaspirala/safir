@@ -1,17 +1,31 @@
 import MyButton from "./button";
+import { IDestroyerComponent } from "../../../index";
+import { BaseComponent } from "../../../index";
 
-export default class MyHeder {
+export default class MyHeader extends BaseComponent implements IDestroyerComponent {
 
-  id: string = 'my-new-heder';
-  slogan: string = 'welcome here';
+  id: string = 'my-heder';
+  slogan: string = 'My header.';
 
-  onClick = () => {
-    console.info("CLick")
+  mySybCompBtnYes = new MyButton({ text: 'Yes', id: 'Y'});
+  mySybCompBtnNo = new MyButton('No');
+
+  constructor(arg: any) {
+    super(arg);
+    this.initial(arg);
+  }
+
+  change = () => {
+    (window as any).app.changeTheme();
   }
 
   render = () => `
-    <div>
-       ${(new MyButton()).render()}
+    <div id="${this.id}" class="middle h5">
+       ${(this.mySybCompBtnYes).render()}
+       ${(this.mySybCompBtnNo).render()}
+       <div onclick="(${this.change})()">
+         Change Theme
+       </div>
     </div>
   `
 }

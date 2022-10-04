@@ -21,39 +21,39 @@ body {
   overflow: hidden;
 }
 
+body {
+  @include themify($themes) {
+    font-family: Accuratist;
+    color: themed('textColor');
+    background-color: themed('backgroundColor');
+  }
+}
+
+div {
+  @include themify($themes) {
+    font-family: Accuratist;
+    color: themed('textColor');
+    background-color: themed('backgroundColor');
+  }
+}
+
 button {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  height: 100%;
-
-  input {
-    height: 100%;
-  }
-  input {
-    position: absolute;
-    bottom: -3px;
-    width: 100%;
-    text-align: center;
-    border-radius: 4px;
-    border: 1px solid #cecece;
-    height: calc(100% + 3px);
-  }
-
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-    width: 20%;
-    border: 1px solid;
-    border-radius: 4px;
- 
-
+  @include themify($themes) {
+    color: themed('textColor');
+    background-color: themed('backgroundColor');
+    border: themed('buttonBorder');
+    font-family: Accuratist;
+    padding: 1px 1px 1px 1px;
+    margin: 1px 1px 1px 1px;
     &:active {
       box-shadow: none;
-      transform: translateY(3px);
+      transform: translateY(-1px);
+      transform: translateX(-1px);
+    }
+
+    &:hover {
+      color: themed('buttonTextHoverColor');
+      border: themed('buttonBorderHover')
     }
   }
 }
@@ -65,4 +65,27 @@ button {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.middle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  background-color:black;
+  color:white;
+
+  &.column {
+    flex-direction: column;
+  }
+}
+
+.h95 {
+  height: 95vh;
+}
+
+.h5 {
+  height: 5vh;
 }

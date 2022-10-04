@@ -1,36 +1,52 @@
-/**
- * @description
- * Test project structure
- */
+import { IDestroyerComponent } from "../types/global";
+import { Manager, getComp } from "./utils";
 
+export class BaseComponent implements IDestroyerComponent{
 
- export class Component {
+  public id: string = 'none';
+  public dom: HTMLElement | null = null;
+  public text: string = '';
+  public rootStyle: object = {};
 
-  private subComponents: Array<any>;
-  private domRoot: HTMLElement | null;
+  constructor(arg: any) {}
 
-  constructor(name: string) {
-    this.subComponents = [];
-    this.domRoot = document.getElementById("app");
-    this.construct();
+  ready() {
+    console.log('ready comp')
   }
 
-  info: () => void = () => {
-    console.log("Test popular killer.");
-  };
+  initial(arg: any, rootStyle?: any) {
+    if (typeof arg === 'string') {
+      console.warn('Arg text is used for id!');
+      this.text = arg;
+      this.id = arg;
+    }
+    if (typeof arg === 'object') {
+       this.text = arg.text;
+       this.id = arg.id;
+    }
+    if (rootStyle && typeof rootStyle.height !== 'undefined') {
+      this.rootStyle = rootStyle;
+    }
+  }
 
-  construct = () => {
+  set(arg: string, newValue: any) {
+    const local = 'data-' + arg;
+    const localRoot = getComp(this.id) as HTMLElement;
+    // Double care!
+    localRoot.setAttribute(local, newValue);
+    let root = this;
+    (root as any)[arg] = newValue;
+    console.info("Test set element care props!", (root as any)[arg]);
+    // >>>
+    this.update()
+  }
 
-    // let tag = "div";
-    // let html = `<${tag}> BLA BLA </${tag}>`;
-    // this.domRoot!.innerHTML = html;
-  };
+  render = () => ``;
 
-  render = () => {
-
+  update = () => {
+    getComp(this.id)!.innerHTML = this.render();
+    console.log("Update comp: ", this.id);
   }
 
 }
 
-// App instance
-console.info("popularDestroyer instance");

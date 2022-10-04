@@ -2,51 +2,87 @@
  * @description
  * Test project structure
  */
-import { myBase } from "./custom-com";
-//import "@webcomponents/webcomponentsjs/webcomponents-bundle";
-//import '@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js';
+
+import {myBase} from "./custom-com";
+import {Manager, getComp} from "./utils";
+export {IDestroyerComponent} from "../types/global";
 
 export class PopularDestroyer {
-
   private subComponents: Array<any>;
   private appRoot: HTMLElement | null;
 
   constructor() {
     this.subComponents = [];
-    this.appRoot = document.getElementById("app");
+    this.appRoot = getComp("app");
     this.construct();
   }
 
-  info: () => void = () => {
-    console.log("Test popular killer.");
+  ready: () => void = () => {
+    console.log("App root component is ready.");
   };
 
   construct = () => {
-    console.log("Test popular killer component.");
-
-    console.log("register popular killer component. ");
-    window.customElements.define('my-box', myBase);
-
-    // let tag = "div";
-    // let html = `<${tag}> BLA BLA </${tag}>`;
-    // this.appRoot!.innerHTML = html;
-    
+    console.log("Register component... ");
+    window.customElements.define("my-box", myBase);
+    this.ready();
   };
 
-  regComponent = (arg: any)=> {
+  regComponent = (arg: any) => {
     let x = document.createElement("my-box");
-    x.setAttribute("id", arg.id)
+    x.setAttribute("id", arg.id);
     this.appRoot?.appendChild(x);
-  }
+  };
 
   loadComponent = (arg: any) => {
     let x = document.createElement("div");
-    x.setAttribute("id", arg.id)
-    x.innerHTML = arg.render();
-    this.appRoot?.appendChild(x)
+    // x.setAttribute("id", arg.id);
+    // this.appRoot?.appendChild(x);
+    this.appRoot?.append(x);
+    x.innerHTML = arg.render(arg);
+    arg.ready();
+    return arg;
   };
 
-}
+  loadVanillaComp(arg: any) {
+    fetch(arg, {})
+      .then(res => {
+        return res.text();
+      })
+      .then(html => {
+        // console.warn(">>>HTML>>>>>>>" + html);
+        let test2 = html.split('<script>')[1];
+        let htmlContent = html.split('<script>')[0];
+        let myScriptContent = test2.split('</script>')[0];
+        let myScript = document.createElement('script');
+        myScript.innerHTML = myScriptContent;
+        // document.body.innerHTML += htmlContent;
+        this.appRoot!.innerHTML += htmlContent;
+        document.body.appendChild(myScript);
+        return "RETURN !";
+      });
+  }
 
-// App instance
-console.info("popularDestroyer instance");
+  changeTheme (newTheme: string | undefined) {
+    if (newTheme) {
+      if (getComp('app')?.classList.contains(newTheme)) {
+        console.info('already containe theme!')
+      } else {
+        getComp('app')?.classList.remove('theme-light');
+        getComp('app')?.classList.remove('theme-dark');
+        getComp('app')?.classList.add(newTheme);
+      }
+    } else {
+      if (getComp('app')?.classList.contains('theme-light')) {
+        console.info("Change theme !");
+        getComp('app')?.classList.remove('theme-light');
+        getComp('app')?.classList.add('theme-dark');
+      } else if (getComp('app')?.classList.contains('theme-dark')) {
+        console.info("Change theme !");
+        getComp('app')?.classList.remove('theme-dark');
+        getComp('app')?.classList.add('theme-light');
+      }
+    }
+
+  }
+
+}

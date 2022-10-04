@@ -8,25 +8,103 @@
  - Performace must be `100%`with full PWA support.
  - For any platform adapted.
 
-
 ## Basics
 
-WEB/HTML/JS/CSS (ecma6)
-```js
-let header = "Templates Literals";
-let tags = ["template literals", "javascript", "es6"];
+There are two way for creating web components:
+ - From code
+ - Vanilla component
 
+## From code
+TYPESCRIPT/ECMA6
 
-let html = `<h2>${header}</h2><ul>`;
+```typescript
+import MyButton from "./button";
+import { IDestroyerComponent } from "../../../index";
+import { BaseComponent } from "../../../index";
 
-for (const x of tags) {
-  html += `<li>${x}</li>`;
+export default class MyHeader extends BaseComponent implements IDestroyerComponent {
+
+  id: string = 'my-heder';
+  slogan: string = 'My header.';
+
+  mySybCompBtnYes = new MyButton({ text: 'Yes', id: 'Y'});
+  mySybCompBtnNo = new MyButton('No');
+
+  constructor(arg: any) {
+    super(arg);
+    this.initial(arg);
+  }
+
+  change = () => {
+    (window as any).app.changeTheme();
+  }
+
+  render = () => `
+    <div id="${this.id}" class="middle h5">
+       ${(this.mySybCompBtnYes).render()}
+       ${(this.mySybCompBtnNo).render()}
+       <div onclick="(${this.change})()">
+         Change Theme
+       </div>
+    </div>
+  `
 }
+```
 
-html += `</ul>`;
+## VANILLA COMPONENT
+WEB/HTML/JS/CSS (ecma6)
 
-document.getElementById("demo").innerHTML = html;
+```html
+<style>
+.myFooter {
+  font-family: Accuratist;
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+
+<div id="footer" class="theme-dark myFooter" onclick="footer.callMe()">
+  <p>maximumroulette.com</p>
+  <p>2023</p>
+</div>
+
+<script>
+  console.info('Footer load. Vanilla component is extreme html/css/js orientend.');
+  console.info('Write here javascript only');
+  console.info('I recommended nersted object structure!');
+
+  let footer = {
+    root: document.getElementById('footer'),
+    callMe: function(e) {
+      console.log('Call trigger on footer.', this);
+      this.root.innerHTML = 'what ever';
+    }
+  };
+</script>
 ```
 
 ## Construct help classes for components creating procces.
 ## How to update without timer or any loop ? Try custom events
+
+
+
+## Hosting
+
+For localhost (http) web server:
+```
+http-server -p 80
+or
+npm run dev
+```
+
+Run watch:
+```
+npm run example
+```

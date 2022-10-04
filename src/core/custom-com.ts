@@ -1,12 +1,13 @@
 
+import { middleBox } from "../style/base";
+
 export class Base extends HTMLElement {
 
   constructor(...args: any) {
 
     super(...(args as ConstructorParameters<typeof HTMLElement>))
-    // super();
 
-    console.log('changed 1style')
+    console.log('Base class init...')
     const shadowRoot = this.attachShadow({mode: 'open'});
     let inputElement = document.createElement('template');
     inputElement.setAttribute('id', this.getAttribute('id')!);
@@ -19,24 +20,14 @@ export class Base extends HTMLElement {
     // need trick
     // inputElement.setAttribute('class', this.getAttribute('class'));
     // predefined
-    let standardStyle = `
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100vh;
-      background-color:black;
-      color:white;
-    `;
 
-    inputElement.setAttribute('style', standardStyle);
+    inputElement.setAttribute('style', middleBox);
 
     console.log('changed style')
     // if (this.getAttribute('style') !== null) inputElement.setAttribute('style', this.getAttribute('style')!);
 
     inputElement.addEventListener('mousemove', () => {
-      console.log('hover on element.');
+      console.log('hover on element.', this.getAttribute('id'));
     });
 
     // inputElement.addEventListener('change', (e) => {

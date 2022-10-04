@@ -1,22 +1,23 @@
 {
   "name": "popular-destroyer",
   "version": "1.0.0",
-  "description": "Tech: Based on Typescript/ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.",
-  "main": "index.js",
+  "description": "Tech: Based on Typescript/ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags. Performance is priory here.",
+  "main": "index.ts",
   "dependencies": {
     "browser-resolve": "^2.0.0"
   },
   "devDependencies": {
-    "@webcomponents/webcomponentsjs": "^2.6.0",
     "browserify": "^17.0.0",
     "esmify": "^2.1.1",
+    "http-server": "^14.1.1",
     "tsify": "^5.0.4",
     "typescript": "^4.8.4",
     "watchify": "^4.0.0"
   },
   "scripts": {
-    "build.example": "browserify src/main.ts -p [tsify --noImplicitAny] > library/example.js",
-    "example": "watchify examples/hello/demo1.ts -p [tsify --noImplicitAny] -o library/example.js",
+    "build.example": "browserify examples/hello/demo1.ts -p [tsify --noImplicitAny] > dist/example.js",
+    "example": "watchify examples/hello/demo1.ts -p [tsify --noImplicitAny] -o dist/example.js",
+    "dev": "http-server -p 80",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
