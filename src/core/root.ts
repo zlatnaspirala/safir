@@ -27,12 +27,6 @@ export class PopularDestroyer {
     this.ready();
   };
 
-  regComponent = (arg: any) => {
-    let x = document.createElement("my-box");
-    x.setAttribute("id", arg.id);
-    this.appRoot?.appendChild(x);
-  };
-
   loadComponent = (arg: any) => {
     let x = document.createElement("div");
     // x.setAttribute("id", arg.id);
@@ -40,6 +34,7 @@ export class PopularDestroyer {
     this.appRoot?.append(x);
     x.innerHTML = arg.render(arg);
     arg.ready();
+    this.subComponents.push(arg);
     return arg;
   };
 

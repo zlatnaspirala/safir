@@ -1,33 +1,43 @@
+import {BaseComponent, IDestroyerComponent} from "../../../index";
 
-import { BaseComponent, IDestroyerComponent } from "../../../index";
-
-export default class MyButton  extends BaseComponent implements IDestroyerComponent {
-
-  id: string = 'my-button';
-  text: string = 'welcome here';
+export default class MyButton
+  extends BaseComponent
+  implements IDestroyerComponent
+{
+  id: string = '';
+  text: string = '';
   counter: number = 0;
 
-  get getCounter () {
+  get getCounter() {
     return this.counter;
   }
+
+  ready = () => {
+    // console.log('ready comp');
+  };
 
   constructor(arg: string | any) {
     super(arg);
     this.initial(arg);
   }
 
-  onClick = () => {
-    console.info('Click trigger event. ->' + this);
-    console.info('Click trigger event. access props ->' + (this as any).getAttribute('data-counter'));
-    (this as any).setAttribute('data-counter', 2)
-  }
+  onClick = (event: string) => {
+    let onClickEvent = new CustomEvent(event, {
+      bubbles: true,
+      detail: {
+        info: 'Incrase counter',
+        for: event,
+        target: this
+      },
+    });
+    dispatchEvent(onClickEvent);
+  };
 
   render = () => `
     <div id="${this.id}">
-      <button data-counter="${this.getCounter}" onclick="(${ this.onClick })()">
-        ${this.text} with ${this.getCounter}
+      <button data-counter="${this.getCounter}" onclick="(${this.onClick})('${this.id}')">
+        ${this.text} class MyButton prop counter = ${this.getCounter}
       </button>
     </div>
   `;
-
 }
