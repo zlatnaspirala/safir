@@ -11,7 +11,7 @@ export class BaseComponent implements IDestroyerComponent{
   constructor(arg: any) {}
 
   ready() {
-    console.log('ready comp')
+    console.log('ready comp');
   }
 
   initial(arg: any, rootStyle?: any) {
@@ -29,23 +29,35 @@ export class BaseComponent implements IDestroyerComponent{
     }
   }
 
-  set(arg: string, newValue: any) {
+  set(arg: string, newValue: any, extraData?: object | any) {
     const local = 'data-' + arg;
     const localRoot = getComp(this.id) as HTMLElement;
     // Double care!
     localRoot.setAttribute(local, newValue);
     let root = this;
     (root as any)[arg] = newValue;
-    console.info("Test set element care props!", (root as any)[arg]);
-    // >>>
-    this.update()
+    // console.info("props " + (root as any)[arg] + " test 'on-' + arg " + 'on-' + arg);
+    this.update(root, arg, extraData);
   }
 
   render = () => ``;
 
-  update = () => {
-    getComp(this.id)!.innerHTML = this.render();
-    console.log("Update comp: ", this.id);
+  update = (root: any, arg: string, extraData?: any) => {
+    getComp(root.id)!.innerHTML = this.render();
+    if (extraData?.emit === false) {
+      console.info("Update Comp:", this.id);
+      return;
+    }
+    // Emiter
+    dispatchEvent(new CustomEvent('on-' + arg, {
+      bubbles: true,
+      detail: {
+        emitter: root.id,
+        arg: arg,
+        newValue: (root as any)[arg]
+      }
+    }));
+    console.info("Update/Emited Comp:", this.id);
   }
 
 }

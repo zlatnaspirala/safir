@@ -7,11 +7,9 @@ let app  = new PopularDestroyer();
 (window as any).app = app;
 
 let myHeader = app.loadComponent(new MyHeader('my-header'));
-
 let myLayout = app.loadComponent(new Layout('my-layout'));
 
-let myFooterVanilla = app.loadVanillaComp("/examples/hello/vanilla-components/footer.html");
+app.loadVanillaComp("/examples/hello/vanilla-components/footer.html");
 
-
-console.log("Vanilla component : ", myFooterVanilla);
+console.info("Application running...");
 (window as any).app = app;

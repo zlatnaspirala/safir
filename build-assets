@@ -1,0 +1,11 @@
+#!/bin/bash
+# Project: Destroyer 1.0.0
+# Tested on windows bash terminal
+echo -e "$(tput bold) . $(tput sgr0)";
+mkdir -p dist/assets/;
+yes | cp -Rf examples/hello/assets/* dist/assets/;
+echo
+echo -e "$(tput bold) Destroyer assets bulder $(tput sgr0)";
+echo -e "$(tput setaf 4) Final production pack at: /dist";
+echo -e "Crazy good and fast! $(tput sgr0).";
+echo

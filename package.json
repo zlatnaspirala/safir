@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build.example": "browserify examples/hello/demo1.ts -p [tsify --noImplicitAny] > dist/example.js",
-    "example": "watchify examples/hello/demo1.ts -p [tsify --noImplicitAny] -o dist/example.js",
+    "example": "watchify examples/hello/demo1.ts -p [tsify --noImplicitAny] -o dist/example.js |mkdir -p dist/assets/|cp -Rf examples/hello/assets/* dist/assets",
     "dev": "http-server -p 80",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

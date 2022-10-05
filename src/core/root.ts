@@ -5,6 +5,7 @@
 
 import {myBase} from "./custom-com";
 import {Manager, getComp} from "./utils";
+import {On} from "./modifier";
 export {IDestroyerComponent} from "../types/global";
 
 export class PopularDestroyer {
@@ -18,23 +19,27 @@ export class PopularDestroyer {
   }
 
   ready: () => void = () => {
-    console.log("App root component is ready.");
+    // console.info("App root component is ready.");
   };
 
   construct = () => {
-    console.log("Register component... ");
-    window.customElements.define("my-box", myBase);
+    window.customElements.define('my-box', myBase);
     this.ready();
   };
 
+  loadMultilang = function() {
+    // console.info("Register component... ");
+    fetch('./')
+  };
+
   loadComponent = (arg: any) => {
-    let x = document.createElement("div");
+    let x = document.createElement('div');
     // x.setAttribute("id", arg.id);
     // this.appRoot?.appendChild(x);
     this.appRoot?.append(x);
     x.innerHTML = arg.render(arg);
-    arg.ready();
     this.subComponents.push(arg);
+    arg.ready();
     return arg;
   };
 
@@ -53,7 +58,7 @@ export class PopularDestroyer {
         // document.body.innerHTML += htmlContent;
         this.appRoot!.innerHTML += htmlContent;
         document.body.appendChild(myScript);
-        return "RETURN !";
+        return true;
       });
   }
 

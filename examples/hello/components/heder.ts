@@ -1,7 +1,7 @@
 import MyButton from "./button";
 import { IDestroyerComponent } from "../../../index";
-import { BaseComponent } from "../../../index";
-import { getComp } from "../../../src/core/utils";
+import { On, BaseComponent } from "../../../index";
+// import { getComp } from "../../../src/core/utils";
 
 export default class MyHeader extends BaseComponent implements IDestroyerComponent {
 
@@ -12,14 +12,14 @@ export default class MyHeader extends BaseComponent implements IDestroyerCompone
   mySybCompBtnNo = new MyButton({ text: 'No decrase counter!', id: 'no'});
 
   ready = () =>  {
-    // console.log('ready');
+    console.log('header ready');
   }
 
   constructor(arg: any) {
     super(arg);
     this.initial(arg);
 
-    addEventListener('yes', () => {
+    On('yes', () => {
       console.info('Trigger Btn Yes', (this as any));
       let newValue = this.mySybCompBtnYes.getCounter + 1;
       this.mySybCompBtnYes.set('counter', newValue);
@@ -28,7 +28,7 @@ export default class MyHeader extends BaseComponent implements IDestroyerCompone
     addEventListener('no', () => {
       console.info('Trigger Btn no', (this as any));
       let newValue = this.mySybCompBtnNo.getCounter - 1;
-      this.mySybCompBtnNo.set('counter', newValue);
+      this.mySybCompBtnNo.set('counter', newValue, { emit: false });
     });
   }
 
