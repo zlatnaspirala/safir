@@ -6,13 +6,50 @@
 import {myBase} from "./custom-com";
 import {Manager, getComp} from "./utils";
 import {On} from "./modifier";
-export {IDestroyerComponent} from "../types/global";
 
-export class PopularDestroyer {
+export {IDestroyerComponent} from "../types/global";
+export {getComp} from "./utils";
+export let T: any = {};
+
+class BaseDestroyer {
+
+
+
+  emitML = async function (r: any) {
+    const x = await r.loadMultilang();
+    T = x;
+    // internal exspose to the global obj
+    // Better then injecting intro every sub comp!
+    dispatchEvent(new CustomEvent('app.ready', { detail: {
+      info: 'app.ready'
+    }}));
+  }
+
+  loadMultilang: (path?: string) => {} = async function(path = 'assets/multilang/en.json') {
+    console.info("Multilang integrated component... ");
+    // Predefined path ../assets
+    const r = await fetch(path, { headers : {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }});
+    return await r.json();
+  };
+
+}
+
+export class Destroyer extends BaseDestroyer {
   private subComponents: Array<any>;
   private appRoot: HTMLElement | null;
 
   constructor() {
+    super();
+    // On('app.ready', (data: any) => {
+    //   if (data.detail.info == "app.ready") {
+    //     // Integrated multilang app.ready
+    //     T = data.detail.labels;
+    //     console.log("Test global T :", T);
+    //   }
+    // });
     this.subComponents = [];
     this.appRoot = getComp("app");
     this.construct();
@@ -23,19 +60,16 @@ export class PopularDestroyer {
   };
 
   construct = () => {
+    // Translation Enabled.
+    this.emitML(this);
+    // console.info("Multilang integrated component.ROOT. ", this.l);
     window.customElements.define('my-box', myBase);
     this.ready();
-  };
-
-  loadMultilang = function() {
-    // console.info("Register component... ");
-    fetch('./')
   };
 
   loadComponent = (arg: any) => {
     let x = document.createElement('div');
     // x.setAttribute("id", arg.id);
-    // this.appRoot?.appendChild(x);
     this.appRoot?.append(x);
     x.innerHTML = arg.render(arg);
     this.subComponents.push(arg);
@@ -62,27 +96,6 @@ export class PopularDestroyer {
       });
   }
 
-  changeTheme (newTheme: string | undefined) {
-    if (newTheme) {
-      if (getComp('app')?.classList.contains(newTheme)) {
-        console.info('already containe theme!')
-      } else {
-        getComp('app')?.classList.remove('theme-light');
-        getComp('app')?.classList.remove('theme-dark');
-        getComp('app')?.classList.add(newTheme);
-      }
-    } else {
-      if (getComp('app')?.classList.contains('theme-light')) {
-        console.info("Change theme !");
-        getComp('app')?.classList.remove('theme-light');
-        getComp('app')?.classList.add('theme-dark');
-      } else if (getComp('app')?.classList.contains('theme-dark')) {
-        console.info("Change theme !");
-        getComp('app')?.classList.remove('theme-dark');
-        getComp('app')?.classList.add('theme-light');
-      }
-    }
 
-  }
 
 }

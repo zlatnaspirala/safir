@@ -1,4 +1,5 @@
-import { IDestroyerComponent } from "../types/global";
+import { IDestroyerComponent, IOnEventDetail } from "../types/global";
+import { On } from "./modifier";
 import { Manager, getComp } from "./utils";
 
 export class BaseComponent implements IDestroyerComponent{
@@ -7,7 +8,6 @@ export class BaseComponent implements IDestroyerComponent{
   public dom: HTMLElement | null = null;
   public text: string = '';
   public rootStyle: object = {};
-
   constructor(arg: any) {}
 
   ready() {
@@ -19,8 +19,7 @@ export class BaseComponent implements IDestroyerComponent{
       console.warn('Arg text is used for id!');
       this.text = arg;
       this.id = arg;
-    }
-    if (typeof arg === 'object') {
+    } else if (typeof arg === 'object') {
        this.text = arg.text;
        this.id = arg.id;
     }
@@ -36,7 +35,6 @@ export class BaseComponent implements IDestroyerComponent{
     localRoot.setAttribute(local, newValue);
     let root = this;
     (root as any)[arg] = newValue;
-    // console.info("props " + (root as any)[arg] + " test 'on-' + arg " + 'on-' + arg);
     this.update(root, arg, extraData);
   }
 
@@ -55,10 +53,32 @@ export class BaseComponent implements IDestroyerComponent{
         emitter: root.id,
         arg: arg,
         newValue: (root as any)[arg]
-      }
+      } as IOnEventDetail
     }));
     console.info("Update/Emited Comp:", this.id);
   }
+
+  changeTheme = (newTheme?: string | any) => {
+    if (newTheme) {
+      if (getComp('app')?.classList.contains(newTheme)) {
+        console.info('already containe theme!');
+      } else {
+        getComp('app')?.classList.remove('theme-light');
+        getComp('app')?.classList.remove('theme-dark');
+        getComp('app')?.classList.add(newTheme);
+      }
+    } else {
+      if (getComp('app')?.classList.contains('theme-light')) {
+        console.info('Change theme !');
+        getComp('app')?.classList.remove('theme-light');
+        getComp('app')?.classList.add('theme-dark');
+      } else if (getComp('app')?.classList.contains('theme-dark')) {
+        console.info('Change theme !');
+        getComp('app')?.classList.remove('theme-dark');
+        getComp('app')?.classList.add('theme-light');
+      }
+    }
+  };
 
 }
 

@@ -8,3 +8,9 @@ export interface IOnEventDetail {
   arg: string,
   newValue: any
 }
+
+export interface IOnClickDetail {
+  for : string;
+  info: string;
+  target: HTMLElement;
+}

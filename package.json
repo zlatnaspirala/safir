@@ -1,5 +1,5 @@
 {
-  "name": "popular-destroyer",
+  "name": "destroyer",
   "version": "1.0.0",
   "description": "Tech: Based on Typescript/ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags. Performance is priory here.",
   "main": "index.ts",
@@ -15,9 +15,10 @@
     "watchify": "^4.0.0"
   },
   "scripts": {
-    "build.example": "browserify examples/hello/demo1.ts -p [tsify --noImplicitAny] > dist/example.js",
-    "example": "watchify examples/hello/demo1.ts -p [tsify --noImplicitAny] -o dist/example.js |mkdir -p dist/assets/|cp -Rf examples/hello/assets/* dist/assets",
-    "dev": "http-server -p 80",
+    "build.example": "build-assets.sh | browserify examples/hello/demo1.ts -p [tsify --noImplicitAny] > dist/example.js",
+    "example": "build-assets.sh | watchify examples/hello/demo1.ts -p [tsify --noImplicitAny] -o dist/example.js",
+    "build.assets": "build-assets.sh",
+    "host": "http-server ./dist/ -p 80",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

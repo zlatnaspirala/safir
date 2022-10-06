@@ -1,15 +1,16 @@
 
-import { PopularDestroyer } from "../../index";
-import MyHeader from "./components/heder";
-import Layout from "./components/layout";
+import { Destroyer, On } from "../../index";
+import MyHeader from "./layouts/heder";
+import Layout from "./layouts/body";
 
-let app  = new PopularDestroyer();
-(window as any).app = app;
+let app  = new Destroyer();
+app.loadVanillaComp("vanilla-components/footer.html");
+// (window as any).app = app;
 
-let myHeader = app.loadComponent(new MyHeader('my-header'));
-let myLayout = app.loadComponent(new Layout('my-layout'));
+On("app.ready", () => {
+  let myHeader = app.loadComponent(new MyHeader('my-header'));
+  let myLayout = app.loadComponent(new Layout('my-layout'));
+  console.info("Application running [ready]...", Date.now());
+});
 
-app.loadVanillaComp("/examples/hello/vanilla-components/footer.html");
-
-console.info("Application running...");
-(window as any).app = app;
+console.info("Application running [sync]...", Date.now());

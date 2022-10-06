@@ -1,5 +1,5 @@
 
-# Popular Destroyer WIP
+# Destroyer WIP
 
 ### Tech: Based on Typescript/ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.
 ### Alternative software - High Performace
@@ -95,14 +95,21 @@ WEB/HTML/JS/CSS (ecma6)
 
 ## Hosting
 
-For localhost (http) web server:
+### For localhost (http) web server:
 ```
-http-server -p 80
+http-server ./dist -p 80
 or
-npm run dev
+npm run host
 ```
 
+### For localhost watch:
 Run watch:
 ```
 npm run example
+```
+
+### For production (https) web server:
+Run command:
+```js
+npm run build.example
 ```

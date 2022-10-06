@@ -1,6 +1,6 @@
 {
-  "name": "Popular Destroyer",
-  "short_name": "Popular Destroyer",
+  "name": "Destroyer",
+  "short_name": "Destroyer",
   "start_url": "examples.html",
   "orientation": "landscape",
   "theme_color": "aliceblue",

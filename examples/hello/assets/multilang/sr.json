@@ -1,5 +1,8 @@
 {
-  "changetheme": "Promeni temu",
-  "yes": "Da",
-  "no": "Ne"
+  "changeTheme": "Change Theme",
+  "yes": "Yes",
+  "no": "No",
+  "destroyer": "Destroyer",
+  "welcome":"Welcome",
+  "textAlert": "This is modal ! Why not !"
 }

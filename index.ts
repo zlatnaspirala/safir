@@ -1,14 +1,20 @@
 
-import { 
-  PopularDestroyer,
+import {
+  getComp,
+  T,
+  Destroyer,
   IDestroyerComponent } from "./src/core/root";
 
+import { IOnEventDetail } from "./src/types/global";
 import { BaseComponent } from "./src/core/comp";
 import { On } from "./src/core/modifier";
 
 export {
-  PopularDestroyer,
+  Destroyer,
   BaseComponent,
   On,
-  IDestroyerComponent
+  T,
+  getComp,
+  IDestroyerComponent,
+  IOnEventDetail
 }
