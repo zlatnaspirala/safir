@@ -6,7 +6,6 @@ import {
   BaseComponent,
   IDestroyerComponent } from "../../../index";
 
-
 export default class MyHeader extends BaseComponent implements IDestroyerComponent {
 
   id: string = 'my-heder';
