@@ -21,17 +21,7 @@ export default class MyButton
     this.initial(arg);
   }
 
-  onClick = (event: string) => {
-    let onClickEvent = new CustomEvent(event, {
-      bubbles: true,
-      detail: {
-        info: 'Incrase counter',
-        for: event,
-        target: this
-      },
-    });
-    dispatchEvent(onClickEvent);
-  };
+  onClick = this.clickBind;
 
   render = () => `
     <div id="${this.id}">

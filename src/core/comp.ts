@@ -80,5 +80,17 @@ export class BaseComponent implements IDestroyerComponent{
     }
   };
 
+  clickBind = (a?: any) => {
+    let onClickEvent = new CustomEvent(a, {
+      bubbles: true,
+      detail: {
+        info: 'clickBind',
+        for: a,
+        target: this
+      },
+    });
+    dispatchEvent(onClickEvent);
+  };
+
 }
 

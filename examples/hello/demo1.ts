@@ -1,11 +1,10 @@
 
-import { Destroyer, On } from "../../index";
+import { RedStone, On } from "../../index";
 import MyHeader from "./layouts/heder";
 import Layout from "./layouts/body";
 
-let app  = new Destroyer();
+let app  = new RedStone();
 app.loadVanillaComp("vanilla-components/footer.html");
-// (window as any).app = app;
 
 On("app.ready", () => {
   let myHeader = app.loadComponent(new MyHeader('my-header'));

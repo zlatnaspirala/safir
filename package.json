@@ -1,7 +1,7 @@
 {
-  "name": "destroyer",
+  "name": "red-stone",
   "version": "1.0.0",
-  "description": "Tech: Based on Typescript/ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags. Performance is priory here.",
+  "description": "BETA VER. Tech: Based on Typescript/ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags. Performance is priory here.",
   "main": "index.ts",
   "dependencies": {
     "browser-resolve": "^2.0.0"

@@ -1,5 +1,5 @@
 
-# Destroyer WIP
+# RedStone WIP
 
 ### Tech: Based on Typescript/ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.
 ### Alternative software - High Performace
