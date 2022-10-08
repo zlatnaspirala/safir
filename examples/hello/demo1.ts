@@ -1,9 +1,9 @@
 
-import { RedStone, On } from "../../index";
+import { Smaragd, On } from "../../index";
 import MyHeader from "./layouts/heder";
 import Layout from "./layouts/body";
 
-let app  = new RedStone();
+let app  = new Smaragd();
 app.loadVanillaComp("vanilla-components/footer.html");
 
 On("app.ready", () => {

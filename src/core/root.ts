@@ -37,7 +37,7 @@ class BaseDestroyer {
 
 }
 
-export class RedStone extends BaseDestroyer {
+export class Smaragd extends BaseDestroyer {
   private subComponents: Array<any>;
   private appRoot: HTMLElement | null;
 

@@ -1,8 +1,6 @@
 import MyButton from "../components/button";
 import {
-  On,
-  T,
-  getComp,
+  On, T,
   BaseComponent,
   IDestroyerComponent } from "../../../index";
 
@@ -46,17 +44,7 @@ export default class MyHeader extends BaseComponent implements IDestroyerCompone
 
   }
 
-  change = (event: string) => {
-      let onClickEvent = new CustomEvent(event, {
-        bubbles: true,
-        detail: {
-          info: 'Change theme',
-          for: event,
-          target: this
-        },
-      });
-      dispatchEvent(onClickEvent);
-  }
+  change = this.clickBind;
 
   render = () => `
     <div id="${this.id}" class="middle h5">

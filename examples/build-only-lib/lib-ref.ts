@@ -1,4 +1,4 @@
 
-import { RedStone } from "../../index";
-// let app  = new RedStone();
-console.info("Application running [sync]...", RedStone);
+import { Smaragd } from "../../index";
+// let app  = new Smaragd();
+console.info("Application running [sync]...", Smaragd);
