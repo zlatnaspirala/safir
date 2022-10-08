@@ -18,6 +18,7 @@
     "build.example": "build-assets.sh | browserify examples/hello/demo1.ts -p [tsify --noImplicitAny] > dist/example.js",
     "example": "build-assets.sh | watchify examples/hello/demo1.ts -p [tsify --noImplicitAny] -o dist/example.js",
     "build.assets": "build-assets.sh",
+    "build.lib": "browserify examples/build-only-lib/lib-ref.ts -p [tsify --noImplicitAny] > dist/redstone.lib.js",
     "host": "http-server ./dist/ -p 80",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
