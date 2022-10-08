@@ -1,3 +1,6 @@
+
+test
+
 # Logs
 logs
 *.log
@@ -102,3 +105,4 @@ dist
 
 # TernJS port file
 .tern-port
+test/build-assets.sh
