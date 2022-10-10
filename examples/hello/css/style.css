@@ -35,6 +35,12 @@ body {
   background-color: #222;
 }
 
+.theme-orange body {
+  font-family: Accuratist;
+  color: #f53c17;
+  background-color: #222;
+}
+
 .theme-light div {
   font-family: Accuratist;
   color: #408bbd;
@@ -44,6 +50,12 @@ body {
 .theme-dark div {
   font-family: Accuratist;
   color: #ddd;
+  background-color: #222;
+}
+
+.theme-orange div {
+  font-family: Accuratist;
+  color: #f53c17;
   background-color: #222;
 }
 
@@ -91,6 +103,29 @@ body {
 .theme-dark button:hover {
   color: white;
   border: 1px solid #fafafa;
+}
+
+.theme-orange button {
+  color: #f53c17;
+  background-color: #222;
+  border: 1px solid #ffc228;
+  font-family: Accuratist;
+  padding: 1px 1px 1px 1px;
+  margin: 1px 1px 1px 1px;
+}
+
+.theme-orange button:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-transform: translateY(-1px);
+          transform: translateY(-1px);
+  -webkit-transform: translateX(-1px);
+          transform: translateX(-1px);
+}
+
+.theme-orange button:hover {
+  color: white;
+  border: 1px solid #ff8b64;
 }
 
 .noselect {

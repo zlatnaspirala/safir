@@ -86,7 +86,7 @@ export class BaseComponent implements IDestroyerComponent{
       detail: {
         info: 'clickBind',
         for: a,
-        target: this
+        target: a
       },
     });
     dispatchEvent(onClickEvent);

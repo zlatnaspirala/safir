@@ -1,7 +1,9 @@
 {
   "name": "smaragd",
-  "version": "1.0.0",
-  "description": "BETA VER. Tech: Based on Typescript/ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags. Performance is priory here.",
+  "version": "1.0.4",
+  "description": "BETA WIP VER. Tech: Based on Typescript/ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags. Performance is priory here.",
+  "browser": "index.js",
+  "types": "/src/types",
   "main": "index.ts",
   "dependencies": {
     "browser-resolve": "^2.0.0"
@@ -17,8 +19,9 @@
   "scripts": {
     "build.example": "build-assets.sh | browserify examples/hello/demo1.ts -p [tsify --noImplicitAny] > dist/example.js",
     "example": "build-assets.sh | watchify examples/hello/demo1.ts -p [tsify --noImplicitAny] -o dist/example.js",
+    "smaragd": "build-assets.sh | watchify examples/build-only-lib/lib-ref.ts -p [tsify --noImplicitAny] -o dist/smaragd.js",
     "build.assets": "build-assets.sh",
-    "build.lib": "browserify examples/build-only-lib/lib-ref.ts -p [tsify --noImplicitAny] > dist/redstone.lib.js",
+    "build.lib": "browserify examples/build-only-lib/lib-ref.ts -p [tsify --noImplicitAny] > dist/smaragd.js",
     "host": "http-server ./dist/ -p 80",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
