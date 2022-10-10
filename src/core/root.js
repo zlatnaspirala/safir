@@ -33,7 +33,7 @@ class BaseDestroyer {
 
 }
 
-export class Smaragd extends BaseDestroyer {
+export class Safir extends BaseDestroyer {
   subComponents;
   appRoot;
 

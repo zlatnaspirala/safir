@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _index = require("../index");
+var _index = require("../../index");
 class MyButton extends _index.BaseComponent {
   id = '';
   text = '';
@@ -38,7 +38,7 @@ var _index = require("../index");
 var _heder = _interopRequireDefault(require("./layouts/heder"));
 var _body = _interopRequireDefault(require("./layouts/body"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-let app = new _index.Smaragd();
+let app = new _index.Safir();
 app.loadVanillaComp("vanilla-components/footer.html");
 (0, _index.On)("app.ready", () => {
   let myHeader = app.loadComponent(new _heder.default('my-header'));
@@ -54,7 +54,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _index = require("../index");
+var _index = require("../../index");
 class Layout extends _index.BaseComponent {
   id = 'my-body';
   statusOfCounter = '';
@@ -105,7 +105,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _button = _interopRequireDefault(require("../components/button"));
-var _index = require("../index");
+var _index = require("../../index");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 class MyHeader extends _index.BaseComponent {
   id = 'my-heder';
@@ -180,10 +180,10 @@ Object.defineProperty(exports, "On", {
     return _modifier.On;
   }
 });
-Object.defineProperty(exports, "Smaragd", {
+Object.defineProperty(exports, "Safir", {
   enumerable: true,
   get: function () {
-    return _root.Smaragd;
+    return _root.Safir;
   }
 });
 Object.defineProperty(exports, "T", {
@@ -365,7 +365,7 @@ exports.On = On;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.T = exports.Smaragd = void 0;
+exports.T = exports.Safir = void 0;
 Object.defineProperty(exports, "getComp", {
   enumerable: true,
   get: function () {
@@ -406,7 +406,7 @@ class BaseDestroyer {
     return await r.json();
   };
 }
-class Smaragd extends BaseDestroyer {
+class Safir extends BaseDestroyer {
   subComponents;
   appRoot;
   constructor() {
@@ -458,7 +458,7 @@ class Smaragd extends BaseDestroyer {
     });
   }
 }
-exports.Smaragd = Smaragd;
+exports.Safir = Safir;
 
 },{"./custom-com":7,"./modifier":8,"./utils":10}],10:[function(require,module,exports){
 "use strict";

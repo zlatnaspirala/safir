@@ -3,13 +3,13 @@
 import {
   getComp,
   T,
-  Smaragd } from "./src/core/root";
+  Safir } from "./src/core/root";
 
 import { BaseComponent } from "./src/core/comp";
 import { On } from "./src/core/modifier";
 
 export {
-  Smaragd,
+  Safir,
   BaseComponent,
   On,
   T,
