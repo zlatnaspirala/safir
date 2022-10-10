@@ -1,6 +1,6 @@
 # SAFIR 1.0.0
 
-### Tech: Based on Typescript/ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.
+### Tech: Based on ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.
 ### Alternative software - High Performace
 
 ![](https://github.com/zlatnaspirala/safir/blob/main/hello/assets/icons/192.png)
@@ -15,7 +15,7 @@ Basics
 ### - From code
 ### - Vanilla component
 
-### Example
+## Example
 
 #### Main
 ```js
@@ -136,7 +136,6 @@ export default class MyButton extends BaseComponent {
 
 ```
 
-
 ## VANILLA COMPONENT
 WEB/HTML/JS/CSS (ecma6)
 ```html
@@ -162,7 +161,7 @@ WEB/HTML/JS/CSS (ecma6)
 
 <script>
   console.info('Footer load. Vanilla component is extreme html/css/js orientend.');
-  console.info('Write here javascript only');
+  console.info('Write here javascript only, it is dynamic (async loaded script).');
   console.info('I recommended nersted object structure!');
 
   let footer = {
