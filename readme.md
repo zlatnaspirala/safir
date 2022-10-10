@@ -1,20 +1,22 @@
-Tech: Based on Typescript/ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.
-Alternative software - High Performace
-Objective:
+# SAFIR 1.0.0
+
+### Tech: Based on Typescript/ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.
+### Alternative software - High Performace
+
+## Objective:
 Must be simple and usefull.
 Performace must be 100%with full PWA support.
 For any platform adapted.
 Basics
-There are two way for creating web components:
 
-From code
-Vanilla component
-From code ECMA6
+### There are two way for creating web components:
+### - From code
+### - Vanilla component
 
+
+### From code ECMA6
 It is very similar to the reactjs and vue.
-
-
-```
+```js
 import { Safir, On } from "safir";
 import MyHeader from "./layouts/heder";
 import Layout from "./layouts/body";
@@ -131,9 +133,9 @@ export default class MyButton extends BaseComponent {
 ```
 
 
-VANILLA COMPONENT
+### VANILLA COMPONENT
 WEB/HTML/JS/CSS (ecma6)
-
+```html
 <style>
 .myFooter {
   font-family: Accuratist;
@@ -167,7 +169,11 @@ WEB/HTML/JS/CSS (ecma6)
     }
   };
 </script>
-Hosting
+```
+
+
+## Hosting
+
 For localhost (http) web server:
 ```
 http-server ./dist -p 80
