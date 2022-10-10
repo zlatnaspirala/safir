@@ -14,8 +14,10 @@ Basics
 ### - Vanilla component
 
 
-### From code ECMA6
+## From code ECMA6
 It is very similar to the reactjs and vue.
+
+#### Main
 ```js
 import { Safir, On } from "safir";
 import MyHeader from "./layouts/heder";
@@ -34,8 +36,8 @@ console.info("App running [sync]...", Date.now());
 ```
 
 
-Header
-```
+#### Header
+```js
 import MyButton from "../components/button";
 import {
   On, T,
@@ -97,8 +99,8 @@ export default class MyHeader extends BaseComponent {
 
 ```
 
-Button
-```
+#### Button
+```js
 import {BaseComponent} from "safir";
 
 export default class MyButton extends BaseComponent {
@@ -133,7 +135,7 @@ export default class MyButton extends BaseComponent {
 ```
 
 
-### VANILLA COMPONENT
+## VANILLA COMPONENT
 WEB/HTML/JS/CSS (ecma6)
 ```html
 <style>
@@ -172,7 +174,7 @@ WEB/HTML/JS/CSS (ecma6)
 ```
 
 
-## Hosting
+## Hosting/build
 
 For localhost (http) web server:
 ```
