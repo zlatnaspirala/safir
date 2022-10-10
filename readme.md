@@ -3,6 +3,8 @@
 ### Tech: Based on Typescript/ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.
 ### Alternative software - High Performace
 
+![](https://github.com/zlatnaspirala/safir/blob/main/hello/assets/icons/192.png)
+
 ## Objective:
 Must be simple and usefull.
 Performace must be 100%with full PWA support.
