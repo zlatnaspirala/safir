@@ -1,5 +1,5 @@
 
-import { IDestroyerComponent, On } from "safir";
+import { On } from "safir";
 import { BaseComponent } from "safir";
 
 export default class Layout extends BaseComponent {

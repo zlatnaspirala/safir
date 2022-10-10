@@ -173,8 +173,6 @@ WEB/HTML/JS/CSS (ecma6)
 </script>
 ```
 
-
-
 ## Hosting/build
 
 For localhost (http) web server:
@@ -197,3 +195,8 @@ Run command:
 ```
 npm run build
 ```
+
+## Links
+
+Basic example:
+ https://codepen.io/zlatnaspirala/pen/mdLzxoy

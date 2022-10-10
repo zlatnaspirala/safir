@@ -2,7 +2,7 @@
 
 /**
  * @description
- * Main export file for safir.
+ * Main export file for Safir.
  */
 
 import {
