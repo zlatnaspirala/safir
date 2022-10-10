@@ -1,7 +1,7 @@
 {
   "name": "safir",
-  "version": "1.0.2",
-  "description": "Ultimate perfomance Ultimate simple!",
+  "version": "1.0.3",
+  "description": "Ultimate web perfomance. Tech: Based on ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.",
   "main": "index.js",
   "scripts": {
     "demo1": "build-assets.sh | watchify hello/demo1.js -p [esmify --noImplicitAny] -o dist/hello.js",
@@ -17,6 +17,10 @@
   "devDependencies": {
     "esmify": "^2.1.1"
   },
-  "author": "",
-  "license": "MIT"
+  "author": "Nikola Lukic",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zlatnaspirala/safir.git"
+  }
 }
