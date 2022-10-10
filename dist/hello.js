@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _index = require("../../index");
+var _index = require("../index");
 class MyButton extends _index.BaseComponent {
   id = '';
   text = '';
@@ -54,7 +54,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _index = require("../../index");
+var _index = require("../index");
 class Layout extends _index.BaseComponent {
   id = 'my-body';
   statusOfCounter = '';
@@ -105,7 +105,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _button = _interopRequireDefault(require("../components/button"));
-var _index = require("../../index");
+var _index = require("../index");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 class MyHeader extends _index.BaseComponent {
   id = 'my-heder';
