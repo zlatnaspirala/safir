@@ -6,6 +6,7 @@
   "scripts": {
     "demo1": "build-assets.sh | watchify hello/demo1.js -p [esmify --noImplicitAny] -o dist/hello.js",
     "build": "build-assets.sh | browserify hello/demo1.js -p esmify > dist/hello.js",
+    "build.lib": "browserify lib.js -p esmify > dist/safir.lib.js",
     "host": "http-server ./dist/ -p 80",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
