@@ -24,11 +24,17 @@ class BaseDestroyer {
   loadMultilang = async function(path = 'assets/multilang/en.json') {
     console.info("Multilang integrated component... ");
     // Predefined path ../assets
-    const r = await fetch(path, { headers : {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }});
-    return await r.json();
+
+    try {
+      const r = await fetch(path, { headers : {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }});
+      return await r.json();
+    } catch(err) {}
+    finally {
+       return {};
+    }
   };
 
 }

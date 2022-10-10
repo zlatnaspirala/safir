@@ -13,9 +13,7 @@ Basics
 ### - From code
 ### - Vanilla component
 
-
-## From code ECMA6
-It is very similar to the reactjs and vue.
+### Example
 
 #### Main
 ```js
@@ -35,6 +33,8 @@ On("app.ready", () => {
 console.info("App running [sync]...", Date.now());
 ```
 
+## From code ECMA6
+It is very similar to the reactjs and vue.
 
 #### Header
 ```js
@@ -174,6 +174,7 @@ WEB/HTML/JS/CSS (ecma6)
 ```
 
 
+
 ## Hosting/build
 
 For localhost (http) web server:
@@ -194,5 +195,5 @@ npm run demo1
 For production (https) web server:
 Run command:
 ```
-npm run build.example
+npm run build
 ```
