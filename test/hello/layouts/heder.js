@@ -1,8 +1,7 @@
 import MyButton from "../components/button";
 import {
   On, T,
-  BaseComponent,
-  IDestroyerComponent } from "safir";
+  BaseComponent } from "safir";
 
 export default class MyHeader extends BaseComponent {
 
