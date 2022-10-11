@@ -29,11 +29,21 @@ body {
   }
 }
 
+h2 {
+  border: themed('buttonBorder');
+  &:hover {
+    color: themed('textHoverColor');
+    border: themed('buttonBorderHover');
+  }
+}
+
 div {
   @include themify($themes) {
     font-family: Accuratist;
     color: themed('textColor');
     background-color: themed('backgroundColor');
+    height: inherit;
+    border: themed('buttonBorder');
   }
 }
 
@@ -82,8 +92,52 @@ button {
   }
 }
 
+.verCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  @include themify($themes) {
+    color: themed('textColor');
+    background-color: themed('backgroundColor');
+  }
+}
+
+.horCenter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  @include themify($themes) {
+    color: themed('textColor');
+    background-color: themed('backgroundColor');
+  }
+}
+
+.fill {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.fit {
+  width: fit-content !important;
+  height: fit-content !important;
+}
+
+.hey {
+  height: 200px;
+}
+
 .h95 {
   height: 95vh;
+}
+
+.h50 {
+  height: 90vh;
 }
 
 .h5 {

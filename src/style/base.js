@@ -1,11 +1,18 @@
 
-export let middleBox = `
+export let verCenter = `
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100vh;
-    background-color:black;
-    color:white;
+    height: calc(100%);
+`;
+
+export let horCenter = `
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100%);
 `;

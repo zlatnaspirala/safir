@@ -1,21 +1,29 @@
 /**
  * @description
- * Test project structure
+ * Main safir classes.
+ * Test project structure.
  */
-
-import {myBase} from "./custom-com";
+import {Vertical, Horizontal} from "./custom-com";
 import {Manager, getComp} from "./utils";
 import {On} from "./modifier";
 export {getComp} from "./utils";
 export let T = {};
 
-class BaseDestroyer {
+/**
+ * @description
+ * Main Base Safir class.
+ */
+class BaseSafir {
 
+  /**
+   * @description
+   * Multi language system is already deep integrated like common feature
+   * in developing apps proccess.
+   */
   emitML = async function (r) {
     const x = await r.loadMultilang();
-    T = x;
     // internal exspose to the global obj
-    // Better then injecting intro every sub comp!
+    T = x;
     dispatchEvent(new CustomEvent('app.ready', { detail: {
       info: 'app.ready'
     }}));
@@ -24,14 +32,16 @@ class BaseDestroyer {
   loadMultilang = async function(path = 'assets/multilang/en.json') {
     console.info("Multilang integrated component... ");
     // Predefined path ../assets
-
+    // Need fix for online services eg. codepen
     try {
       const r = await fetch(path, { headers : {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }});
       return await r.json();
-    } catch(err) {}
+    } catch(err) {
+      console.warn('Not possible to access multilang json asset! Err => ', err);
+    }
     finally {
        return {};
     }
@@ -39,19 +49,13 @@ class BaseDestroyer {
 
 }
 
-export class Safir extends BaseDestroyer {
+export class Safir extends BaseSafir {
+
   subComponents;
   appRoot;
 
   constructor() {
     super();
-    // On('app.ready', (data) => {
-    //   if (data.detail.info == "app.ready") {
-    //     // Integrated multilang app.ready
-    //     T = data.detail.labels;
-    //     console.log("Test global T :", T);
-    //   }
-    // });
     this.subComponents = [];
     this.appRoot = getComp("app");
     this.construct();
@@ -64,10 +68,17 @@ export class Safir extends BaseDestroyer {
   construct = () => {
     // Translation Enabled.
     this.emitML(this);
-    // console.info("Multilang integrated component.ROOT. ", this.l);
-    window.customElements.define('my-box', myBase);
+    console.info("Multilang integrated component.ROOT. Still not resolved (pass arg) for services eg. codepen etc.");
+    window.customElements.define('ver-box', Vertical);
+    window.customElements.define('hor-box', Horizontal);
+    console.info("Custom Base Dom elements integrated => [Vertical, Horizontal].");
     this.ready();
   };
+
+  regTag(tagName, classRef) {
+    window.customElements.define(tagName, classRef);
+    console.info("Custom dom element loaded in runtime => " + tagName);
+  }
 
   loadComponent = (arg) => {
     let x = document.createElement('div');
@@ -85,7 +96,6 @@ export class Safir extends BaseDestroyer {
         return res.text();
       })
       .then(html => {
-        // console.warn(">>>HTML>>>>>>>" + html);
         let test2 = html.split('<script>')[1];
         let htmlContent = html.split('<script>')[0];
         let myScriptContent = test2.split('</script>')[0];
@@ -97,7 +107,5 @@ export class Safir extends BaseDestroyer {
         return true;
       });
   }
-
-
 
 }

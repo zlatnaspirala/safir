@@ -6,165 +6,85 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _index = require("../../index");
-class MyButton extends _index.BaseComponent {
+class MyHBox extends _index.BaseComponent {
   id = '';
-  text = '';
-  counter = 0;
-  get getCounter() {
-    return this.counter;
+  tableData = ['Crazzy easy', 'Super Performance', 'Data access'];
+  get getSubId() {
+    return 'hor-box-button';
   }
-  ready = () => {
-    // console.log('ready comp');
-  };
   constructor(arg) {
     super(arg);
     this.initial(arg);
   }
   onClick = this.clickBind;
   render = () => `
-    <div id="${this.id}">
-      <button data-counter="${this.getCounter}" onclick="(${this.onClick})('${this.id}')">
-        ${this.text} class MyButton prop counter = ${this.getCounter}
-      </button>
+    <div id="${this.id}" style="width:100%">
+      <hor-box onclick="(${this.onClick})('${this.getSubId}')">
+          ${this.tableData.map(item => {
+    return `<h2 style="width:100%;text-align: center;">` + item + `</h2>`;
+  }).join('')}
+      </hor-box>
     </div>
   `;
 }
-exports.default = MyButton;
+exports.default = MyHBox;
 
-},{"../../index":5}],2:[function(require,module,exports){
+},{"../../index":4}],2:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _index = require("../../index");
+var _horBox = _interopRequireDefault(require("./hor-box"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+class MyVHBox extends _index.BaseComponent {
+  id = '';
+  tableData = ['Crazzy easy1 ', 'Super Performance1 ', 'Data access1 '];
+  get getSubId() {
+    return 'mybox-button1';
+  }
+  constructor(arg) {
+    super(arg);
+    this.initial(arg);
+    // this.myHorizontalComp = new MyHBox('hor-box-custom');
+  }
+
+  onClick = this.clickBind;
+  render = () => `
+    <div id="${this.id}">
+      <ver-box onclick="(${this.onClick})('${this.getSubId}')">
+        ${this.tableData.map((item, index) => new _horBox.default('hor-box-custom' + index).render()).join('')}
+      </ver-box>
+    </div>
+  `;
+}
+exports.default = MyVHBox;
+
+},{"../../index":4,"./hor-box":1}],3:[function(require,module,exports){
 "use strict";
 
 var _index = require("../index");
-var _heder = _interopRequireDefault(require("./layouts/heder"));
-var _body = _interopRequireDefault(require("./layouts/body"));
+var _verHor = _interopRequireDefault(require("./components/ver-hor"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 let app = new _index.Safir();
 app.loadVanillaComp("vanilla-components/footer.html");
 (0, _index.On)("app.ready", () => {
-  let myHeader = app.loadComponent(new _heder.default('my-header'));
-  let myLayout = app.loadComponent(new _body.default('my-layout'));
-  console.info("Application running [ready]...", Date.now());
+  let myBoxComp = app.loadComponent(new _verHor.default('ver-hor'));
+  console.info("Application running demo2 [ready]...", Date.now());
 });
-console.info("Application running [sync]...", Date.now());
-
-},{"../index":5,"./layouts/body":3,"./layouts/heder":4}],3:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
+(0, _index.On)("mybox-button1", r => {
+  console.info("Application On ver-box custom integrated dom element, click event attached.", r);
 });
-exports.default = void 0;
-var _index = require("../../index");
-class Layout extends _index.BaseComponent {
-  id = 'my-body';
-  statusOfCounter = '';
-  ready = () => {
-    console.log('layout ready');
-  };
-  constructor(arg) {
-    super(arg);
-    (0, _index.On)('on-counter', data => {
-      console.info('[on-counter] Trigger Btn Yes [from body] ', data.detail);
-      let t = data.detail;
-      // Because we use multiply same component with also same prop
-      // Still if you need emit but to other place then you can use 
-      // detail.emitter to determinate by id who is for real
-      if (t.emitter === "yes") {
-        this.set('statusOfCounter', t.newValue);
-      }
-      // no is the ignored!
-      // local tbn (no-emit) never emitted!
-    });
 
-    (0, _index.On)('no', data => {
-      console.info('[no] Trigger Btn no [from body]', data.detail);
-    });
-    (0, _index.On)('no-emit', data => {
-      console.info('Trigger Btn no-emit: ', data);
-    });
-  }
-  change = e => {
-    alert(e);
-  };
-  render = () => `
-    <div id="${this.id}" class="middle h95 column">
-       <h3>Status of counter YES = ${this.statusOfCounter} </h3>
-       <div onclick="(${this.change})(this)">
-         Test Modal
-       </div>
-    </div>
-  `;
-}
-exports.default = Layout;
-
-},{"../../index":5}],4:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _button = _interopRequireDefault(require("../components/button"));
-var _index = require("../../index");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-class MyHeader extends _index.BaseComponent {
-  id = 'my-heder';
-  slogan = 'My header.';
-  mySybCompBtnYes = new _button.default({
-    text: _index.T.yes,
-    id: 'yes'
-  });
-  mySybCompBtnNo = new _button.default({
-    text: _index.T.no,
-    id: 'no'
-  });
-  mySybCompBtnNoEmit = new _button.default({
-    text: _index.T.textAlert,
-    id: 'local'
-  });
-  ready = () => {
-    console.log('header ready. what is ml ', _index.T);
-  };
-  constructor(arg) {
-    super(arg);
-    this.initial(arg);
-    (0, _index.On)('yes', () => {
-      console.info('Trigger Btn Yes', this);
-      let newValue = this.mySybCompBtnYes.getCounter + 1;
-      this.mySybCompBtnYes.set('counter', newValue);
-    });
-    (0, _index.On)('no', () => {
-      console.info('Trigger Btn no', this);
-      let newValue = this.mySybCompBtnNo.getCounter - 1;
-      this.mySybCompBtnNo.set('counter', newValue);
-    });
-    (0, _index.On)('local', () => {
-      console.info('Trigger Btn no', this);
-      this.mySybCompBtnNoEmit.set('counter', 100, {
-        emit: false
-      });
-    });
-    (0, _index.On)('change-theme', () => {
-      console.info('Trigger CHANGE THEME', this.changeTheme());
-    });
-  }
-  change = this.clickBind;
-  render = () => `
-    <div id="${this.id}" class="middle h5">
-       ${this.mySybCompBtnYes.render()}
-       ${this.mySybCompBtnNo.render()}
-       ${this.mySybCompBtnNoEmit.render()}
-       <div onclick="(${this.change})('change-theme')">
-         Change Theme
-       </div>
-    </div>
-  `;
-}
-exports.default = MyHeader;
-
-},{"../../index":5,"../components/button":1}],5:[function(require,module,exports){
+},{"../index":4,"./components/ver-hor":2}],4:[function(require,module,exports){
 'use strict';
 
+/**
+ * @description
+ * Main export file for Safir.
+ */
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -202,7 +122,7 @@ var _root = require("./src/core/root");
 var _comp = require("./src/core/comp");
 var _modifier = require("./src/core/modifier");
 
-},{"./src/core/comp":6,"./src/core/modifier":8,"./src/core/root":9}],6:[function(require,module,exports){
+},{"./src/core/comp":5,"./src/core/modifier":7,"./src/core/root":8}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -295,25 +215,24 @@ class BaseComponent {
 }
 exports.BaseComponent = BaseComponent;
 
-},{"./modifier":8,"./utils":10}],7:[function(require,module,exports){
+},{"./modifier":7,"./utils":9}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.myBase = exports.Base = void 0;
+exports.Vertical = exports.Horizontal = exports.Base = void 0;
 var _base = require("../style/base");
 class Base extends HTMLElement {
   constructor(...args) {
     super(...args);
-    console.log('Base class init...');
+    console.log('Base class init... arg => ', args);
     const shadowRoot = this.attachShadow({
       mode: 'open'
     });
-    let inputElement = document.createElement('template');
+    let inputElement = document.createElement('div');
     inputElement.setAttribute('id', this.getAttribute('id'));
     inputElement.innerHTML = this.innerHTML;
-
     // inputElement.setAttribute('type', this.getAttribute('type')!);
     // inputElement.setAttribute('value', this.getAttribute('value')!);
     // inputElement.setAttribute('max', this.getAttribute('max')!);
@@ -322,12 +241,14 @@ class Base extends HTMLElement {
     // inputElement.setAttribute('class', this.getAttribute('class'));
     // predefined
 
-    inputElement.setAttribute('style', _base.middleBox);
-    console.log('changed style');
+    inputElement.setAttribute('style', args[0]);
+    // inputElement.classList.add(args[0]);
+
+    console.log('inputElement.classList =? ', inputElement.classList);
     // if (this.getAttribute('style') !== null) inputElement.setAttribute('style', this.getAttribute('style')!);
 
     inputElement.addEventListener('mousemove', () => {
-      console.log('hover on element.', this.getAttribute('id'));
+      // console.log('hover on element.', this.getAttribute('id'));
     });
 
     // inputElement.addEventListener('change', (e) => {
@@ -339,14 +260,24 @@ class Base extends HTMLElement {
   }
 }
 exports.Base = Base;
-class myBase extends Base {
+class Vertical extends Base {
   constructor(...args) {
+    console.log('C Ver class init... arg => ', args);
+    args.push(_base.verCenter);
     super(...args);
   }
 }
-exports.myBase = myBase;
+exports.Vertical = Vertical;
+class Horizontal extends Base {
+  constructor(...args) {
+    console.log('C Hor class init... arg => ', args);
+    args.push(_base.horCenter);
+    super(...args);
+  }
+}
+exports.Horizontal = Horizontal;
 
-},{"../style/base":11}],8:[function(require,module,exports){
+},{"../style/base":10}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -359,7 +290,7 @@ window.On = window.addEventListener;
 const On = window.On;
 exports.On = On;
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -377,17 +308,27 @@ var _utils = require("./utils");
 var _modifier = require("./modifier");
 /**
  * @description
- * Test project structure
+ * Main safir classes.
+ * Test project structure.
  */
 
 let T = {};
+
+/**
+ * @description
+ * Main Base Safir class.
+ */
 exports.T = T;
-class BaseDestroyer {
+class BaseSafir {
+  /**
+   * @description
+   * Multi language system is already deep integrated like common feature
+   * in developing apps proccess.
+   */
   emitML = async function (r) {
     const x = await r.loadMultilang();
-    exports.T = T = x;
     // internal exspose to the global obj
-    // Better then injecting intro every sub comp!
+    exports.T = T = x;
     dispatchEvent(new CustomEvent('app.ready', {
       detail: {
         info: 'app.ready'
@@ -397,27 +338,27 @@ class BaseDestroyer {
   loadMultilang = async function (path = 'assets/multilang/en.json') {
     console.info("Multilang integrated component... ");
     // Predefined path ../assets
-    const r = await fetch(path, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    });
-    return await r.json();
+    // Need fix for online services eg. codepen
+    try {
+      const r = await fetch(path, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+      return await r.json();
+    } catch (err) {
+      console.warn('Not possible to access multilang json asset! Err => ', err);
+    } finally {
+      return {};
+    }
   };
 }
-class Safir extends BaseDestroyer {
+class Safir extends BaseSafir {
   subComponents;
   appRoot;
   constructor() {
     super();
-    // On('app.ready', (data) => {
-    //   if (data.detail.info == "app.ready") {
-    //     // Integrated multilang app.ready
-    //     T = data.detail.labels;
-    //     console.log("Test global T :", T);
-    //   }
-    // });
     this.subComponents = [];
     this.appRoot = (0, _utils.getComp)("app");
     this.construct();
@@ -428,10 +369,16 @@ class Safir extends BaseDestroyer {
   construct = () => {
     // Translation Enabled.
     this.emitML(this);
-    // console.info("Multilang integrated component.ROOT. ", this.l);
-    window.customElements.define('my-box', _customCom.myBase);
+    console.info("Multilang integrated component.ROOT. Still not resolved (pass arg) for services eg. codepen etc.");
+    window.customElements.define('ver-box', _customCom.Vertical);
+    window.customElements.define('hor-box', _customCom.Horizontal);
+    console.info("Custom Base Dom elements integrated => [Vertical, Horizontal].");
     this.ready();
   };
+  regTag(tagName, classRef) {
+    window.customElements.define(tagName, classRef);
+    console.info("Custom dom element loaded in runtime => " + tagName);
+  }
   loadComponent = arg => {
     let x = document.createElement('div');
     // x.setAttribute("id", arg.id);
@@ -445,7 +392,6 @@ class Safir extends BaseDestroyer {
     fetch(arg, {}).then(res => {
       return res.text();
     }).then(html => {
-      // console.warn(">>>HTML>>>>>>>" + html);
       let test2 = html.split('<script>')[1];
       let htmlContent = html.split('<script>')[0];
       let myScriptContent = test2.split('</script>')[0];
@@ -460,7 +406,7 @@ class Safir extends BaseDestroyer {
 }
 exports.Safir = Safir;
 
-},{"./custom-com":7,"./modifier":8,"./utils":10}],10:[function(require,module,exports){
+},{"./custom-com":6,"./modifier":7,"./utils":9}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -550,23 +496,30 @@ const loadImage = function (url, onload) {
 };
 exports.loadImage = loadImage;
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.middleBox = void 0;
-let middleBox = `
+exports.verCenter = exports.horCenter = void 0;
+let verCenter = `
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100vh;
-    background-color:black;
-    color:white;
+    height: calc(100%);
 `;
-exports.middleBox = middleBox;
+exports.verCenter = verCenter;
+let horCenter = `
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100%);
+`;
+exports.horCenter = horCenter;
 
-},{}]},{},[2]);
+},{}]},{},[3]);

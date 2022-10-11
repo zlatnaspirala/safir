@@ -2,6 +2,7 @@ $themes: (
   light: (
     backgroundColor: #fff,
     textColor: #408bbd,
+    textHoverColor: #1290ea,
     buttonTextColor: #408bbd,
     buttonTextTransform: none,
     buttonTextHoverColor: #61b0e7,
@@ -12,6 +13,7 @@ $themes: (
   dark: (
     backgroundColor: #222,
     textColor: #ddd,
+    textHoverColor: #1290ea,
     buttonTextColor: #aaa,
     buttonTextTransform: uppercase,
     buttonTextHoverColor: rgb(255, 255, 255),
@@ -22,6 +24,7 @@ $themes: (
   orange: (
     backgroundColor: #222,
     textColor: rgb(245, 60, 23),
+    textHoverColor: #1290ea,
     buttonTextColor: rgb(243, 79, 43),
     buttonTextTransform: uppercase,
     buttonTextHoverColor: rgb(255, 255, 255),

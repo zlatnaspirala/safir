@@ -1,18 +1,16 @@
 
-import { middleBox } from "../style/base";
+import { verCenter, horCenter } from "../style/base";
 
 export class Base extends HTMLElement {
 
   constructor(...args) {
+    super(...(args));
+    console.log('Base class init... arg => ', args);
 
-    super(...(args))
-
-    console.log('Base class init...')
     const shadowRoot = this.attachShadow({mode: 'open'});
-    let inputElement = document.createElement('template');
+    let inputElement = document.createElement('div');
     inputElement.setAttribute('id', this.getAttribute('id'));
     inputElement.innerHTML = this.innerHTML;
-
     // inputElement.setAttribute('type', this.getAttribute('type')!);
     // inputElement.setAttribute('value', this.getAttribute('value')!);
     // inputElement.setAttribute('max', this.getAttribute('max')!);
@@ -21,13 +19,14 @@ export class Base extends HTMLElement {
     // inputElement.setAttribute('class', this.getAttribute('class'));
     // predefined
 
-    inputElement.setAttribute('style', middleBox);
+    inputElement.setAttribute('style', args[0]);
+    // inputElement.classList.add(args[0]);
 
-    console.log('changed style')
+    console.log('inputElement.classList =? ', inputElement.classList)
     // if (this.getAttribute('style') !== null) inputElement.setAttribute('style', this.getAttribute('style')!);
 
     inputElement.addEventListener('mousemove', () => {
-      console.log('hover on element.', this.getAttribute('id'));
+      // console.log('hover on element.', this.getAttribute('id'));
     });
 
     // inputElement.addEventListener('change', (e) => {
@@ -39,8 +38,18 @@ export class Base extends HTMLElement {
   }
 }
 
-export class myBase extends Base {
+export class Vertical extends Base {
   constructor(...args) {
+    console.log('C Ver class init... arg => ', args);
+    args.push(verCenter);
+    super(...args);
+  }
+}
+
+export class Horizontal extends Base {
+  constructor(...args) {
+    console.log('C Hor class init... arg => ', args);
+    args.push(horCenter);
     super(...args);
   }
 }

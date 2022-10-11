@@ -138,6 +138,14 @@ export default class MyButton extends BaseComponent {
 
 ## VANILLA COMPONENT
 WEB/HTML/JS/CSS (ecma6)
+
+ - Perfect for async app flow.
+ - Css is local scoped (loaded only when the vanilla component is loaded).
+ 
+```json
+  - Only role is `put tag <script> after <style> and <html>`
+```
+
 ```html
 <style>
 .myFooter {
@@ -188,7 +196,7 @@ npm run host
 For localhost watch:
 Run watch:
 ```
-npm run demo1
+npm run dev
 ```
 
 For production (https) web server:
