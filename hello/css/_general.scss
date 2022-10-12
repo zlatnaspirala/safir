@@ -2,6 +2,7 @@
   font-family: Accuratist;
   src: url(../assets/fonts/Accuratist.ttf);
 }
+
 @font-face {
   font-family: Closeness;
   src: url(../assets/fonts/Closeness.ttf);
@@ -19,6 +20,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  font-size: 2vw;
 }
 
 body {
@@ -30,10 +32,12 @@ body {
 }
 
 h2 {
-  border: themed('buttonBorder');
-  &:hover {
-    color: themed('textHoverColor');
-    border: themed('buttonBorderHover');
+  @include themify($themes) {
+    border: themed('buttonBorder');
+    &:hover {
+      color: themed('textHoverColor');
+      border: themed('buttonBorderHover');
+    }
   }
 }
 
@@ -42,8 +46,9 @@ div {
     font-family: Accuratist;
     color: themed('textColor');
     background-color: themed('backgroundColor');
-    height: inherit;
-    border: themed('buttonBorder');
+    -webkit-box-shadow: inset 0px 0px 2px 1px themed('divShadowColor');
+    -moz-box-shadow: inset 0px 0px 2px 1px themed('divShadowColor');
+    box-shadow: inset 0px 0px 2px 1px themed('divShadowColor');
   }
 }
 
@@ -52,16 +57,20 @@ button {
     color: themed('textColor');
     background-color: themed('backgroundColor');
     border: themed('buttonBorder');
-    font-family: Accuratist;
-    padding: 1px 1px 1px 1px;
-    margin: 1px 1px 1px 1px;
-    &:active {
-      box-shadow: none;
-      transform: translateY(-1px);
-      transform: translateX(-1px);
-    }
+  }
 
-    &:hover {
+  font-family: Accuratist;
+  padding: 1px 1px 1px 1px;
+  margin: 1px 1px 1px 1px;
+
+  &:active {
+    box-shadow: none;
+    transform: translateY(-1px);
+    transform: translateX(-1px);
+  }
+
+  &:hover {
+    @include themify($themes) {
       color: themed('buttonTextHoverColor');
       border: themed('buttonBorderHover')
     }
@@ -77,6 +86,41 @@ button {
   user-select: none;
 }
 
+/* Scroll bars */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @include themify($themes) {
+    box-shadow: themed('scrollBar');
+  }
+  border-radius: 8px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @include themify($themes) {
+    background: themed('scrollbarThumb');
+  }
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @include themify($themes) {
+    background: themed('scrollbarThumbHover');
+  }
+}
+
+.myScroll {
+  height: 92%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
 .middle {
   display: flex;
   flex-direction: row;
@@ -84,8 +128,6 @@ button {
   align-items: center;
   width: 100%;
   height: auto;
-  background-color:black;
-  color:white;
 
   &.column {
     flex-direction: column;
@@ -98,7 +140,8 @@ button {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: auto;
+
   @include themify($themes) {
     color: themed('textColor');
     background-color: themed('backgroundColor');
@@ -112,6 +155,7 @@ button {
   align-items: center;
   width: 100%;
   height: 100%;
+
   @include themify($themes) {
     color: themed('textColor');
     background-color: themed('backgroundColor');

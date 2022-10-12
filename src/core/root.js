@@ -20,31 +20,36 @@ class BaseSafir {
    * Multi language system is already deep integrated like common feature
    * in developing apps proccess.
    */
-  emitML = async function (r) {
+  emitML = async function(r) {
     const x = await r.loadMultilang();
-    // internal exspose to the global obj
+    // Internal exspose to the global obj
     T = x;
-    dispatchEvent(new CustomEvent('app.ready', { detail: {
-      info: 'app.ready'
-    }}));
+    dispatchEvent(new CustomEvent('app.ready', {
+      detail: {
+        info: 'app.ready'
+      }
+    }));
   }
 
   loadMultilang = async function(path = 'assets/multilang/en.json') {
-    console.info("Multilang integrated component... ");
+    // console.info("Multilang integrated component... ");
     // Predefined path ../assets
     // Need fix for online services eg. codepen
     try {
-      const r = await fetch(path, { headers : {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }});
+      const r = await fetch(path, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
       return await r.json();
     } catch(err) {
       console.warn('Not possible to access multilang json asset! Err => ', err);
+      return {};
     }
-    finally {
-       return {};
-    }
+    // finally {
+    //  return await r.json();
+    // }
   };
 
 }
@@ -68,10 +73,10 @@ export class Safir extends BaseSafir {
   construct = () => {
     // Translation Enabled.
     this.emitML(this);
-    console.info("Multilang integrated component.ROOT. Still not resolved (pass arg) for services eg. codepen etc.");
+    // console.info("Multilang integrated component.ROOT. Still not resolved (pass arg) for services eg. codepen etc.");
     window.customElements.define('ver-box', Vertical);
     window.customElements.define('hor-box', Horizontal);
-    console.info("Custom Base Dom elements integrated => [Vertical, Horizontal].");
+    // console.info("Custom Base Dom elements integrated => [Vertical, Horizontal].");
     this.ready();
   };
 
@@ -80,9 +85,11 @@ export class Safir extends BaseSafir {
     console.info("Custom dom element loaded in runtime => " + tagName);
   }
 
-  loadComponent = (arg) => {
+  loadComponent = (arg, rootStyle) => {
     let x = document.createElement('div');
-    // x.setAttribute("id", arg.id);
+    x.setAttribute("id", arg.id);
+    // if (rootStyle) x.setAttribute("style", rootStyle);
+    if (rootStyle) x.classList.add(rootStyle);
     this.appRoot?.append(x);
     x.innerHTML = arg.render(arg);
     this.subComponents.push(arg);

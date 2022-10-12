@@ -18,7 +18,6 @@ export class Base extends HTMLElement {
     // need trick
     // inputElement.setAttribute('class', this.getAttribute('class'));
     // predefined
-
     inputElement.setAttribute('style', args[0]);
     // inputElement.classList.add(args[0]);
 
@@ -40,7 +39,7 @@ export class Base extends HTMLElement {
 
 export class Vertical extends Base {
   constructor(...args) {
-    console.log('C Ver class init... arg => ', args);
+    // console.log('C Ver class init... arg => ', args);
     args.push(verCenter);
     super(...args);
   }
@@ -48,7 +47,7 @@ export class Vertical extends Base {
 
 export class Horizontal extends Base {
   constructor(...args) {
-    console.log('C Hor class init... arg => ', args);
+    // console.log('C Hor class init... arg => ', args);
     args.push(horCenter);
     super(...args);
   }

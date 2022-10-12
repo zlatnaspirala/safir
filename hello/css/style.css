@@ -21,6 +21,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  font-size: 2vw;
 }
 
 .theme-light body {
@@ -31,50 +32,89 @@ body {
 
 .theme-dark body {
   font-family: Accuratist;
-  color: #ddd;
-  background-color: #222;
+  color: white;
+  background-color: #535353;
 }
 
 .theme-orange body {
   font-family: Accuratist;
-  color: #f53c17;
-  background-color: #222;
+  color: #ff2600;
+  background-color: black;
+}
+
+.theme-light h2 {
+  border: 1px solid #b0ebf8;
+}
+
+.theme-light h2:hover {
+  border: 1px solid #00ddff;
+}
+
+.theme-dark h2 {
+  border: 1px solid #aaa;
+}
+
+.theme-dark h2:hover {
+  border: 1px solid #fafafa;
+}
+
+.theme-orange h2 {
+  border: 1px solid #ffc228;
+}
+
+.theme-orange h2:hover {
+  border: 1px solid #ff8b64;
 }
 
 .theme-light div {
   font-family: Accuratist;
   color: #408bbd;
   background-color: #fff;
-  height: inherit;
-  border: 1px solid #00d0ff;
+  -webkit-box-shadow: inset 0px 0px 2px 1px #49d8ff14;
+  box-shadow: inset 0px 0px 2px 1px #49d8ff14;
 }
 
 .theme-dark div {
   font-family: Accuratist;
-  color: #ddd;
-  background-color: #222;
-  height: inherit;
-  border: 1px solid #aaa;
+  color: white;
+  background-color: #535353;
+  -webkit-box-shadow: inset 0px 0px 2px 1px #ff000014;
+  box-shadow: inset 0px 0px 2px 1px #ff000014;
 }
 
 .theme-orange div {
   font-family: Accuratist;
-  color: #f53c17;
-  background-color: #222;
-  height: inherit;
-  border: 1px solid #ffc228;
+  color: #ff2600;
+  background-color: black;
+  -webkit-box-shadow: inset 0px 0px 2px 1px #ff000014;
+  box-shadow: inset 0px 0px 2px 1px #ff000014;
 }
 
-.theme-light button {
-  color: #408bbd;
-  background-color: #fff;
-  border: 1px solid #00d0ff;
+button {
   font-family: Accuratist;
   padding: 1px 1px 1px 1px;
   margin: 1px 1px 1px 1px;
 }
 
-.theme-light button:active {
+.theme-light button {
+  color: #408bbd;
+  background-color: #fff;
+  border: 1px solid #b0ebf8;
+}
+
+.theme-dark button {
+  color: white;
+  background-color: #535353;
+  border: 1px solid #aaa;
+}
+
+.theme-orange button {
+  color: #ff2600;
+  background-color: black;
+  border: 1px solid #ffc228;
+}
+
+button:active {
   -webkit-box-shadow: none;
           box-shadow: none;
   -webkit-transform: translateY(-1px);
@@ -85,48 +125,12 @@ body {
 
 .theme-light button:hover {
   color: #61b0e7;
-  border: 1px solid black;
-}
-
-.theme-dark button {
-  color: #ddd;
-  background-color: #222;
-  border: 1px solid #aaa;
-  font-family: Accuratist;
-  padding: 1px 1px 1px 1px;
-  margin: 1px 1px 1px 1px;
-}
-
-.theme-dark button:active {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  -webkit-transform: translateY(-1px);
-          transform: translateY(-1px);
-  -webkit-transform: translateX(-1px);
-          transform: translateX(-1px);
+  border: 1px solid #00ddff;
 }
 
 .theme-dark button:hover {
   color: white;
   border: 1px solid #fafafa;
-}
-
-.theme-orange button {
-  color: #f53c17;
-  background-color: #222;
-  border: 1px solid #ffc228;
-  font-family: Accuratist;
-  padding: 1px 1px 1px 1px;
-  margin: 1px 1px 1px 1px;
-}
-
-.theme-orange button:active {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  -webkit-transform: translateY(-1px);
-          transform: translateY(-1px);
-  -webkit-transform: translateX(-1px);
-          transform: translateX(-1px);
 }
 
 .theme-orange button:hover {
@@ -140,6 +144,60 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+/* Scroll bars */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 8px;
+}
+
+.theme-light ::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 5px #207487;
+          box-shadow: inset 0 0 5px #207487;
+}
+
+.theme-dark ::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 5px #207487;
+          box-shadow: inset 0 0 5px #207487;
+}
+
+.theme-orange ::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 5px #207487;
+          box-shadow: inset 0 0 5px #207487;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+
+.theme-light ::-webkit-scrollbar-thumb {
+  background: silver;
+}
+
+/* Handle on hover */
+.theme-light ::-webkit-scrollbar-thumb:hover {
+  background: orange;
+}
+
+.theme-dark ::-webkit-scrollbar-thumb:hover {
+  background: orange;
+}
+
+.theme-orange ::-webkit-scrollbar-thumb:hover {
+  background: orange;
+}
+
+.myScroll {
+  height: 92%;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 .middle {
@@ -158,8 +216,6 @@ body {
           align-items: center;
   width: 100%;
   height: auto;
-  background-color: black;
-  color: white;
 }
 
 .middle.column {
@@ -184,7 +240,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 
 .theme-light .verCenter {
@@ -193,13 +249,13 @@ body {
 }
 
 .theme-dark .verCenter {
-  color: #ddd;
-  background-color: #222;
+  color: white;
+  background-color: #535353;
 }
 
 .theme-orange .verCenter {
-  color: #f53c17;
-  background-color: #222;
+  color: #ff2600;
+  background-color: black;
 }
 
 .horCenter {
@@ -226,27 +282,39 @@ body {
 }
 
 .theme-dark .horCenter {
-  color: #ddd;
-  background-color: #222;
+  color: white;
+  background-color: #535353;
 }
 
 .theme-orange .horCenter {
-  color: #f53c17;
-  background-color: #222;
+  color: #ff2600;
+  background-color: black;
 }
 
 .fill {
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .fit {
+  width: -webkit-fit-content !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
   height: -webkit-fit-content !important;
   height: -moz-fit-content !important;
   height: fit-content !important;
 }
 
+.hey {
+  height: 200px;
+}
+
 .h95 {
   height: 95vh;
+}
+
+.h50 {
+  height: 90vh;
 }
 
 .h5 {

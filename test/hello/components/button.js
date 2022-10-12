@@ -9,9 +9,7 @@ export default class MyButton extends BaseComponent {
     return this.counter;
   }
 
-  ready = () => {
-    // console.log('ready comp');
-  };
+  ready = () => {};
 
   constructor(arg) {
     super(arg);
@@ -20,11 +18,11 @@ export default class MyButton extends BaseComponent {
 
   onClick = this.clickBind;
 
+  // Attached on root dom element
+  // data-counter="${this.getCounter}"
   render = () => `
-    <div id="${this.id}">
-      <button data-counter="${this.getCounter}" onclick="(${this.onClick})('${this.id}')">
-        ${this.text} class MyButton prop counter = ${this.getCounter}
-      </button>
-    </div>
+    <button onclick="(${this.onClick})('${this.id}')">
+      ${this.text} counter => ${this.getCounter}
+    </button>
   `;
 }

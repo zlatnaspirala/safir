@@ -1,21 +1,15 @@
 import MyButton from "../components/button";
 import {
   On, T,
-  BaseComponent,
-  IDestroyerComponent } from "../../index";
+  BaseComponent } from "../../index";
 
 export default class MyHeader extends BaseComponent {
 
   id = 'my-heder';
   slogan = 'My header.';
-
   mySybCompBtnYes = new MyButton({ text: T.yes, id: 'yes'});
-  mySybCompBtnNo = new MyButton({ text: T.no, id: 'no'});
-  mySybCompBtnNoEmit = new MyButton({ text: T.textAlert, id: 'local'});
-
-  ready = () =>  {
-    console.log('header ready. what is ml ', T);
-  }
+  mySybCompBtnNo = (new MyButton({ text: T.no, id: 'no'}));
+  mySybCompBtnNoEmit = (new MyButton({ text: T.textAlert, id: 'local'}));
 
   constructor(arg) {
     super(arg);
@@ -34,12 +28,15 @@ export default class MyHeader extends BaseComponent {
     });
 
     On('local', () => {
-      console.info('Trigger Btn no', (this));
-      this.mySybCompBtnNoEmit.set('counter', 100, { emit: false });
+      let newValue = this.mySybCompBtnNoEmit.getCounter - 1;
+      console.info('You can always get trigger detect by id !', (this));
+      console.info('But no trigger for props setter with { emit: false } !', (this));
+      this.mySybCompBtnNoEmit.set('counter', newValue, { emit: false });
     });
 
     On('change-theme', () => {
-      console.info('Trigger CHANGE THEME', (this).changeTheme());
+      (this).changeTheme();
+      console.info('Trigger ChangeTheme integrated.');
     })
 
   }
@@ -47,13 +44,13 @@ export default class MyHeader extends BaseComponent {
   change = this.clickBind;
 
   render = () => `
-    <div id="${this.id}" class="middle h5">
-       ${(this.mySybCompBtnYes).render()}
-       ${(this.mySybCompBtnNo).render()}
-       ${(this.mySybCompBtnNoEmit).render()}
-       <div onclick="(${this.change})('change-theme')">
+    <div class="middle h5">
+       ${(this.mySybCompBtnYes).renderId()}
+       ${(this.mySybCompBtnNo).renderId()}
+       ${(this.mySybCompBtnNoEmit).renderId()}
+       <button onclick="(${this.change})('change-theme')">
          Change Theme
-       </div>
+       </button>
     </div>
   `
 }

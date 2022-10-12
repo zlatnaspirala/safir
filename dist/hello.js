@@ -6,30 +6,31 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _index = require("../../index");
-class MyHBox extends _index.BaseComponent {
+class MyButton extends _index.BaseComponent {
   id = '';
-  tableData = ['Crazzy easy', 'Super Performance', 'Data access'];
-  get getSubId() {
-    return 'hor-box-button';
+  text = '';
+  counter = 0;
+  get getCounter() {
+    return this.counter;
   }
+  ready = () => {};
   constructor(arg) {
     super(arg);
     this.initial(arg);
   }
   onClick = this.clickBind;
+
+  // Attached on root dom element
+  // data-counter="${this.getCounter}"
   render = () => `
-    <div id="${this.id}" style="width:100%">
-      <hor-box onclick="(${this.onClick})('${this.getSubId}')">
-          ${this.tableData.map(item => {
-    return `<h2 style="width:100%;text-align: center;">` + item + `</h2>`;
-  }).join('')}
-      </hor-box>
-    </div>
+    <button onclick="(${this.onClick})('${this.id}')">
+      ${this.text} counter => ${this.getCounter}
+    </button>
   `;
 }
-exports.default = MyHBox;
+exports.default = MyButton;
 
-},{"../../index":4}],2:[function(require,module,exports){
+},{"../../index":5}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37,48 +38,117 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _index = require("../../index");
-var _horBox = _interopRequireDefault(require("./hor-box"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-class MyVHBox extends _index.BaseComponent {
+class MyList extends _index.BaseComponent {
   id = '';
-  tableData = ['Crazzy easy1 ', 'Super Performance1 ', 'Data access1 '];
-  get getSubId() {
-    return 'mybox-button1';
-  }
+
+  // This is props
+  tableData = ['👽 Modern tech', '👌 Performance', '🤑 Free soft', '😜 Easy use', '💔 Breaking', '💥 Star project', '👁️‍🗨️ Event oriented', '🖖 No single unnecessary element', '🤘 Safir rocks', '👨‍🔬 Use npm service', '👨‍💻 Open source', '🐈 https://github.com/zlatnaspirala/safir'];
   constructor(arg) {
     super(arg);
     this.initial(arg);
-    // this.myHorizontalComp = new MyHBox('hor-box-custom');
   }
-
   onClick = this.clickBind;
   render = () => `
-    <div id="${this.id}">
-      <ver-box onclick="(${this.onClick})('${this.getSubId}')">
-        ${this.tableData.map((item, index) => new _horBox.default('hor-box-custom' + index).render()).join('')}
-      </ver-box>
+    <div class="verCenter">
+      ${this.tableData.map((item, index) => `<h1 onclick="(${this.onClick})('${this.id}')"
+               class="middle">` + index + item + `</h1>`).join('')}
     </div>
   `;
 }
-exports.default = MyVHBox;
+exports.default = MyList;
 
-},{"../../index":4,"./hor-box":1}],3:[function(require,module,exports){
+},{"../../index":5}],3:[function(require,module,exports){
 "use strict";
 
 var _index = require("../index");
-var _verHor = _interopRequireDefault(require("./components/ver-hor"));
+var _myList = _interopRequireDefault(require("./components/my-list"));
+var _heder = _interopRequireDefault(require("./layouts/heder"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 let app = new _index.Safir();
 app.loadVanillaComp("vanilla-components/footer.html");
+
+// window.app = app;
+let myBoxComp, myHeader;
 (0, _index.On)("app.ready", () => {
-  let myBoxComp = app.loadComponent(new _verHor.default('ver-hor'));
+  myHeader = app.loadComponent(new _heder.default('my-header'));
+  myBoxComp = app.loadComponent(new _myList.default('my-box-custom'), 'myScroll');
   console.info("Application running demo2 [ready]...", Date.now());
-});
-(0, _index.On)("mybox-button1", r => {
-  console.info("Application On ver-box custom integrated dom element, click event attached.", r);
+  // Exsposed to the global scope for testing in console!
+  window.myBoxComp = myBoxComp;
+  // myBoxComp.set('tableData', ['wao', 'woow'])
 });
 
-},{"../index":4,"./components/ver-hor":2}],4:[function(require,module,exports){
+(0, _index.On)("my-box-custom", r => {
+  console.info("Application On ver-box custom integrated dom element, click event attached.", r);
+  alert(" List item clicked => " + r.path[0].innerHTML);
+});
+
+},{"../index":5,"./components/my-list":2,"./layouts/heder":4}],4:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _button = _interopRequireDefault(require("../components/button"));
+var _index = require("../../index");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+class MyHeader extends _index.BaseComponent {
+  id = 'my-heder';
+  slogan = 'My header.';
+  mySybCompBtnYes = new _button.default({
+    text: _index.T.yes,
+    id: 'yes'
+  });
+  mySybCompBtnNo = new _button.default({
+    text: _index.T.no,
+    id: 'no'
+  });
+  mySybCompBtnNoEmit = new _button.default({
+    text: _index.T.textAlert,
+    id: 'local'
+  });
+  constructor(arg) {
+    super(arg);
+    this.initial(arg);
+    (0, _index.On)('yes', () => {
+      console.info('Trigger Btn Yes', this);
+      let newValue = this.mySybCompBtnYes.getCounter + 1;
+      this.mySybCompBtnYes.set('counter', newValue);
+    });
+    (0, _index.On)('no', () => {
+      console.info('Trigger Btn no', this);
+      let newValue = this.mySybCompBtnNo.getCounter - 1;
+      this.mySybCompBtnNo.set('counter', newValue);
+    });
+    (0, _index.On)('local', () => {
+      let newValue = this.mySybCompBtnNoEmit.getCounter - 1;
+      console.info('You can always get trigger detect by id !', this);
+      console.info('But no trigger for props setter with { emit: false } !', this);
+      this.mySybCompBtnNoEmit.set('counter', newValue, {
+        emit: false
+      });
+    });
+    (0, _index.On)('change-theme', () => {
+      this.changeTheme();
+      console.info('Trigger ChangeTheme integrated.');
+    });
+  }
+  change = this.clickBind;
+  render = () => `
+    <div class="middle h5">
+       ${this.mySybCompBtnYes.renderId()}
+       ${this.mySybCompBtnNo.renderId()}
+       ${this.mySybCompBtnNoEmit.renderId()}
+       <button onclick="(${this.change})('change-theme')">
+         Change Theme
+       </button>
+    </div>
+  `;
+}
+exports.default = MyHeader;
+
+},{"../../index":5,"../components/button":1}],5:[function(require,module,exports){
 'use strict';
 
 /**
@@ -122,39 +192,42 @@ var _root = require("./src/core/root");
 var _comp = require("./src/core/comp");
 var _modifier = require("./src/core/modifier");
 
-},{"./src/core/comp":5,"./src/core/modifier":7,"./src/core/root":8}],5:[function(require,module,exports){
+},{"./src/core/comp":6,"./src/core/modifier":8,"./src/core/root":9}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.BaseComponent = void 0;
-var _modifier = require("./modifier");
 var _utils = require("./utils");
 class BaseComponent {
   id = 'none';
-  dom = null;
+  domRoot = null;
   text = '';
   rootStyle = {};
+  subComponents = [];
   constructor(arg) {}
   ready() {
     console.log('ready comp');
   }
   initial(arg, rootStyle) {
     if (typeof arg === 'string') {
-      console.warn('Arg text is used for id!');
       this.text = arg;
       this.id = arg;
     } else if (typeof arg === 'object') {
+      // console.warn('Arg is object!');
       this.text = arg.text;
       this.id = arg.id;
     }
-    if (rootStyle && typeof rootStyle.height !== 'undefined') {
+    if (rootStyle) {
       this.rootStyle = rootStyle;
+    } else {
+      this.rootStyle = "";
     }
   }
   set(arg, newValue, extraData) {
     const local = 'data-' + arg;
+    console.log('test id ', this.id);
     const localRoot = (0, _utils.getComp)(this.id);
     // Double care!
     localRoot.setAttribute(local, newValue);
@@ -162,6 +235,11 @@ class BaseComponent {
     root[arg] = newValue;
     this.update(root, arg, extraData);
   }
+  renderId = () => `
+    <div id="${this.id}" style="${this.rootStyle}">
+      ${this.render()}
+    </div>
+  `;
   render = () => ``;
   update = (root, arg, extraData) => {
     (0, _utils.getComp)(root.id).innerHTML = this.render();
@@ -207,7 +285,7 @@ class BaseComponent {
       detail: {
         info: 'clickBind',
         for: a,
-        target: a
+        target: this
       }
     });
     dispatchEvent(onClickEvent);
@@ -215,7 +293,7 @@ class BaseComponent {
 }
 exports.BaseComponent = BaseComponent;
 
-},{"./modifier":7,"./utils":9}],6:[function(require,module,exports){
+},{"./utils":10}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -240,7 +318,6 @@ class Base extends HTMLElement {
     // need trick
     // inputElement.setAttribute('class', this.getAttribute('class'));
     // predefined
-
     inputElement.setAttribute('style', args[0]);
     // inputElement.classList.add(args[0]);
 
@@ -262,7 +339,7 @@ class Base extends HTMLElement {
 exports.Base = Base;
 class Vertical extends Base {
   constructor(...args) {
-    console.log('C Ver class init... arg => ', args);
+    // console.log('C Ver class init... arg => ', args);
     args.push(_base.verCenter);
     super(...args);
   }
@@ -270,14 +347,14 @@ class Vertical extends Base {
 exports.Vertical = Vertical;
 class Horizontal extends Base {
   constructor(...args) {
-    console.log('C Hor class init... arg => ', args);
+    // console.log('C Hor class init... arg => ', args);
     args.push(_base.horCenter);
     super(...args);
   }
 }
 exports.Horizontal = Horizontal;
 
-},{"../style/base":10}],7:[function(require,module,exports){
+},{"../style/base":11}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -290,7 +367,7 @@ window.On = window.addEventListener;
 const On = window.On;
 exports.On = On;
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -327,7 +404,7 @@ class BaseSafir {
    */
   emitML = async function (r) {
     const x = await r.loadMultilang();
-    // internal exspose to the global obj
+    // Internal exspose to the global obj
     exports.T = T = x;
     dispatchEvent(new CustomEvent('app.ready', {
       detail: {
@@ -336,7 +413,7 @@ class BaseSafir {
     }));
   };
   loadMultilang = async function (path = 'assets/multilang/en.json') {
-    console.info("Multilang integrated component... ");
+    // console.info("Multilang integrated component... ");
     // Predefined path ../assets
     // Need fix for online services eg. codepen
     try {
@@ -349,11 +426,14 @@ class BaseSafir {
       return await r.json();
     } catch (err) {
       console.warn('Not possible to access multilang json asset! Err => ', err);
-    } finally {
       return {};
     }
+    // finally {
+    //  return await r.json();
+    // }
   };
 }
+
 class Safir extends BaseSafir {
   subComponents;
   appRoot;
@@ -369,19 +449,21 @@ class Safir extends BaseSafir {
   construct = () => {
     // Translation Enabled.
     this.emitML(this);
-    console.info("Multilang integrated component.ROOT. Still not resolved (pass arg) for services eg. codepen etc.");
+    // console.info("Multilang integrated component.ROOT. Still not resolved (pass arg) for services eg. codepen etc.");
     window.customElements.define('ver-box', _customCom.Vertical);
     window.customElements.define('hor-box', _customCom.Horizontal);
-    console.info("Custom Base Dom elements integrated => [Vertical, Horizontal].");
+    // console.info("Custom Base Dom elements integrated => [Vertical, Horizontal].");
     this.ready();
   };
   regTag(tagName, classRef) {
     window.customElements.define(tagName, classRef);
     console.info("Custom dom element loaded in runtime => " + tagName);
   }
-  loadComponent = arg => {
+  loadComponent = (arg, rootStyle) => {
     let x = document.createElement('div');
-    // x.setAttribute("id", arg.id);
+    x.setAttribute("id", arg.id);
+    // if (rootStyle) x.setAttribute("style", rootStyle);
+    if (rootStyle) x.classList.add(rootStyle);
     this.appRoot?.append(x);
     x.innerHTML = arg.render(arg);
     this.subComponents.push(arg);
@@ -406,7 +488,7 @@ class Safir extends BaseSafir {
 }
 exports.Safir = Safir;
 
-},{"./custom-com":6,"./modifier":7,"./utils":9}],9:[function(require,module,exports){
+},{"./custom-com":7,"./modifier":8,"./utils":10}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -496,7 +578,7 @@ const loadImage = function (url, onload) {
 };
 exports.loadImage = loadImage;
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

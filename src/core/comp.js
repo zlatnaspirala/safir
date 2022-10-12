@@ -1,34 +1,36 @@
-import { On } from "./modifier";
-import { Manager, getComp } from "./utils";
+import { getComp } from "./utils";
 
 export class BaseComponent {
 
   id= 'none';
-  dom= null;
+  domRoot= null;
   text= '';
   rootStyle = {};
+  subComponents = [];
+
   constructor(arg) {}
 
-  ready() {
-    console.log('ready comp');
-  }
+  ready() { console.log('ready comp') }
 
   initial(arg, rootStyle) {
     if (typeof arg === 'string') {
-      console.warn('Arg text is used for id!');
       this.text = arg;
       this.id = arg;
     } else if (typeof arg === 'object') {
+      // console.warn('Arg is object!');
        this.text = arg.text;
        this.id = arg.id;
     }
-    if (rootStyle && typeof rootStyle.height !== 'undefined') {
+    if (rootStyle) {
       this.rootStyle = rootStyle;
+    } else {
+      this.rootStyle = "";
     }
   }
 
   set(arg, newValue, extraData) {
     const local = 'data-' + arg;
+    console.log('test id ', this.id);
     const localRoot = getComp(this.id);
     // Double care!
     localRoot.setAttribute(local, newValue);
@@ -36,6 +38,12 @@ export class BaseComponent {
     (root )[arg] = newValue;
     this.update(root, arg, extraData);
   }
+
+  renderId = () => `
+    <div id="${this.id}" style="${this.rootStyle}">
+      ${this.render()}
+    </div>
+  `;
 
   render = () => ``;
 
@@ -85,11 +93,10 @@ export class BaseComponent {
       detail: {
         info: 'clickBind',
         for: a,
-        target: a
+        target: this
       },
     });
     dispatchEvent(onClickEvent);
   };
 
 }
-

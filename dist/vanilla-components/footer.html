@@ -24,11 +24,15 @@
   console.info('Write here javascript only');
   console.info('I recommended nersted object structure!');
 
+  On('Yes', (data) => {
+    console.info('Trigger Btn Yes catched in vanilla component: ', data)
+  });
+
   let footer = {
     root: document.getElementById('footer'),
     callMe: function(e) {
       console.log('Call trigger on footer.', this);
       this.root.innerHTML = 'what ever';
-    }
+    },
   };
 </script>

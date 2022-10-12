@@ -1,4 +1,4 @@
-# SAFIR 1.0.0
+# SAFIR 1.0.4
 
 ### Tech: Based on ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.
 ### Alternative software - High Performace
@@ -9,7 +9,7 @@
 Must be simple and usefull.
 Performace must be 100%with full PWA support.
 For any platform adapted.
-Basics
+
 
 ### There are two way for creating web components:
 ### - From code
@@ -36,9 +36,38 @@ console.info("App running [sync]...", Date.now());
 ```
 
 ## From code ECMA6
-It is very similar to the reactjs and vue.
+It is very similar to the reactjs and vue but it is not. There is no jsx support.
+This software use already exist feature Template Literal ECMA6 vs CustomEvents.
+This is the best way to organize web app in easy and progressive way.
+Performance and simplity are main objective in this project.
 
-#### Header
+Next level will be improvements in custom tag field.
+
+How works app updates?
+When you create Safir Component use `class MyList extends BaseComponent`.
+BaseComponent will handle situation. Safir have only function `set`
+for updating class props.
+
+```bash
+  set(arg, newValue, extraData)
+    - arg -> name of prop eg. counter
+    - newValue -> New value / what ever
+    - extraData -> it is object with only { emit: false }
+
+  Usage
+  mySybCompBtnNoEmit.set('counter', newValue, { emit: false });
+```
+
+Safir use `scss` with themed integrated but don't include dev tools for it. You need to use Visual Code Exstension
+`Live Sass`. Because we need css in final dist folder we need to run `build-assets.sh` for any changes intro assets or css
+folder. This will be fixed with `live sass` settings in future.
+
+Role:
+```json
+ Any changes in assets/ folder need run `build-assets.sh`
+```
+
+#### My Header
 ```js
 import MyButton from "../components/button";
 import {
@@ -101,7 +130,7 @@ export default class MyHeader extends BaseComponent {
 
 ```
 
-#### Button
+#### My Button
 ```js
 import {BaseComponent} from "safir";
 
@@ -135,6 +164,46 @@ export default class MyButton extends BaseComponent {
 }
 
 ```
+
+#### Simple list render with click catch
+```js
+import {BaseComponent} from "../../index";
+
+export default class MyList extends BaseComponent {
+  id = '';
+  // This is props
+  tableData = [
+    '👽 Modern tech',
+    '👌 Performance',
+    '🤑 Free soft',
+    '😜 Easy use',
+    '💔 Breaking',
+    '💥 Star project',
+    '👁️‍🗨️ Event oriented',
+    '🖖 No single unnecessary element',
+    '🤘 Safir rocks',
+    '👨‍🔬 Use npm service',
+    '👨‍💻 Open source',
+    '🐈 https://github.com/zlatnaspirala/safir'
+  ];
+  constructor(arg) {
+    super(arg);
+    this.initial(arg);
+  }
+  onClick = this.clickBind;
+  render = () => `
+    <div class="verCenter">
+      ${this.tableData.map((item, index) =>
+          `<h1 onclick="(${this.onClick})('${this.id}')"
+               class="middle">` + index + item + `</h1>`
+      ).join('')}
+    </div>
+  `;
+}
+```
+
+From demo2.js:
+`// myBoxComp.set('tableData', ['wao', 'woow'])`
 
 ## VANILLA COMPONENT
 WEB/HTML/JS/CSS (ecma6)
