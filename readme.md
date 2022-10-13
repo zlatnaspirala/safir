@@ -1,13 +1,15 @@
-# SAFIR 1.0.4
+# SAFIR [1.0.5]
 
 ### Tech: Based on ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.
 ### Alternative software - High Performace
 
 ![](https://github.com/zlatnaspirala/safir/blob/main/hello/assets/icons/192.png)
 
+Safir use `browserify` for building final pack script.
+
 ## Objective:
 Must be simple and usefull.
-Performace must be 100%with full PWA support.
+Performace must be 100% with full PWA support.
 For any platform adapted.
 
 
@@ -15,9 +17,9 @@ For any platform adapted.
 ### - From code
 ### - Vanilla component
 
-## Example
+## Basic Example
 
-#### Main
+#### Main instance script
 ```js
 import { Safir, On } from "safir";
 import MyHeader from "./layouts/heder";
@@ -35,7 +37,18 @@ On("app.ready", () => {
 console.info("App running [sync]...", Date.now());
 ```
 
-## From code ECMA6
+In index.html header add:
+```html
+  <link rel="stylesheet" href="./style.css">
+```
+If you wanna use themes.
+
+Add main dom holder:
+```html
+  <div id="app" class="theme-light app fill"></div>
+```
+
+## Create component from code 
 It is very similar to the reactjs and vue but it is not. There is no jsx support.
 This software use already exist feature Template Literal ECMA6 vs CustomEvents.
 This is the best way to organize web app in easy and progressive way.
@@ -44,27 +57,75 @@ Performance and simplity are main objective in this project.
 Next level will be improvements in custom tag field.
 
 How works app updates?
-When you create Safir Component use `class MyList extends BaseComponent`.
+When you create Safir Component use `class MyNewClass extends BaseComponent`.
 BaseComponent will handle situation. Safir have only function `set`
-for updating class props.
+for updating class props. Calling the `set` function will cause a rerender
+and dispach event with `on-<name_of_prop>` name.
+
+To create props just add it normally intro class eg. `counter = 0'.
 
 ```bash
-  set(arg, newValue, extraData)
+  set(arg, newValue, extraData?)
     - arg -> name of prop eg. counter
     - newValue -> New value / what ever
-    - extraData -> it is object with only { emit: false }
+    - extraData -> it is object with only `{ emit: true }`
+                   it is optimal arg.
 
-  Usage
+  Usage:
   mySybCompBtnNoEmit.set('counter', newValue, { emit: false });
+
+  Catch it any where you want:
+  On('on-counter', (data) => {
+    console.info('[on-counter] Trigger Btn Yes [catched from body] ', data.detail);
+    let t = data.detail;
+    // Because we use multiply same component with also same prop name
+    // you can use `detail.emitter` to determinate by id who made dispach.
+    if (t.emitter === "yes") {
+      this.set('statusCounterYes', t.newValue);
+    } else if (t.emitter === "no") {
+      this.set('statusCounterNo', t.newValue);
+    }
+    // local tbn (no-emit) never emitted!
+  });
+
 ```
 
-Safir use `scss` with themed integrated but don't include dev tools for it. You need to use Visual Code Exstension
-`Live Sass`. Because we need css in final dist folder we need to run `build-assets.sh` for any changes intro assets or css
-folder. This will be fixed with `live sass` settings in future.
+#### @Note About dom attribute.
+After first call of func `set('counter', 1)` engine will setup root dom element 
+with attribute `data-counter="1"`.
+This must be optimised [make some extra arg or make it disable by default...]
+This feature is No required but can be used.
 
-Role:
-```json
- Any changes in assets/ folder need run `build-assets.sh`
+#### My Button
+```js
+import {BaseComponent} from "../../index";
+
+export default class MyButton extends BaseComponent {
+  id = '';
+  text = '';
+  counter = 0;
+
+  get getCounter() {
+    return this.counter;
+  }
+
+  ready = () => {};
+
+  constructor(arg) {
+    super(arg);
+    this.initial(arg);
+  }c
+
+  onClick = this.clickBind;
+
+  // Attached on root dom element
+  // data-counter="${this.getCounter}"
+  render = () => `
+    <button onclick="(${this.onClick})('${this.id}')">
+      ${this.text} counter => ${this.getCounter}
+    </button>
+  `;
+}
 ```
 
 #### My Header
@@ -72,20 +133,15 @@ Role:
 import MyButton from "../components/button";
 import {
   On, T,
-  BaseComponent } from "safir";
+  BaseComponent } from "../../index";
 
 export default class MyHeader extends BaseComponent {
 
   id = 'my-heder';
   slogan = 'My header.';
-
   mySybCompBtnYes = new MyButton({ text: T.yes, id: 'yes'});
-  mySybCompBtnNo = new MyButton({ text: T.no, id: 'no'});
-  mySybCompBtnNoEmit = new MyButton({ text: T.textAlert, id: 'local'});
-
-  ready = () =>  {
-    console.log('header ready. what is ml ', T);
-  }
+  mySybCompBtnNo = (new MyButton({ text: T.no, id: 'no'}));
+  mySybCompBtnNoEmit = (new MyButton({ text: T.textAlert, id: 'local'}));
 
   constructor(arg) {
     super(arg);
@@ -104,65 +160,37 @@ export default class MyHeader extends BaseComponent {
     });
 
     On('local', () => {
-      console.info('Trigger Btn no', (this));
-      this.mySybCompBtnNoEmit.set('counter', 100, { emit: false });
+      let newValue = this.mySybCompBtnNoEmit.getCounter - 1;
+      console.info('You can always get trigger detect by id !', (this));
+      console.info('But no trigger for props setter with { emit: false } !', (this));
+      this.mySybCompBtnNoEmit.set('counter', newValue, { emit: false });
     });
 
     On('change-theme', () => {
-      console.info('Trigger CHANGE THEME', (this).changeTheme());
+      (this).changeTheme();
+      console.info('Trigger ChangeTheme integrated.');
     })
 
   }
 
   change = this.clickBind;
 
+  /**
+   * @description
+   * Component in component case :
+   * Use renderId.
+   */
   render = () => `
-    <div id="${this.id}" class="middle h5">
-       ${(this.mySybCompBtnYes).render()}
-       ${(this.mySybCompBtnNo).render()}
-       ${(this.mySybCompBtnNoEmit).render()}
-       <div onclick="(${this.change})('change-theme')">
+    <div class="middle h5">
+       ${(this.mySybCompBtnYes).renderId()}
+       ${(this.mySybCompBtnNo).renderId()}
+       ${(this.mySybCompBtnNoEmit).renderId()}
+       <button onclick="(${this.change})('change-theme')">
          Change Theme
-       </div>
+       </button>
     </div>
   `
 }
-
-```
-
-#### My Button
-```js
-import {BaseComponent} from "safir";
-
-export default class MyButton extends BaseComponent {
-  id = '';
-  text = '';
-  counter = 0;
-
-  get getCounter() {
-    return this.counter;
-  }
-
-  ready = () => {
-    // console.log('ready comp');
-  };
-
-  constructor(arg) {
-    super(arg);
-    this.initial(arg);
-  }
-
-  onClick = this.clickBind;
-
-  render = () => `
-    <div id="${this.id}">
-      <button data-counter="${this.getCounter}" onclick="(${this.onClick})('${this.id}')">
-        ${this.text} class MyButton prop counter = ${this.getCounter}
-      </button>
-    </div>
-  `;
-}
-
 ```
 
 #### Simple list render with click catch
@@ -202,7 +230,7 @@ export default class MyList extends BaseComponent {
 }
 ```
 
-From demo2.js:
+For demo2.js try in console:
 `// myBoxComp.set('tableData', ['wao', 'woow'])`
 
 ## VANILLA COMPONENT
@@ -251,30 +279,69 @@ WEB/HTML/JS/CSS (ecma6)
 </script>
 ```
 
+#### Style
+Style can be used with props [from code]. Style comes with examples it is not real part safir core but it is
+deeply integrated within. It is a part of this repo also.
+
+Safir use `scss` with themed integrated but don't include dev tools for it. You need to use Visual Code Exstension
+`Live Sass`. Because we need css in final dist folder we need to run `build-assets.sh` for any changes intro assets or css
+folder. This will be fixed with `live sass` settings in future.
+
+Role:
+```json
+ Any changes in assets/ folder need run `build-assets.sh`
+```
+
 ## Hosting/build
 
 For localhost (http) web server:
-```
-http-server ./dist -p 80
+```js
+  http-server ./dist -p 80
 ```
 or
-```
-npm run host
+```js
+  npm run host
 ```
 
 For localhost watch:
 Run watch:
-```
-npm run dev
+```js
+  npm run demo1
+  npm run demo2
+  ...
 ```
 
 For production (https) web server:
 Run command:
+```js
+  npm run build.demo1
+  npm run build.demo2
+  npm run build.all
 ```
-npm run build
+
+## Build Library [option]
+
+If you don't wanna use `npm service` or you dont wanna use `module type` and `compiling js` code
+then you can build empty lib like javascript ES5 or ES6.
+```
+  "build.lib": "browserify lib.js -p esmify > dist/safir.lib.js",
+```
+
+Import intro HTML direct:
+```html
+  <script defer src="safir.lib.js"></script>
 ```
 
 ## Links
 
-Basic example:
- https://codepen.io/zlatnaspirala/pen/mdLzxoy
+Basic examples:
+ - Demo1.js [How to use? Create and update prop on click]
+   https://codepen.io/zlatnaspirala/pen/mdLzxoy
+ - Demo2.js [How to use? Table data remove item from list on click]
+   https://codepen.io/zlatnaspirala/pen/eYrxgKz
+
+
+## Credits 
+
+ Used for css animation:
+ -> https://webcode.tools/generators/css/keyframe-animation

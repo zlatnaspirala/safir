@@ -1,19 +1,21 @@
 $themes: (
   light: (
+    fontSize: 2vw,
     backgroundColor: #fff,
     divShadowColor: #49d8ff14,
     scrollBar: inset 0 0 5px rgb(32, 116, 135),
     scrollbarThumb: silver,
     scrollbarThumbHover: orange,
-    textColor: #408bbd,
-    buttonTextColor: #408bbd,
+    textColor: #023e66,
+    buttonTextColor: #0f2d41,
     buttonTextTransform: none,
-    buttonTextHoverColor: #61b0e7,
+    buttonTextHoverColor: #000000,
     buttonColor: rgb(255, 255, 255),
-    buttonBorder: 1px solid rgb(176, 235, 248),
+    buttonBorder: 1px solid rgb(0, 148, 181),
     buttonBorderHover: 1px solid rgb(0, 221, 255),
   ),
   dark: (
+    fontSize: 2vw,
     backgroundColor: rgb(83, 83, 83),
     divShadowColor: #ff000014,
     scrollBar: inset 0 0 5px rgb(32, 116, 135),
@@ -27,6 +29,7 @@ $themes: (
     buttonBorderHover: 1px solid rgb(250, 250, 250),
   ),
   orange: (
+    fontSize: 2vw,
     backgroundColor: rgb(0, 0, 0),
     divShadowColor: #ff000014,
     scrollBar: inset 0 0 5px rgb(32, 116, 135),

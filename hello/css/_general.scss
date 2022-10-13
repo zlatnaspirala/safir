@@ -33,10 +33,10 @@ body {
 
 h2 {
   @include themify($themes) {
-    border: themed('buttonBorder');
+    cursor: default;
     &:hover {
       color: themed('textHoverColor');
-      border: themed('buttonBorderHover');
+      background:  themed('divShadowColor');
     }
   }
 }
@@ -57,6 +57,7 @@ button {
     color: themed('textColor');
     background-color: themed('backgroundColor');
     border: themed('buttonBorder');
+    font-size: themed('fontSize');
   }
 
   font-family: Accuratist;

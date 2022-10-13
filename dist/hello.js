@@ -48,10 +48,16 @@ class MyList extends _index.BaseComponent {
     this.initial(arg);
   }
   onClick = this.clickBind;
+
+  /**
+   * @description
+   * Index Key is not required but 
+   * it is nice to have.
+   */
   render = () => `
     <div class="verCenter">
-      ${this.tableData.map((item, index) => `<h1 onclick="(${this.onClick})('${this.id}')"
-               class="middle">` + index + item + `</h1>`).join('')}
+      ${this.tableData.map((item, index) => `<h2 data-key="${index}" onclick="(${this.onClick})('${this.id}')"
+               class="middle">` + index + item + `</h2>`).join('')}
     </div>
   `;
 }
@@ -80,7 +86,15 @@ let myBoxComp, myHeader;
 
 (0, _index.On)("my-box-custom", r => {
   console.info("Application On ver-box custom integrated dom element, click event attached.", r);
-  alert(" List item clicked => " + r.path[0].innerHTML);
+  // alert(" List item clicked => " + r.path[0].innerHTML);
+  console.log('>>>>>>>>>>' + myBoxComp.tableData);
+  // myBoxComp.tableData.slice();
+  let getIndex = r.path[0].getAttribute('data-key');
+  myBoxComp.tableData.splice(getIndex, 1);
+  setTimeout(function () {
+    myBoxComp.set('tableData', myBoxComp.tableData);
+  }, 600);
+  r.path[0].classList.add('animate-destroy');
 });
 
 },{"../index":5,"./components/my-list":2,"./layouts/heder":4}],4:[function(require,module,exports){

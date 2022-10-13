@@ -1,7 +1,7 @@
 import MyButton from "../components/button";
 import {
   On, T,
-  BaseComponent } from "../../index";
+  BaseComponent } from "safir";
 
 export default class MyHeader extends BaseComponent {
 

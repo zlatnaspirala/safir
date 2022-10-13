@@ -21,7 +21,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  font-size: 1hw;
+  font-size: 2vw;
 }
 
 .theme-light body {
@@ -103,24 +103,15 @@ button {
 }
 
 .theme-dark button {
-  color: white;
+  color: #d6d6d6;
   background-color: #535353;
   border: 1px solid #aaa;
 }
 
 .theme-orange button {
-  color: #ff2600;
+  color: #f34f2b;
   background-color: black;
   border: 1px solid #ffc228;
-}
-
-button:active {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  -webkit-transform: translateY(-1px);
-          transform: translateY(-1px);
-  -webkit-transform: translateX(-1px);
-          transform: translateX(-1px);
 }
 
 .theme-light button:hover {

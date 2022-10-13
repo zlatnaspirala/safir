@@ -1,4 +1,4 @@
-import { BaseComponent, On } from "../../index";
+import { BaseComponent, On } from "safir";
 
 export default class Layout extends BaseComponent {
 

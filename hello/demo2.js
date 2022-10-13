@@ -20,5 +20,17 @@ On("app.ready", () => {
 
 On("my-box-custom", (r) => {
   console.info("Application On ver-box custom integrated dom element, click event attached.", r);
-  alert(" List item clicked => " + r.path[0].innerHTML);
+  // alert(" List item clicked => " + r.path[0].innerHTML);
+  console.log( '>>>>>>>>>>' + myBoxComp.tableData);
+  // myBoxComp.tableData.slice();
+  let getIndex = r.path[0].getAttribute('data-key');
+
+  myBoxComp.tableData.splice(getIndex , 1);
+
+  setTimeout(function() { 
+    myBoxComp.set('tableData', myBoxComp.tableData);
+  }, 600);
+
+  r.path[0].classList.add('animate-destroy');
+
 });

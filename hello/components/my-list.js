@@ -27,11 +27,16 @@ export default class MyList extends BaseComponent {
 
   onClick = this.clickBind;
 
+  /**
+   * @description
+   * Index Key is not required but 
+   * it is nice to have.
+   */
   render = () => `
     <div class="verCenter">
       ${this.tableData.map((item, index) =>
-          `<h1 onclick="(${this.onClick})('${this.id}')"
-               class="middle">` + index + item + `</h1>`
+          `<h2 data-key="${index}" onclick="(${this.onClick})('${this.id}')"
+               class="middle">` + index + item + `</h2>`
       ).join('')}
     </div>
   `;

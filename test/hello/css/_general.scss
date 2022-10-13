@@ -20,7 +20,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  font-size: 1hw;
+  font-size: 2vw;
 }
 
 body {
@@ -34,7 +34,6 @@ body {
 h2 {
   @include themify($themes) {
     border: themed('buttonBorder');
-
     &:hover {
       color: themed('textHoverColor');
       border: themed('buttonBorderHover');
@@ -47,7 +46,6 @@ div {
     font-family: Accuratist;
     color: themed('textColor');
     background-color: themed('backgroundColor');
-
     -webkit-box-shadow: inset 0px 0px 2px 1px themed('divShadowColor');
     -moz-box-shadow: inset 0px 0px 2px 1px themed('divShadowColor');
     box-shadow: inset 0px 0px 2px 1px themed('divShadowColor');
@@ -56,7 +54,7 @@ div {
 
 button {
   @include themify($themes) {
-    color: themed('textColor');
+    color: themed('buttonTextColor');
     background-color: themed('backgroundColor');
     border: themed('buttonBorder');
   }
@@ -65,11 +63,7 @@ button {
   padding: 1px 1px 1px 1px;
   margin: 1px 1px 1px 1px;
 
-  &:active {
-    box-shadow: none;
-    transform: translateY(-1px);
-    transform: translateX(-1px);
-  }
+  &:active {}
 
   &:hover {
     @include themify($themes) {

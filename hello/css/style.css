@@ -26,7 +26,7 @@ body {
 
 .theme-light body {
   font-family: Accuratist;
-  color: #408bbd;
+  color: #023e66;
   background-color: #fff;
 }
 
@@ -43,32 +43,32 @@ body {
 }
 
 .theme-light h2 {
-  border: 1px solid #b0ebf8;
+  cursor: default;
 }
 
 .theme-light h2:hover {
-  border: 1px solid #00ddff;
+  background: #49d8ff14;
 }
 
 .theme-dark h2 {
-  border: 1px solid #aaa;
+  cursor: default;
 }
 
 .theme-dark h2:hover {
-  border: 1px solid #fafafa;
+  background: #ff000014;
 }
 
 .theme-orange h2 {
-  border: 1px solid #ffc228;
+  cursor: default;
 }
 
 .theme-orange h2:hover {
-  border: 1px solid #ff8b64;
+  background: #ff000014;
 }
 
 .theme-light div {
   font-family: Accuratist;
-  color: #408bbd;
+  color: #023e66;
   background-color: #fff;
   -webkit-box-shadow: inset 0px 0px 2px 1px #49d8ff14;
   box-shadow: inset 0px 0px 2px 1px #49d8ff14;
@@ -97,21 +97,24 @@ button {
 }
 
 .theme-light button {
-  color: #408bbd;
+  color: #023e66;
   background-color: #fff;
-  border: 1px solid #b0ebf8;
+  border: 1px solid #0094b5;
+  font-size: 2vw;
 }
 
 .theme-dark button {
   color: white;
   background-color: #535353;
   border: 1px solid #aaa;
+  font-size: 2vw;
 }
 
 .theme-orange button {
   color: #ff2600;
   background-color: black;
   border: 1px solid #ffc228;
+  font-size: 2vw;
 }
 
 button:active {
@@ -124,7 +127,7 @@ button:active {
 }
 
 .theme-light button:hover {
-  color: #61b0e7;
+  color: #000000;
   border: 1px solid #00ddff;
 }
 
@@ -244,7 +247,7 @@ button:active {
 }
 
 .theme-light .verCenter {
-  color: #408bbd;
+  color: #023e66;
   background-color: #fff;
 }
 
@@ -277,7 +280,7 @@ button:active {
 }
 
 .theme-light .horCenter {
-  color: #408bbd;
+  color: #023e66;
   background-color: #fff;
 }
 
@@ -319,5 +322,130 @@ button:active {
 
 .h5 {
   height: 5vh;
+}
+
+.animate-jello {
+  -webkit-animation: jello2 1s ease 0s 1 normal forwards;
+          animation: jello2 1s ease 0s 1 normal forwards;
+}
+
+@-webkit-keyframes jello2 {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes jello2 {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+.animate-jello2 {
+  -webkit-animation: jello 2s ease 0s 1 normal forwards;
+          animation: jello 2s ease 0s 1 normal forwards;
+}
+
+@-webkit-keyframes jello {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+            transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+            transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+            transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+            transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+            transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes jello {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+            transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+            transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+            transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+            transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+            transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+
+.animate-destroy {
+  -webkit-animation: animateDestroy 1s ease 0s 1 normal forwards;
+          animation: animateDestroy 1s ease 0s 1 normal forwards;
+}
+
+@-webkit-keyframes animateDestroy {
+  0% {
+    opacity: 1;
+    -webkit-transform: rotate(0) scale(1);
+            transform: rotate(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: rotate(-540deg) scale(0);
+            transform: rotate(-540deg) scale(0);
+  }
+}
+
+@keyframes animateDestroy {
+  0% {
+    opacity: 1;
+    -webkit-transform: rotate(0) scale(1);
+            transform: rotate(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: rotate(-540deg) scale(0);
+            transform: rotate(-540deg) scale(0);
+  }
 }
 /*# sourceMappingURL=style.css.map */
