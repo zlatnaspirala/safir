@@ -14,13 +14,15 @@ export class BaseComponent {
 
   initial(arg, rootStyle) {
     if (typeof arg === 'string') {
+      console.warn('Arg is string!');
       this.text = arg;
       this.id = arg;
     } else if (typeof arg === 'object') {
-      // console.warn('Arg is object!');
+       console.warn('Arg is object!');
        this.text = arg.text;
        this.id = arg.id;
     }
+    console.warn('Arg is rootStyle!', rootStyle);
     if (rootStyle) {
       this.rootStyle = rootStyle;
     } else {
@@ -40,7 +42,7 @@ export class BaseComponent {
   }
 
   renderId = () => `
-    <div id="${this.id}" style="${this.rootStyle}">
+    <div id="${this.id}" class="${this.rootStyle}">
       ${this.render()}
     </div>
   `;

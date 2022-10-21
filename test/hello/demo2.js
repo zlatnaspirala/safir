@@ -14,7 +14,5 @@ On("app.ready", () => {
 
 On("my-box-custom", (r) => {
   console.info("Application On ver-box custom integrated dom element, click event attached.", r);
-
-  alert(" List item clicked => " + r.path[0].innerHTML);
-
+  // alert(" List item clicked => " + r.path[0].innerHTML);
 });

@@ -7,9 +7,9 @@ export default class MyHeader extends BaseComponent {
 
   id = 'my-heder';
   slogan = 'My header.';
-  mySybCompBtnYes = new MyButton({ text: T.yes, id: 'yes'});
-  mySybCompBtnNo = (new MyButton({ text: T.no, id: 'no'}));
-  mySybCompBtnNoEmit = (new MyButton({ text: T.textAlert, id: 'local'}));
+  mySybCompBtnYes = new MyButton({ text: T.yes, id: 'yes'}, 'fill');
+  mySybCompBtnNo = (new MyButton({ text: T.no, id: 'no'}, 'fill'));
+  mySybCompBtnNoEmit = (new MyButton({ text: T.textAlert, id: 'local'}, 'fill'));
 
   constructor(arg) {
     super(arg);
@@ -48,9 +48,11 @@ export default class MyHeader extends BaseComponent {
        ${(this.mySybCompBtnYes).renderId()}
        ${(this.mySybCompBtnNo).renderId()}
        ${(this.mySybCompBtnNoEmit).renderId()}
-       <button onclick="(${this.change})('change-theme')">
-         Change Theme
-       </button>
+       <div class="fill">
+        <button class="fill" onclick="(${this.change})('change-theme')">
+          Change Theme
+        </button>
+       </div>
     </div>
   `
 }
