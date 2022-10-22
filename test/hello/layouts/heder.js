@@ -7,9 +7,9 @@ export default class MyHeader extends BaseComponent {
 
   id = 'my-heder';
   slogan = 'My header.';
-  mySybCompBtnYes = new MyButton({ text: T.yes, id: 'yes'});
-  mySybCompBtnNo = (new MyButton({ text: T.no, id: 'no'}));
-  mySybCompBtnNoEmit = (new MyButton({ text: T.textAlert, id: 'local'}));
+  mySybCompBtnYes = new MyButton({ text: T.yes, id: 'yes'}, 'fill');
+  mySybCompBtnNo = new MyButton({ text: T.no, id: 'no'}, 'fill');
+  mySybCompBtnNoEmit = new MyButton({ text: T.textAlert, id: 'local'}, 'fill');
 
   constructor(arg) {
     super(arg);
@@ -17,18 +17,18 @@ export default class MyHeader extends BaseComponent {
 
     On('yes', () => {
       console.info('Trigger Btn Yes', (this));
-      let newValue = this.mySybCompBtnYes.getCounter + 1;
+      let newValue = this.mySybCompBtnYes.counter + 1;
       this.mySybCompBtnYes.set('counter', newValue);
     });
 
     On('no', () => {
       console.info('Trigger Btn no', (this));
-      let newValue = this.mySybCompBtnNo.getCounter - 1;
+      let newValue = this.mySybCompBtnNo.counter - 1;
       this.mySybCompBtnNo.set('counter', newValue);
     });
 
     On('local', () => {
-      let newValue = this.mySybCompBtnNoEmit.getCounter - 1;
+      let newValue = this.mySybCompBtnNoEmit.counter - 1;
       console.info('You can always get trigger detect by id !', (this));
       console.info('But no trigger for props setter with { emit: false } !', (this));
       this.mySybCompBtnNoEmit.set('counter', newValue, { emit: false });
@@ -48,9 +48,11 @@ export default class MyHeader extends BaseComponent {
        ${(this.mySybCompBtnYes).renderId()}
        ${(this.mySybCompBtnNo).renderId()}
        ${(this.mySybCompBtnNoEmit).renderId()}
-       <button onclick="(${this.change})('change-theme')">
-         Change Theme
-       </button>
+       <div class="fill">
+        <button class="fill" onclick="(${this.change})('change-theme')">
+          Change Theme
+        </button>
+       </div>
     </div>
   `
 }
