@@ -9,9 +9,9 @@ export default class MyButton extends BaseComponent {
   counter = 0;
 
   // Also fancy ECMA6
-  // get getCounter() {
-  //   return this.counter;
-  // }
+  get getCounter() {
+    return this.counter;
+  }
 
   ready = () => {};
 

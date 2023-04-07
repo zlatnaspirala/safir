@@ -2,3 +2,5 @@
 node_modules/
 test/node_modules/
 dist/
+dist/index.html
+dist/style.css
