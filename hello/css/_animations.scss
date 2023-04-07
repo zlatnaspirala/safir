@@ -1,36 +1,63 @@
-  // &:hover {
-  //   @include themify($themes) {
-  //     color: themed('buttonTextHoverColor');
-  //   }
+.animate-jello {
+  animation: jello2 1s ease 0s 1 normal forwards;
+}
 
-  .animate-jello {
-    animation: jello2 1s ease 0s 1 normal forwards;
+@keyframes jello2 {
+  0% {
+    transform: scale(0);
   }
 
-  @keyframes jello2 {
-    0% { transform: scale(0); }
-    100% { transform: scale(1); }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-jello2 {
+  animation: jello 2s ease 0s 1 normal forwards;
+}
+
+@keyframes jello {
+  0% {
+    transform: scale3d(1, 1, 1);
   }
 
-  .animate-jello2 {
-    animation: jello 2s ease 0s 1 normal forwards;
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
   }
 
-  @keyframes jello {
-    0% { transform: scale3d(1, 1, 1); }
-    30% { transform: scale3d(1.25, 0.75, 1); }
-    40% { transform: scale3d(0.75, 1.25, 1); }
-    50% { transform: scale3d(1.15, 0.85, 1); }
-    65% { transform: scale3d(0.95, 1.05, 1); }
-    75% { transform: scale3d(1.05, 0.95, 1); }
-    100% { transform: scale3d(1, 1, 1); }
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
   }
 
-  .animate-destroy {
-    animation: animateDestroy 1s ease 0s 1 normal forwards;
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
   }
 
-  @keyframes animateDestroy {
-    0% { opacity: 1; transform: rotate(0) scale(1); }
-    100% { opacity: 0; transform: rotate(-540deg) scale(0); }
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
   }
+
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.animate-destroy {
+  animation: animateDestroy 1s ease 0s 1 normal forwards;
+}
+
+@keyframes animateDestroy {
+  0% {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(-540deg) scale(0);
+  }
+}

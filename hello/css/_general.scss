@@ -1,11 +1,11 @@
 @font-face {
   font-family: Accuratist;
-  src: url(../assets/fonts/Accuratist.ttf);
+  src: url(/assets/fonts/Accuratist.ttf);
 }
 
 @font-face {
   font-family: Closeness;
-  src: url(../assets/fonts/Closeness.ttf);
+  src: url(/assets/fonts/Closeness.ttf);
 }
 
 *,
@@ -186,5 +186,6 @@ button {
 }
 
 .h5 {
-  height: 5vh;
+  height: 3vw;
 }
+

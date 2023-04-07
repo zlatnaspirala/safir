@@ -24,6 +24,9 @@ On("my-box-custom", (r) => {
   myBoxComp.tableData.splice(getIndex , 1);
   setTimeout(() => {
     myBoxComp.set('tableData', myBoxComp.tableData);
-  }, 600);
+  }, 1000);
+  
   r.srcElement.classList.add('animate-destroy');
+  console.info('r.srcElement.classList' + r.srcElement.classList);
+
 });
