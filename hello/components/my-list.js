@@ -29,7 +29,7 @@ export default class MyList extends BaseComponent {
 
   /**
    * @description
-   * Index Key is not required but 
+   * Index Key is not required but
    * it is nice to have.
    */
   render = () => `

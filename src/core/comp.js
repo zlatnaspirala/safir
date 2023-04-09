@@ -18,9 +18,10 @@ export class BaseComponent {
       this.text = arg;
       this.id = arg;
     } else if (typeof arg === 'object') {
-       console.warn('Arg is object!');
-       this.text = arg.text;
+       console.warn('Arg is object! this.value  ', this.value );
        this.id = arg.id;
+       this.text = arg.text || '';
+       // this.value = arg.value;
     }
     console.warn('Arg is rootStyle!', rootStyle);
     if (rootStyle) {
@@ -31,14 +32,20 @@ export class BaseComponent {
   }
 
   set(arg, newValue, extraData) {
-    const local = 'data-' + arg;
-    console.log('test id ', this.id);
-    const localRoot = getComp(this.id);
-    // Double care!
-    localRoot.setAttribute(local, newValue);
+    // const local = 'data-' + arg;
+    // console.log('test id ', this.id);
+    // const localRoot = getComp(this.id);
+    // // Double care!
+    // localRoot.setAttribute(local, newValue);
+    localStorage.setItem(arg, newValue);
     let root = this;
-    (root )[arg] = newValue;
+    (root)[arg] = newValue;
     this.update(root, arg, extraData);
+  }
+
+  setPropById (id, nv) {
+    console.log('TEST getComp(id) ', getComp(id))
+    getComp(id).innerText = nv;
   }
 
   renderId = () => `
@@ -95,7 +102,34 @@ export class BaseComponent {
       detail: {
         info: 'clickBind',
         for: a,
-        target: this
+        target: this,
+        value: this.value
+      },
+    });
+    dispatchEvent(onClickEvent);
+  };
+
+  keyDownBind = (a) => {
+    let onClickEvent = new CustomEvent(a, {
+      bubbles: true,
+      detail: {
+        info: 'keyDownBind',
+        for: a,
+        target: this,
+        value: this.value
+      },
+    });
+    dispatchEvent(onClickEvent);
+  };
+
+  keyUpBind = (a) => {
+    let onClickEvent = new CustomEvent(a, {
+      bubbles: true,
+      detail: {
+        info: 'keyDownBind',
+        for: a,
+        target: this,
+        value: this.value
       },
     });
     dispatchEvent(onClickEvent);
