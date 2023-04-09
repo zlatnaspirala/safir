@@ -1,6 +1,8 @@
 #!/bin/bash
-# Project: Safir 1.0.0
+
+# Project: Safir 1.0.7
 # Tested on windows bash terminal
+
 echo -e "$(tput bold) . $(tput sgr0)";
 mkdir -p dist/assets;
 mkdir -p dist/css;
@@ -9,6 +11,7 @@ yes | cp -Rf hello/assets/* dist/assets;
 cp -Rf hello/vanilla-components/* dist/vanilla-components;
 cp index.html dist/index.html;
 cp hello/css/style.css dist/css/style.css;
+cp hello/css/style.css.map dist/css/style.css.map;
 echo
 echo -e "$(tput bold) Safir assets bulder $(tput sgr0)";
 echo -e "$(tput setaf 4) Final production pack at: /dist";
