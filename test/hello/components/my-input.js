@@ -1,4 +1,4 @@
-import {BaseComponent} from "../../index";
+import {BaseComponent} from "safir";
 
 export default class MyInput extends BaseComponent {
 

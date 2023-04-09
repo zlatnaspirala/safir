@@ -1,11 +1,11 @@
 @font-face {
   font-family: Accuratist;
-  src: url(../assets/fonts/Accuratist.ttf);
+  src: url(/assets/fonts/Accuratist.ttf);
 }
 
 @font-face {
   font-family: Closeness;
-  src: url(../assets/fonts/Closeness.ttf);
+  src: url(/assets/fonts/Closeness.ttf);
 }
 
 *,
@@ -33,10 +33,10 @@ body {
 
 h2 {
   @include themify($themes) {
-    border: themed('buttonBorder');
+    cursor: default;
     &:hover {
       color: themed('textHoverColor');
-      border: themed('buttonBorderHover');
+      background:  themed('divShadowColor');
     }
   }
 }
@@ -54,16 +54,21 @@ div {
 
 button {
   @include themify($themes) {
-    color: themed('buttonTextColor');
+    color: themed('textColor');
     background-color: themed('backgroundColor');
     border: themed('buttonBorder');
+    font-size: themed('fontSize');
   }
 
   font-family: Accuratist;
   padding: 1px 1px 1px 1px;
   margin: 1px 1px 1px 1px;
 
-  &:active {}
+  &:active {
+    box-shadow: none;
+    /**transform: translateY(-1px);
+    transform: translateX(-1px);*/
+  }
 
   &:hover {
     @include themify($themes) {
@@ -181,5 +186,6 @@ button {
 }
 
 .h5 {
-  height: 5vh;
+  height: 3vw;
 }
+

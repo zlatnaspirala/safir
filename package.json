@@ -1,6 +1,6 @@
 {
   "name": "safir",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Ultimate web app perfomance. Tech: Based on Template Literals & CustomEvents",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,7 @@
     "build.all": "npm run build.demo1 | npm run build.demo2",
     "build.lib": "browserify lib.js -p esmify > dist/safir.lib.js",
     "host": "http-server ./dist/ -p 80",
+    "host.npm": "http-server ./test/dist/ -p 80",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

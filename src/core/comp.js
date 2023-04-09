@@ -21,7 +21,8 @@ export class BaseComponent {
        console.warn('Arg is object! this.value  ', this.value );
        this.id = arg.id;
        this.text = arg.text || '';
-       // this.value = arg.value;
+       this.type = arg.type;
+       this.value = arg.value || '';
     }
     console.warn('Arg is rootStyle!', rootStyle);
     if (rootStyle) {
