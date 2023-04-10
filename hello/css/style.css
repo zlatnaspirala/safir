@@ -150,19 +150,19 @@ body {
 }
 
 .theme-light body {
-  font-family: Accuratist;
+  font-family: "Accuratist";
   color: #023e66;
   background-color: #fff;
 }
 
 .theme-dark body {
-  font-family: Accuratist;
+  font-family: "Accuratist";
   color: white;
   background-color: #535353;
 }
 
 .theme-orange body {
-  font-family: Accuratist;
+  font-family: "Accuratist";
   color: #ff2600;
   background-color: black;
 }
@@ -191,8 +191,12 @@ body {
   background: #ff000014;
 }
 
+div {
+  width: inherit;
+}
+
 .theme-light div {
-  font-family: Accuratist;
+  font-family: "Accuratist";
   color: #023e66;
   background-color: #fff;
   -webkit-box-shadow: inset 0px 0px 2px 1px #49d8ff14;
@@ -200,7 +204,7 @@ body {
 }
 
 .theme-dark div {
-  font-family: Accuratist;
+  font-family: "Accuratist";
   color: white;
   background-color: #535353;
   -webkit-box-shadow: inset 0px 0px 2px 1px #ff000014;
@@ -208,7 +212,7 @@ body {
 }
 
 .theme-orange div {
-  font-family: Accuratist;
+  font-family: "Accuratist";
   color: #ff2600;
   background-color: black;
   -webkit-box-shadow: inset 0px 0px 2px 1px #ff000014;
@@ -260,6 +264,57 @@ button:active {
 }
 
 .theme-orange button:hover {
+  color: white;
+  border: 1px solid #ff8b64;
+}
+
+input {
+  padding: 1px 1px 1px 1px;
+  margin: 1px 1px 1px 1px;
+}
+
+.theme-light input {
+  font-family: "Accuratist";
+  color: #023e66;
+  background-color: #fff;
+  border: 1px solid #0094b5;
+  font-size: 2vw;
+}
+
+.theme-dark input {
+  font-family: "Accuratist";
+  color: white;
+  background-color: #535353;
+  border: 1px solid #aaa;
+  font-size: 2vw;
+}
+
+.theme-orange input {
+  font-family: "Accuratist";
+  color: #ff2600;
+  background-color: black;
+  border: 1px solid #ffc228;
+  font-size: 2vw;
+}
+
+input:active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  /**transform: translateY(-1px);
+    transform: translateX(-1px);*/
+}
+
+.theme-light input:hover {
+  color: #000000;
+  border: 1px solid #00ddff;
+}
+
+.theme-dark input:hover {
+  color: white;
+  border: 1px solid #fafafa;
+}
+
+.theme-orange input:hover {
   color: white;
   border: 1px solid #ff8b64;
 }
@@ -420,6 +475,18 @@ button:active {
 .fill {
   width: 100% !important;
   height: 100% !important;
+}
+
+.theme-light .fill {
+  font-family: "Accuratist";
+}
+
+.theme-dark .fill {
+  font-family: "Accuratist";
+}
+
+.theme-orange .fill {
+  font-family: "Accuratist";
 }
 
 .fit {

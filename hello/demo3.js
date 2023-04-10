@@ -5,6 +5,6 @@ import TestInputBody from "./layouts/body-input";
 let app  = new Safir();
 
 On("app.ready", () => {
-  let p = app.loadComponent(new TestInputBody(), 'myScroll');
+  let p = app.loadComponent(new TestInputBody(), 'fill');
   console.info("Application running demo3 [ready]...", Date.now());
 });

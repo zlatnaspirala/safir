@@ -33,8 +33,6 @@ class BaseSafir {
 
   loadMultilang = async function(path = 'assets/multilang/en.json') {
     // console.info("Multilang integrated component... ");
-    // Predefined path ../assets
-    // Need fix for online services eg. codepen
     try {
       const r = await fetch(path, {
         headers: {
@@ -47,9 +45,6 @@ class BaseSafir {
       console.warn('Not possible to access multilang json asset! Err => ', err);
       return {};
     }
-    // finally {
-    //  return await r.json();
-    // }
   };
 
 }
@@ -59,6 +54,8 @@ export class Safir extends BaseSafir {
   subComponents;
   appRoot;
 
+  // generalPropsMemoryLevel = 0;
+
   constructor() {
     super();
     this.subComponents = [];
@@ -67,7 +64,7 @@ export class Safir extends BaseSafir {
   }
 
   ready = () => {
-    // console.info("App root component is ready.");
+    console.info("App root component is ready.");
   };
 
   construct = () => {

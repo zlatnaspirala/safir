@@ -10,7 +10,7 @@ export class BaseComponent {
 
   constructor(arg) {}
 
-  ready() { console.log('ready comp') }
+  ready() { console.log(`${this.id} is ready.`) }
 
   initial(arg, rootStyle) {
     if (typeof arg === 'string') {
@@ -18,18 +18,19 @@ export class BaseComponent {
       this.text = arg;
       this.id = arg;
     } else if (typeof arg === 'object') {
-       console.warn('Arg is object! this.value  ', this.value );
+       // console.warn('Arg is object! this.id  ', arg.id );
        this.id = arg.id;
        this.text = arg.text || '';
        this.type = arg.type;
        this.value = arg.value || '';
     }
-    console.warn('Arg is rootStyle!', rootStyle);
     if (rootStyle) {
       this.rootStyle = rootStyle;
     } else {
       this.rootStyle = "";
     }
+
+    this.ready();
   }
 
   set(arg, newValue, extraData) {
@@ -38,14 +39,25 @@ export class BaseComponent {
     // const localRoot = getComp(this.id);
     // // Double care!
     // localRoot.setAttribute(local, newValue);
-    localStorage.setItem(arg, newValue);
+    // localStorage.setItem(arg, newValue);
     let root = this;
     (root)[arg] = newValue;
     this.update(root, arg, extraData);
   }
 
-  setPropById (id, nv) {
-    console.log('TEST getComp(id) ', getComp(id))
+  setPropById (id, nv, level) {
+    // console.log('TEST getComp(id) ', getComp(id))
+    if (typeof level == 'undefined') { let level = 0; }
+
+    if (level == 0) {
+      //
+    } else if (level == 1 || level == 'session') {
+      // save it in session storage
+      sessionStorage.setItem(id, nv);
+    } else if (level == 2 || level == 'local') {
+
+    }
+
     getComp(id).innerText = nv;
   }
 

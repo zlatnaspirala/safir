@@ -25,7 +25,7 @@ body {
 
 body {
   @include themify($themes) {
-    font-family: Accuratist;
+    font-family: themed('fontFamily');
     color: themed('textColor');
     background-color: themed('backgroundColor');
   }
@@ -43,13 +43,15 @@ h2 {
 
 div {
   @include themify($themes) {
-    font-family: Accuratist;
+    font-family: themed('fontFamily');
     color: themed('textColor');
     background-color: themed('backgroundColor');
     -webkit-box-shadow: inset 0px 0px 2px 1px themed('divShadowColor');
     -moz-box-shadow: inset 0px 0px 2px 1px themed('divShadowColor');
     box-shadow: inset 0px 0px 2px 1px themed('divShadowColor');
   }
+
+  width: inherit;
 }
 
 button {
@@ -61,6 +63,32 @@ button {
   }
 
   font-family: Accuratist;
+  padding: 1px 1px 1px 1px;
+  margin: 1px 1px 1px 1px;
+
+  &:active {
+    box-shadow: none;
+    /**transform: translateY(-1px);
+    transform: translateX(-1px);*/
+  }
+
+  &:hover {
+    @include themify($themes) {
+      color: themed('buttonTextHoverColor');
+      border: themed('buttonBorderHover')
+    }
+  }
+}
+
+input {
+  @include themify($themes) {
+    font-family: themed('fontFamily');
+    color: themed('textColor');
+    background-color: themed('backgroundColor');
+    border: themed('buttonBorder');
+    font-size: themed('fontSize');
+  }
+
   padding: 1px 1px 1px 1px;
   margin: 1px 1px 1px 1px;
 
@@ -166,6 +194,9 @@ button {
 .fill {
   width: 100% !important;
   height: 100% !important;
+  @include themify($themes) {
+    font-family: themed('fontFamily');
+  }
 }
 
 .fit {

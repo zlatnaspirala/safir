@@ -1,5 +1,6 @@
 $themes: (
   light: (
+    fontFamily: 'Accuratist',
     fontSize: 2vw,
     backgroundColor: #fff,
     divShadowColor: #49d8ff14,
@@ -15,6 +16,7 @@ $themes: (
     buttonBorderHover: 1px solid rgb(0, 221, 255),
   ),
   dark: (
+    fontFamily: 'Accuratist',
     fontSize: 2vw,
     backgroundColor: rgb(83, 83, 83),
     divShadowColor: #ff000014,
@@ -29,6 +31,7 @@ $themes: (
     buttonBorderHover: 1px solid rgb(250, 250, 250),
   ),
   orange: (
+    fontFamily: 'Accuratist',
     fontSize: 2vw,
     backgroundColor: rgb(0, 0, 0),
     divShadowColor: #ff000014,

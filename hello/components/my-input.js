@@ -14,12 +14,16 @@ export default class MyInput extends BaseComponent {
   constructor(arg, arg2 = '') {
     super(arg);
     this.initial(arg, arg2);
+    this.max = 1000;
+    this.min = 1;
   }
 
   render = () => `
     <input
+      max=${this.max}
+      min=${this.min}
       type=${this.type}
-      class=""
+      class="fill"
       onclick="(${this.onClick})('${this.id}')"
       onkeyup="(${this.onChange})('${this.id}')"
       value="${this.value}"
