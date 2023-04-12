@@ -4,7 +4,7 @@
  * Test project structure.
  */
 import {Vertical, Horizontal} from "./custom-com";
-import {Manager, getComp} from "./utils";
+import {Manager, colorLog1, colorLog2, getComp} from "./utils";
 import {On} from "./modifier";
 export {getComp} from "./utils";
 export let T = {};
@@ -54,8 +54,6 @@ export class Safir extends BaseSafir {
   subComponents;
   appRoot;
 
-  // generalPropsMemoryLevel = 0;
-
   constructor() {
     super();
     this.subComponents = [];
@@ -64,7 +62,10 @@ export class Safir extends BaseSafir {
   }
 
   ready = () => {
-    console.info("App root component is ready.");
+    console.log(
+      `%c App root component is ready ♻. %c 🤘 [safir rocks]`,
+      colorLog1, colorLog2
+    );
   };
 
   construct = () => {
