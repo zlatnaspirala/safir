@@ -219,6 +219,10 @@ div {
   box-shadow: inset 0px 0px 2px 1px #ff000014;
 }
 
+span {
+  font-size: 20px;
+}
+
 button {
   font-family: Accuratist;
   padding: 1px 1px 1px 1px;

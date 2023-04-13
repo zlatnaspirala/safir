@@ -1,6 +1,6 @@
 
 import { Safir, On } from "../index";
-import TicTacToe from "./layouts/body-ticrtactoe";
+import TicTacToe from "./layouts/body-tictactoe";
 
 let app = new Safir();
 

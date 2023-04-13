@@ -54,6 +54,10 @@ div {
   width: inherit;
 }
 
+span {
+  font-size:20px;
+}
+
 button {
   @include themify($themes) {
     color: themed('textColor');
