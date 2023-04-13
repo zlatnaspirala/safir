@@ -1,0 +1,10 @@
+
+import { Safir, On } from "../index";
+import TicTacToe from "./layouts/body-ticrtactoe";
+
+let app = new Safir();
+
+On("app.ready", () => {
+  let p = app.loadComponent(new TicTacToe(), '');
+  console.info("Application running demo3 [ready] => ", p);
+});

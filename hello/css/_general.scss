@@ -220,3 +220,20 @@ input {
   height: 3vw;
 }
 
+.tttWrapper {
+  width: 600px;
+  height: 600px;
+
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.tttField {
+  border: solid blueviolet 1px;
+  width: 15vh;
+  height: 15vh;
+}
+

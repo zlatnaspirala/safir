@@ -92,7 +92,7 @@ To create props just add it normally intro class eg. `counter = 0'.
 
 #### @Note About direct update
 
-Rerender DOM is ok for simple tasks. Safir need to handle massive or deep structure.
+Rerender DOM method is ok for simple[pages] tasks. Safir need to handle massive or deep structure.
 In that point rerendering is bad praticle.
 I use very simple checking in component for props then looking for DOMs whos have the same id [equal with propName].
 
@@ -345,6 +345,7 @@ Run watch:
 ```js
   npm run demo1
   npm run demo2
+  npm run demo3
   ...
 ```
 
@@ -376,6 +377,7 @@ Basic examples:
    https://codepen.io/zlatnaspirala/pen/mdLzxoy
  - Demo2.js [How to use? Table data remove item from list on click]
    https://codepen.io/zlatnaspirala/pen/eYrxgKz
+ - Demo3.js [How to use? Use input tag with ]
 
 
 ## Credits 

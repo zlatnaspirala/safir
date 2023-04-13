@@ -2,7 +2,7 @@
 import { Safir, On } from "../index";
 import TestInputBody from "./layouts/body-input";
 
-let app  = new Safir();
+let app = new Safir();
 
 On("app.ready", () => {
   let p = app.loadComponent(new TestInputBody(), 'h95');

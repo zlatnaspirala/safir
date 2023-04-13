@@ -513,4 +513,28 @@ input:active {
 .h5 {
   height: 3vw;
 }
+
+.tttWrapper {
+  width: 600px;
+  height: 600px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.tttField {
+  border: solid blueviolet 1px;
+  width: 15vh;
+  height: 15vh;
+}
 /*# sourceMappingURL=style.css.map */
