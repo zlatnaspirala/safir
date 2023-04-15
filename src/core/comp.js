@@ -14,6 +14,7 @@ export class BaseComponent {
 
   constructor(arg) {
     setTimeout(() => {this.checkProps(arg)}, 1)
+    // this.checkProps(arg);
   }
 
   checkProps(arg) {
@@ -47,6 +48,7 @@ export class BaseComponent {
       this.rootStyle = "";
     }
 
+    // setTimeout(() => {this.ready();}, 1)
     this.ready();
   }
 
@@ -76,6 +78,11 @@ export class BaseComponent {
     }
     // No need to have DOM ID reference 
     if(getComp(id)) getComp(id).innerText = nv;
+
+
+    if (typeof this[id] !== 'undefined') {
+      // this[id] = nv;
+    }
   }
 
   getPropById(id) {
@@ -106,9 +113,13 @@ export class BaseComponent {
         }
 
       }
-      if(typeof this[id] !== 'undefined') {
-        
+
+      if(typeof this[id] !== 'undefined' && this[id] != testSessionLevel) {
         this[id] = testSessionLevel;
+        console.log(
+          `%c Safir set class prop this.${this[id]} vs ${testSessionLevel} %c ☑ [session-props]`,
+          colorLog1, colorLog2
+        );
       }
     }
 
@@ -138,13 +149,13 @@ export class BaseComponent {
           getComp(this.id + '-' + id).value = testLocalLevel;
         }
       }
-
-      if(typeof this[id] !== 'undefined') {
+     
+      if(typeof this[id] !== 'undefined' && this[id] != testLocalLevel) {
+        this[id] = testLocalLevel;
         console.log(
-          `%c Safir found prop in self. %c ✔ [storage-props]`,
+          `%c Safir set class prop this.${this[id]} vs ${testLocalLevel} %c ☑ [storage-props]`,
           colorLog1, colorLog2
         );
-        this[id] = testLocalLevel;
       }
     }
   }

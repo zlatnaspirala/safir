@@ -22,7 +22,7 @@ export default class TTTHistory extends BaseComponent {
    * it is nice to have.
    */
   render = () => `
-    <div class="verCenter">
+    <div class="horCenter">
       ${this.tableData.map((item, index) =>
           `<h2 data-key="${index}" onclick="(${this.onClick})('${this.id}')"
                class="middle">${item}</h2>`
