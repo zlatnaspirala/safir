@@ -12,6 +12,8 @@ Must be simple and usefull.
 Performace must be 100% with full PWA support.
 For any platform adapted.
 
+Test [demo4.js] tictactoe at https://maximumroulette.com/apps/safir/
+
 
 ### There are two way for creating web components:
 ### - From code
@@ -378,6 +380,8 @@ Basic examples:
  - Demo2.js [How to use? Table data remove item from list on click]
    https://codepen.io/zlatnaspirala/pen/eYrxgKz
  - Demo3.js [How to use? Use input tag with ]
+ - demo4.js - TicTacToe game template :
+   https://maximumroulette.com/apps/safir/
 
 
 ## Credits 
