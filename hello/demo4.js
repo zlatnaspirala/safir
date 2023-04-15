@@ -6,5 +6,5 @@ let app = new Safir();
 
 On("app.ready", () => {
   let p = app.loadComponent(new TicTacToe(), '');
-  console.info("Application running demo3 [ready] => ", p);
+  console.info("Application running demo4 [ready] => ", p);
 });
