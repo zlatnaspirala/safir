@@ -32,8 +32,10 @@ export default class TicTacToe extends BaseComponent {
 
   computer = {
     symbol: '⭕',
-    enabled: true
+    enabled: false
   }
+
+  switchSymbols = () => {}
 
   playWithAI = new TicTacToeBtn({text: 'Play with Computer', id: 'playWithComputer'});
   ready = () => {
@@ -45,7 +47,6 @@ export default class TicTacToe extends BaseComponent {
     }, 1);
   };
 
-  // Avoid literal/eval access, to avoid hardcode use array - for now it is ok.
   shema = [
     {name: 'F00', ref: this.ticTacToeField00}, {name: 'F01', ref: this.ticTacToeField01}, {name: 'F02', ref: this.ticTacToeField02},
     {name: 'F10', ref: this.ticTacToeField10}, {name: 'F11', ref: this.ticTacToeField11}, {name: 'F12', ref: this.ticTacToeField12},
@@ -58,6 +59,7 @@ export default class TicTacToe extends BaseComponent {
       field.ref.text = this.symbols.unset;
     });
     this.setPropById('gameStatus', 'open', 1);
+    this.currentPlayer = this.symbols.x;
   }
 
   getPlayer = function() {
@@ -80,6 +82,7 @@ export default class TicTacToe extends BaseComponent {
 
 
   onEnd = function(winner) {
+    console.log('END OF GAME' , winner)
     this.history.tableData.push(winner);
     this.history.set('tableData', this.history.tableData);
     this.setPropById('gameStatus', 'closed', 1);
@@ -90,29 +93,37 @@ export default class TicTacToe extends BaseComponent {
     // hor
     if(this.isPlayed(this.shema[0].ref.text) && this.shema[0].ref.text == this.shema[1].ref.text && this.shema[1].ref.text == this.shema[2].ref.text) {
       this.onEnd(this.shema[0].ref.text);
+      return;
     } else if(this.isPlayed(this.shema[3].ref.text) && this.shema[3].ref.text == this.shema[4].ref.text && this.shema[4].ref.text == this.shema[5].ref.text) {
       this.onEnd(this.shema[3].ref.text);
+      return;
     } else if(this.isPlayed(this.shema[6].ref.text) && this.shema[6].ref.text == this.shema[7].ref.text && this.shema[7].ref.text == this.shema[8].ref.text) {
       this.onEnd(this.shema[6].ref.text);
+      return;
     }
     // Ver
     else if(this.isPlayed(this.shema[0].ref.text) && this.shema[0].ref.text == this.shema[3].ref.text && this.shema[3].ref.text == this.shema[6].ref.text) {
       this.onEnd(this.shema[0].ref.text);
+      return;
     } else if(this.isPlayed(this.shema[1].ref.text) && this.shema[1].ref.text == this.shema[4].ref.text && this.shema[4].ref.text == this.shema[7].ref.text) {
       this.onEnd(this.shema[1].ref.text);
+      return;
     } else if(this.isPlayed(this.shema[2].ref.text) && this.shema[2].ref.text == this.shema[5].ref.text && this.shema[5].ref.text == this.shema[8].ref.text) {
       this.onEnd(this.shema[2].ref.text)
+      return;
     }
     // diagonal
     else if(this.isPlayed(this.shema[0].ref.text) && this.shema[0].ref.text == this.shema[4].ref.text && this.shema[4].ref.text == this.shema[8].ref.text) {
       this.onEnd(this.shema[0].ref.text);
+      return;
     } else if(this.isPlayed(this.shema[2].ref.text) && this.shema[2].ref.text == this.shema[4].ref.text && this.shema[4].ref.text == this.shema[6].ref.text) {
       this.onEnd(this.shema[1].ref.text);
+      return;
     }
 
     if(this.computer.enabled == true) {
-      console.log('this.currentPlayer' , this.currentPlayer)
-      if (this.currentPlayer == this.computer.symbol) this.computerAnalize();
+      console.log('this.currentPlayer', this.currentPlayer)
+      if(this.currentPlayer == this.computer.symbol) this.computerAnalize();
     }
 
     let isFilled = true;
@@ -127,31 +138,23 @@ export default class TicTacToe extends BaseComponent {
   }
 
   computerAnalize() {
-
     let isComputerPlayed = false;
-    
     let testIndexs = (indexs) => {
-
-      if (isComputerPlayed == true) { return; }
-
-      // uniform
+      if(isComputerPlayed == true) {return;}
       if(this.isPlayed(this.shema[indexs[0]].ref.text) && this.shema[indexs[0]].ref.text == this.shema[indexs[1]].ref.text) {
         if(this.shema[indexs[2]].ref.text == this.symbols.unset) {
-          console.log('I FOUND [1] ', this.shema[indexs[2]])
           this.shema[indexs[2]].ref.onClick(this.shema[indexs[2]].name);
           isComputerPlayed = true;
         }
       }
       if(this.isPlayed(this.shema[indexs[1]].ref.text) && this.shema[indexs[1]].ref.text == this.shema[indexs[2]].ref.text) {
         if(this.shema[indexs[0]].ref.text == this.symbols.unset) {
-          console.log('I FOUND [2]', this.shema[indexs[0]])
-          this.shema[indexs[0]].ref.onClick(this.shema[indexs[2]].name);
+          this.shema[indexs[0]].ref.onClick(this.shema[indexs[0]].name);
           isComputerPlayed = true;
         }
       }
       if(this.isPlayed(this.shema[indexs[2]].ref.text) && this.shema[indexs[2]].ref.text == this.shema[indexs[0]].ref.text) {
         if(this.shema[indexs[1]].ref.text == this.symbols.unset) {
-          console.log('I FOUND [3]', this.shema[indexs[1]])
           this.shema[indexs[1]].ref.onClick(this.shema[indexs[1]].name);
           isComputerPlayed = true;
         }
@@ -170,35 +173,31 @@ export default class TicTacToe extends BaseComponent {
     testIndexs([0, 4, 8]);
     testIndexs([2, 4, 6]);
 
-
-    console.log('TEST IS IT PLAYED COMP ', isComputerPlayed)
-
-    if(this.shema[4].ref.text == this.symbols.unset) {
-      console.log('I FOUND [center]', this.shema[4])
+    if(this.shema[4].ref.text == this.symbols.unset && isComputerPlayed == false) {
       this.shema[4].ref.onClick(this.shema[4].name);
       isComputerPlayed = true;
+      return;
     }
 
-    // play any
-    // this.shema.forEach((field) => {
-    //   if(field.ref.text == this.symbols.unset && isComputerPlayed == false) {
-    //     console.log('I PLAY ANY ', field)
-    //     field.ref.onClick(field.name);
-    //     isComputerPlayed = true;
-    //   }
-    // });
+    if(isComputerPlayed == false) {
+      this.shema.forEach((field) => {
+        if(field.ref.text == this.symbols.unset && isComputerPlayed == false) {
+          console.log('I PLAY ANY ', field)
+          field.ref.onClick(field.name);
+          isComputerPlayed = true;
+          return;
+        }
+      });
+    }
 
   }
 
   constructor(arg) {
     super(arg);
-    // attaching safir listener
+
     this.shema.forEach((item) => {
       On(item.name, (r) => {
         if(this.gameStatus != 'open') {return;}
-
-        console.info(`My input ${item.name}  value: `, item.ref.text);
-
         if(item.ref.text != this.symbols.x && item.ref.text != this.symbols.y) {
           let player = this.getPlayer();
           item.ref.setPropById(item.name + '-field', player, 1);
@@ -214,8 +213,6 @@ export default class TicTacToe extends BaseComponent {
       this.computer.enabled = true;
     });
   }
-
-  // add computer 
 
   render = () => `
     <h2 class="middle">Safir AI - TicTacToe -</h2>

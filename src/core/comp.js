@@ -79,9 +79,8 @@ export class BaseComponent {
     // No need to have DOM ID reference 
     if(getComp(id)) getComp(id).innerText = nv;
 
-
     if (typeof this[id] !== 'undefined') {
-      // this[id] = nv;
+      this[id] = nv;
     }
   }
 
