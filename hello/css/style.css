@@ -123,6 +123,112 @@
   }
 }
 
+@-webkit-keyframes safirBounceAnim {
+  0% {
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 1;
+    -webkit-transform: translateY(-45px);
+            transform: translateY(-45px);
+  }
+  24% {
+    opacity: 1;
+  }
+  40% {
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    -webkit-transform: translateY(-24px);
+            transform: translateY(-24px);
+  }
+  65% {
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    -webkit-transform: translateY(-12px);
+            transform: translateY(-12px);
+  }
+  82% {
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    -webkit-transform: translateY(-6px);
+            transform: translateY(-6px);
+  }
+  93% {
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    -webkit-transform: translateY(-4px);
+            transform: translateY(-4px);
+  }
+  25%,
+  55%,
+  75%,
+  87% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  100% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+}
+
+@keyframes safirBounceAnim {
+  0% {
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 1;
+    -webkit-transform: translateY(-45px);
+            transform: translateY(-45px);
+  }
+  24% {
+    opacity: 1;
+  }
+  40% {
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    -webkit-transform: translateY(-24px);
+            transform: translateY(-24px);
+  }
+  65% {
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    -webkit-transform: translateY(-12px);
+            transform: translateY(-12px);
+  }
+  82% {
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    -webkit-transform: translateY(-6px);
+            transform: translateY(-6px);
+  }
+  93% {
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    -webkit-transform: translateY(-4px);
+            transform: translateY(-4px);
+  }
+  25%,
+  55%,
+  75%,
+  87% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  100% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+}
+
 @font-face {
   font-family: Accuratist;
   src: url(/assets/fonts/Accuratist.ttf);
@@ -199,28 +305,40 @@ div {
   font-family: "Accuratist";
   color: #023e66;
   background-color: #fff;
-  -webkit-box-shadow: inset 0px 0px 2px 1px #49d8ff14;
-  box-shadow: inset 0px 0px 2px 1px #49d8ff14;
+  -webkit-box-shadow: inset 0px 0px 1px 1px #49d8ff14;
+  box-shadow: inset 0px 0px 1px 1px #49d8ff14;
 }
 
 .theme-dark div {
   font-family: "Accuratist";
   color: white;
   background-color: #535353;
-  -webkit-box-shadow: inset 0px 0px 2px 1px #ff000014;
-  box-shadow: inset 0px 0px 2px 1px #ff000014;
+  -webkit-box-shadow: inset 0px 0px 1px 1px #ff000014;
+  box-shadow: inset 0px 0px 1px 1px #ff000014;
 }
 
 .theme-orange div {
   font-family: "Accuratist";
   color: #ff2600;
   background-color: black;
-  -webkit-box-shadow: inset 0px 0px 2px 1px #ff000014;
-  box-shadow: inset 0px 0px 2px 1px #ff000014;
+  -webkit-box-shadow: inset 0px 0px 1px 1px #ff000014;
+  box-shadow: inset 0px 0px 1px 1px #ff000014;
 }
 
 span {
-  font-size: 20px;
+  padding: 5px 5px 5px 5px;
+}
+
+.theme-light span {
+  font-size: 2vw;
+}
+
+.theme-dark span {
+  font-size: 2vw;
+}
+
+.theme-orange span {
+  font-size: 2vw;
 }
 
 button {
@@ -476,6 +594,10 @@ input:active {
   background-color: black;
 }
 
+.bg-transparent {
+  background-color: transparent !important;
+}
+
 .fill {
   width: 100% !important;
   height: 100% !important;
@@ -515,12 +637,12 @@ input:active {
 }
 
 .h5 {
-  height: 3vw;
+  height: 3vh;
 }
 
 .tttWrapper {
-  width: 600px;
-  height: 600px;
+  width: 40vh;
+  height: 40vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -537,8 +659,26 @@ input:active {
 }
 
 .tttField {
+  -webkit-animation: safirBounceAnim 1s ease-in-out 0s 1 normal forwards;
+          animation: safirBounceAnim 1s ease-in-out 0s 1 normal forwards;
+  background: radial-gradient(#08A09A 0%, #4A00FF 100%);
   border: solid blueviolet 1px;
-  width: 15vh;
-  height: 15vh;
+  width: 20vw;
+  height: 20vw;
+  max-width: 190px !important;
+  max-height: 190px !important;
+  font-size: 40px !important;
+}
+
+.funnyBg1 {
+  background: -webkit-gradient(linear, left top, right top, from(#D80909), color-stop(10%, #A1D024), color-stop(23%, #00F90B), color-stop(38%, #1AB5DC), color-stop(63%, #401CCA), color-stop(93%, #67145A), to(#67145A));
+  background: linear-gradient(90deg, #D80909 0%, #A1D024 10%, #00F90B 23%, #1AB5DC 38%, #401CCA 63%, #67145A 93%, #67145A 100%);
+}
+
+.myPadding {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 /*# sourceMappingURL=style.css.map */

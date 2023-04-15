@@ -46,16 +46,19 @@ div {
     font-family: themed('fontFamily');
     color: themed('textColor');
     background-color: themed('backgroundColor');
-    -webkit-box-shadow: inset 0px 0px 2px 1px themed('divShadowColor');
-    -moz-box-shadow: inset 0px 0px 2px 1px themed('divShadowColor');
-    box-shadow: inset 0px 0px 2px 1px themed('divShadowColor');
+    -webkit-box-shadow: inset 0px 0px 1px 1px themed('divShadowColor');
+    -moz-box-shadow: inset 0px 0px 1px 1px themed('divShadowColor');
+    box-shadow: inset 0px 0px 1px 1px themed('divShadowColor');
   }
 
   width: inherit;
 }
 
 span {
-  font-size:20px;
+  @include themify($themes) {
+    font-size: themed('fontSize');
+  }
+  padding: 5px 5px 5px 5px;
 }
 
 button {
@@ -195,6 +198,10 @@ input {
   }
 }
 
+.bg-transparent {
+  background-color: transparent !important;
+}
+
 .fill {
   width: 100% !important;
   height: 100% !important;
@@ -221,14 +228,13 @@ input {
 }
 
 .h5 {
-  height: 3vw;
+  height: 3vh;
 }
 
 .tttWrapper {
-  width: 600px;
-  height: 600px;
+  width: 40vh;
+  height: 40vh;
 
-  
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -236,8 +242,23 @@ input {
 }
 
 .tttField {
+  animation: safirBounceAnim 1s ease-in-out 0s 1 normal forwards;
+  background: radial-gradient( #08A09A 0%, #4A00FF 100%);
   border: solid blueviolet 1px;
-  width: 15vh;
-  height: 15vh;
+  width: 20vw;
+  height: 20vw;
+  max-width: 190px !important;
+  max-height: 190px !important;
+  font-size: 40px !important;
 }
 
+.funnyBg1 {
+  background: linear-gradient(90deg, #D80909 0%, #A1D024 10%, #00F90B 23%, #1AB5DC 38%, #401CCA 63%, #67145A 93%, #67145A 100%);
+}
+
+.myPadding {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}

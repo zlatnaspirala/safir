@@ -13,7 +13,7 @@ export default class TicTacToeBtn extends BaseComponent {
   onClick = this.clickBind;
 
   render = () => `
-    <button class="fill" onclick="(${this.onClick})('${this.id}')">
+    <button class="fill bg-transparent" onclick="(${this.onClick})('${this.id}')">
       ${this.text}
     </button>
   `;

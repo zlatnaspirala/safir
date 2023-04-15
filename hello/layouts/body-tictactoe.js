@@ -25,7 +25,7 @@ export default class TicTacToe extends BaseComponent {
   ticTacToeField12 = new TicTacToeField({text: this.symbols.unset, id: 'F12'}, 'tttField');
   ticTacToeField22 = new TicTacToeField({text: this.symbols.unset, id: 'F22'}, 'tttField');
 
-  history = new TTTHistory('H');
+  history = new TTTHistory('H', 'bg-transparent');
 
   currentPlayer = this.symbols.x;
   gameStatus = 'open';
@@ -37,7 +37,7 @@ export default class TicTacToe extends BaseComponent {
 
   switchSymbols = () => {}
 
-  playWithAI = new TicTacToeBtn({text: 'Play with Computer', id: 'playWithComputer'});
+  playWithAI = new TicTacToeBtn({text: 'Play with Computer', id: 'playWithComputer'}, 'bg-transparent');
   ready = () => {
     setTimeout(() => {
       if(this.gameStatus == 'closed') {
@@ -208,7 +208,8 @@ export default class TicTacToe extends BaseComponent {
     });
 
     On('playWithComputer', (r) => {
-      console.info(r.detail)
+      if (this.computer.enabled == true) return;
+      r.detail.target.innerHTML = r.detail.target.innerHTML + ' - ACTIVATED';
       this.resetGame();
       this.computer.enabled = true;
     });
@@ -216,21 +217,21 @@ export default class TicTacToe extends BaseComponent {
 
   render = () => `
     <h2 class="middle">Safir AI - TicTacToe -</h2>
-    <div class="horCenter">
-    <span class="" id="history">
+    <div class="horCenter bg-transparent">
+    <span class="" id="playAI">
       ${this.playWithAI.renderId()}
     </span>
     </div>
-    <div class="horCenter">
+    <div class="horCenter bg-transparent">
     <span class="" id="history">
       ${this.history.renderId()}
     </span>
     </div>
-    <div class="horCenter">
+    <div class="horCenter bg-transparent">
       <span class="">Status:</span>
       <span class="" id="gameStatus">${this.gameStatus}</span>
     </div>
-    <div class="horCenter column">
+    <div class="horCenter column bg-transparent myPadding">
       <div class="tttField row" >
         ${this.ticTacToeField00.renderId()}
         ${this.ticTacToeField10.renderId()}
