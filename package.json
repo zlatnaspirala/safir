@@ -1,6 +1,6 @@
 {
   "name": "safir",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Ultimate web app perfomance. Tech: Based on Template Literals & CustomEvents",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,7 @@
     "demo2": "build-assets.sh | watchify hello/demo2.js -p [esmify --noImplicitAny] -o dist/bundle.js",
     "demo3": "build-assets.sh | watchify hello/demo3.js -p [esmify --noImplicitAny] -o dist/bundle.js",
     "demo4": "build-assets.sh | watchify hello/demo4.js -p [esmify --noImplicitAny] -o dist/bundle.js",
+    "demo5": "build-assets.sh | watchify hello/demo5.js -p [esmify --noImplicitAny] -o dist/bundle.js",
     "build.demo1": "build-assets.sh | browserify hello/demo1.js -p esmify > dist/bundle.js",
     "build.demo2": "build-assets.sh | browserify hello/demo2.js -p esmify > dist/bundle.js",
     "build.all": "npm run build.demo1 | npm run build.demo2",

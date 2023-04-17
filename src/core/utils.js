@@ -77,6 +77,18 @@ export const getComp = function (id) {
   return document.getElementById(id);
 };
 
+export const byClass = function (id) {
+  return document.getElementsByClassName(id);
+};
+
+export const byTag = function (id) {
+  return document.getElementsByTagName(id);
+};
+
+export const byID = function (id) {
+  return document.getElementById(id);
+};
+
 export function degToRad (degrees) {
   return (degrees * Math.PI) / 180;
 };

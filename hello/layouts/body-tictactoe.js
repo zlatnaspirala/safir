@@ -10,7 +10,7 @@ export default class TicTacToe extends BaseComponent {
   symbols = {
     x: '❌',
     y: '⭕',
-    unset: '💎'
+    unset: '💎💎'
   };
 
   ticTacToeField00 = new TicTacToeField({text: this.symbols.unset, id: 'F00'}, 'tttField');
@@ -122,7 +122,6 @@ export default class TicTacToe extends BaseComponent {
     }
 
     if(this.computer.enabled == true) {
-      console.log('this.currentPlayer', this.currentPlayer)
       if(this.currentPlayer == this.computer.symbol) this.computerAnalize();
     }
 

@@ -31,6 +31,10 @@ body {
   }
 }
 
+a {
+  color: #1AB5DC;
+}
+
 h2 {
   @include themify($themes) {
     cursor: default;
@@ -231,10 +235,35 @@ input {
   height: 3vh;
 }
 
+.w30 {
+  width: 30vw;
+}
+
+.paddingtop20 {
+  padding-top: 20vh;
+}
+
+.textColorWhite {
+  color: white;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.midWrapper {
+  width: 60vh;
+  margin: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .tttWrapper {
   width: 40vh;
   height: 40vh;
-
   display: flex;
   flex-direction: row;
   justify-content: center;

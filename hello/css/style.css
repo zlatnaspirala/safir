@@ -273,6 +273,10 @@ body {
   background-color: black;
 }
 
+a {
+  color: #1AB5DC;
+}
+
 .theme-light h2 {
   cursor: default;
 }
@@ -638,6 +642,41 @@ input:active {
 
 .h5 {
   height: 3vh;
+}
+
+.w30 {
+  width: 30vw;
+}
+
+.paddingtop20 {
+  padding-top: 20vh;
+}
+
+.textColorWhite {
+  color: white;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.midWrapper {
+  width: 60vh;
+  margin: auto;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .tttWrapper {

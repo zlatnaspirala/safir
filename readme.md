@@ -1,4 +1,4 @@
-# SAFIR [1.0.5]
+# SAFIR [1.1.5]
 
 ### Tech: Based on ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.
 ### Alternative software - High Performace
@@ -117,6 +117,11 @@ Take a look at the demo3.
   this.myInput2.setPropById('value', r.detail.value, 2);
 ```
 
+
+## Note
+
+  Dont use `build.all` for now its override previous build...
+  
 
 #### My Button
 ```js
