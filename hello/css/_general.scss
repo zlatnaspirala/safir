@@ -32,7 +32,7 @@ body {
 }
 
 a {
-  color: #1AB5DC;
+  color: #08b9ff;
 }
 
 a:hover {
@@ -120,6 +120,11 @@ input {
       border: themed('buttonBorderHover')
     }
   }
+}
+
+p {
+  margin: 0;
+  padding: 0;
 }
 
 .noselect {
@@ -245,7 +250,7 @@ input {
 }
 
 .paddingtop20 {
-  padding-top: 10vw;
+  padding-top: 1vw;
 }
 
 .textColorWhite {
