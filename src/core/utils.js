@@ -209,3 +209,8 @@ export let LocalSessionMemory = {
 
 export const colorLog1 = "color: #66ffff; font-size:14px;text-shadow: 0px 0px 51px #111222, 1px 1px 1px #aaa66a;";
 export const colorLog2 = "color: #ffff66; font-size:12px;text-shadow: 0px 0px 1px #52f2ff, 1px 1px 1px #11ffff;";
+
+export const JSON_HEADER = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json'
+}

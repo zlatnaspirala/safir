@@ -1,7 +1,6 @@
 import { BaseComponent, On } from "../../index";
-import {byID} from "../../src/core/utils";
+import {JSON_HEADER, byID} from "../../src/core/utils";
 import SimpleBtn from "../components/simple-btn";
-
 
 export default class RocketCraftingLayout extends BaseComponent {
 
@@ -10,12 +9,7 @@ export default class RocketCraftingLayout extends BaseComponent {
   loginBtn = new SimpleBtn({text: 'Login', id: 'loginBtn'}, 'w30');
   registerBtn = new SimpleBtn({text: 'Register', id: 'registerBtn'}, 'w30');
 
-  ready = () => { console.log('RocketCraftingLayout ready') }
-
-  JSON_HEADER = {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
+  ready = () => { console.log('RocketCrafting Login form ready.') }
 
   async runApiCall(apiCallFlag) {
     let route = 'http://maximumroulette.com'
@@ -25,12 +19,11 @@ export default class RocketCraftingLayout extends BaseComponent {
     }
     const rawResponse = await fetch(route + '/rocket/' +  apiCallFlag, {
       method: 'POST',
-      headers: this.JSON_HEADER,
+      headers: JSON_HEADER,
       body: JSON.stringify(args)
     })
     var response = await rawResponse.json();
-    console.log('Api call finished!', response);
-    this.exploreResponse(response)
+    this.exploreResponse(response);
   }
 
   // Best way
@@ -55,20 +48,13 @@ export default class RocketCraftingLayout extends BaseComponent {
       console.info('[login] Trigger Btn', (data).detail);
       this.runApiCall('login');
     });
-
     On('registerBtn', (data) => {
       console.info('[register] Trigger Btn', (data).detail);
       this.runApiCall('register');
     });
-
-  }
-
-  change = (e) => {
-    alert(e)
   }
 
   render = () => `
-
     <div class="paddingtop20 animate-jello2 bg-transparent textCenter">
       <h2>Safir extreme simple networking 🌍</h2>
       <p class="textColorWhite">Account login/register/confirmation</p>
