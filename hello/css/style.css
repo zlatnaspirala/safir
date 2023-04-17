@@ -229,6 +229,37 @@
   }
 }
 
+.funnyBg2 {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  -webkit-animation: gradient 15s ease infinite;
+          animation: gradient 15s ease infinite;
+}
+
+@-webkit-keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 @font-face {
   font-family: Accuratist;
   src: url(/assets/fonts/Accuratist.ttf);
@@ -258,7 +289,7 @@ body {
 .theme-light body {
   font-family: "Accuratist";
   color: #023e66;
-  background-color: #fff;
+  background-color: transparent;
 }
 
 .theme-dark body {
@@ -279,6 +310,7 @@ a {
 
 .theme-light h2 {
   cursor: default;
+  text-shadow: 0px 0px 1px #52f2ff;
 }
 
 .theme-light h2:hover {
@@ -287,6 +319,7 @@ a {
 
 .theme-dark h2 {
   cursor: default;
+  text-shadow: 0px 0px 1px #52f2ff;
 }
 
 .theme-dark h2:hover {
@@ -295,6 +328,7 @@ a {
 
 .theme-orange h2 {
   cursor: default;
+  text-shadow: 0px 0px 1px #52f2ff;
 }
 
 .theme-orange h2:hover {
@@ -308,7 +342,7 @@ div {
 .theme-light div {
   font-family: "Accuratist";
   color: #023e66;
-  background-color: #fff;
+  background-color: transparent;
   -webkit-box-shadow: inset 0px 0px 1px 1px #49d8ff14;
   box-shadow: inset 0px 0px 1px 1px #49d8ff14;
 }
@@ -353,7 +387,7 @@ button {
 
 .theme-light button {
   color: #023e66;
-  background-color: #fff;
+  background-color: transparent;
   border: 1px solid #0094b5;
   font-size: 2vw;
 }
@@ -402,8 +436,8 @@ input {
 .theme-light input {
   font-family: "Accuratist";
   color: #023e66;
-  background-color: #fff;
-  border: 1px solid #0094b5;
+  background-color: transparent;
+  border: 1px solid #7c19ff;
   font-size: 2vw;
 }
 
@@ -411,7 +445,7 @@ input {
   font-family: "Accuratist";
   color: white;
   background-color: #535353;
-  border: 1px solid #aaa;
+  border: 1px solid #ff8819;
   font-size: 2vw;
 }
 
@@ -419,7 +453,7 @@ input {
   font-family: "Accuratist";
   color: #ff2600;
   background-color: black;
-  border: 1px solid #ffc228;
+  border: 1px solid #fce14a;
   font-size: 2vw;
 }
 
@@ -552,7 +586,7 @@ input:active {
 
 .theme-light .verCenter {
   color: #023e66;
-  background-color: #fff;
+  background-color: transparent;
 }
 
 .theme-dark .verCenter {
@@ -585,7 +619,7 @@ input:active {
 
 .theme-light .horCenter {
   color: #023e66;
-  background-color: #fff;
+  background-color: transparent;
 }
 
 .theme-dark .horCenter {
@@ -649,7 +683,7 @@ input:active {
 }
 
 .paddingtop20 {
-  padding-top: 20vh;
+  padding-top: 10vw;
 }
 
 .textColorWhite {
@@ -661,7 +695,6 @@ input:active {
 }
 
 .midWrapper {
-  width: 60vh;
   margin: auto;
   height: auto;
   display: -webkit-box;
@@ -710,8 +743,8 @@ input:active {
 }
 
 .funnyBg1 {
-  background: -webkit-gradient(linear, left top, right top, from(#D80909), color-stop(10%, #A1D024), color-stop(23%, #00F90B), color-stop(38%, #1AB5DC), color-stop(63%, #401CCA), color-stop(93%, #67145A), to(#67145A));
-  background: linear-gradient(90deg, #D80909 0%, #A1D024 10%, #00F90B 23%, #1AB5DC 38%, #401CCA 63%, #67145A 93%, #67145A 100%);
+  background: -webkit-gradient(linear, left top, right top, from(#D80909), color-stop(10%, #A1D024), color-stop(20%, #00F90B), color-stop(30%, #1AB5DC), color-stop(60%, #401CCA), color-stop(70%, #67145A), color-stop(80%, #860d74), color-stop(90%, #d6164f), to(#d41010));
+  background: linear-gradient(90deg, #D80909 0%, #A1D024 10%, #00F90B 20%, #1AB5DC 30%, #401CCA 60%, #67145A 70%, #860d74 80%, #d6164f 90%, #d41010 100%);
 }
 
 .myPadding {
@@ -719,5 +752,9 @@ input:active {
   padding-right: 15px;
   padding-top: 15px;
   padding-bottom: 15px;
+}
+
+.blackText {
+  color: black;
 }
 /*# sourceMappingURL=style.css.map */

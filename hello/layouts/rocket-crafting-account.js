@@ -14,8 +14,8 @@ export default class RocketCraftingLayout extends BaseComponent {
   async runApiCall(apiCallFlag) {
     let route = 'http://maximumroulette.com'
     const args = {
-      emailField: 'zlatnaspirala@gmail.com',
-      passwordField: '123123123'
+      emailField: byID('arg-username').value,
+      passwordField: byID('arg-password').value
     }
     const rawResponse = await fetch(route + '/rocket/' +  apiCallFlag, {
       method: 'POST',
@@ -26,17 +26,23 @@ export default class RocketCraftingLayout extends BaseComponent {
     this.exploreResponse(response);
   }
 
-  // Best way
+  // Best way - intergalatic
   exploreResponse(res) {
+    byID('apiResponse').innerHTML = '';
     for (let key in res) {
-      console.log('ROOT-KEY: ', key)
+      let color = 'white';
       if (typeof res[key] == 'object') {
         for (let key1 in res[key]) {
-          console.log('1-KEY: for ', key, ' cvalue' , res[key][key1] )
+          color = 'color:indigo;text-shadow: 0px 0px 1px #52f2ff, 1px 1px 1px #11ffff;';
+          byID('apiResponse').innerHTML += `<div style='${color}' >${key} : ${res[key][key1]} </div>`;
         }
       } else {
-        console.log('no object KEY: ', res[key])
-        byID('apiResponse').innerHTML += `<div>Key: ${key}  Value: ${res[key]}</div>`;
+        if (key == 'message' && res[key] == 'Wrong Password') {
+          color = 'color:red;text-shadow: 0px 0px 1px #52f2ff, 1px 1px 1px #11ffff;';
+          byID('apiResponse').innerHTML += `<div style='${color}' >${key} : ${res[key]}</div>`;
+        } else if (res[key] == 'USER_LOGGED') {
+          byID('apiResponse').innerHTML += `<div style='${color}' >${key} : ${res[key]} 👨‍🚀</div>`;
+        }
       }
     }
   }
@@ -56,7 +62,7 @@ export default class RocketCraftingLayout extends BaseComponent {
 
   render = () => `
     <div class="paddingtop20 animate-jello2 bg-transparent textCenter">
-      <h2>Safir extreme simple networking 🌍</h2>
+      <h2 class='blackText' >Safir extreme simple networking 🌍</h2>
       <p class="textColorWhite">Account login/register/confirmation</p>
       <p class="textColorWhite">Safir can be used for any web api server.</p>
       <p class="textColorWhite">In this example safir use <a href="https://github.com/RocketCraftingServer/rocket-craft-server" >rocketCraftingServer</a></p>
@@ -65,13 +71,13 @@ export default class RocketCraftingLayout extends BaseComponent {
 
     </div>
     <div class="midWrapper animate-jello2 bg-transparent">
-        <input class="w30" id='username' type='text' value='zlatnaspirala@gmail.com' />
-        <input class="w30" id='password' type='text' value='123123123' />
+        <input class="w30" id='arg-username' type='text' value='zlatnaspirala@gmail.com' />
+        <input class="w30" id='arg-password' type='password' value='123123123' />
         ${this.loginBtn.renderId()}
         ${this.registerBtn.renderId()}
     </div>
 
-    <div>
+    <div class='midWrapper bg-transparent' >
       <span id="apiResponse"></span>
     </div>
   `

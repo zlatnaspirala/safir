@@ -35,9 +35,14 @@ a {
   color: #1AB5DC;
 }
 
+a:hover {
+  color: #f58843;
+}
+
 h2 {
   @include themify($themes) {
     cursor: default;
+    text-shadow: themed('textShadow');
     &:hover {
       color: themed('textHoverColor');
       background:  themed('divShadowColor');
@@ -96,7 +101,7 @@ input {
     font-family: themed('fontFamily');
     color: themed('textColor');
     background-color: themed('backgroundColor');
-    border: themed('buttonBorder');
+    border: themed('inputBorder');
     font-size: themed('fontSize');
   }
 
@@ -240,7 +245,7 @@ input {
 }
 
 .paddingtop20 {
-  padding-top: 20vh;
+  padding-top: 10vw;
 }
 
 .textColorWhite {
@@ -252,7 +257,7 @@ input {
 }
 
 .midWrapper {
-  width: 60vh;
+  // width: 60vh;
   margin: auto;
   height: auto;
   display: flex;
@@ -282,7 +287,7 @@ input {
 }
 
 .funnyBg1 {
-  background: linear-gradient(90deg, #D80909 0%, #A1D024 10%, #00F90B 23%, #1AB5DC 38%, #401CCA 63%, #67145A 93%, #67145A 100%);
+  background: linear-gradient(90deg, #D80909 0%, #A1D024 10%, #00F90B 20%, #1AB5DC 30%, #401CCA 60%, #67145A 70%, #860d74 80%, #d6164f 90%, #d41010 100%);
 }
 
 .myPadding {
@@ -290,4 +295,8 @@ input {
   padding-right: 15px;
   padding-top: 15px;
   padding-bottom: 15px;
+}
+
+.blackText {
+  color: black;
 }

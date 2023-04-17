@@ -1,4 +1,4 @@
-# SAFIR [1.1.5]
+# SAFIR [1.1.6]
 
 ### Tech: Based on ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.
 ### Alternative software - High Performace
@@ -22,6 +22,9 @@ Test [demo4.js] tictactoe at https://maximumroulette.com/apps/safir/
 ## Basic Example
 
 #### Main instance script
+
+In main file use `app.loadComponent` to load your layout/component. After that use you imagination.
+
 ```js
 import { Safir, On } from "safir";
 import MyHeader from "./layouts/heder";
@@ -123,143 +126,6 @@ Take a look at the demo3.
   Dont use `build.all` for now its override previous build...
 
 
-#### My Button
-```js
-import {BaseComponent} from "../../index";
-
-export default class MyButton extends BaseComponent {
-  id = '';
-  text = '';
-  counter = 0;
-
-  get getCounter() {
-    return this.counter;
-  }
-
-  ready = () => {};
-
-  constructor(arg) {
-    super(arg);
-    this.initial(arg);
-  }c
-
-  onClick = this.clickBind;
-
-  // Attached on root dom element
-  // data-counter="${this.getCounter}"
-  render = () => `
-    <button onclick="(${this.onClick})('${this.id}')">
-      ${this.text} counter => ${this.getCounter}
-    </button>
-  `;
-}
-```
-
-#### My Header
-```js
-import MyButton from "../components/button";
-import {
-  On, T,
-  BaseComponent } from "../../index";
-
-export default class MyHeader extends BaseComponent {
-
-  id = 'my-heder';
-  slogan = 'My header.';
-  mySybCompBtnYes = new MyButton({ text: T.yes, id: 'yes'});
-  mySybCompBtnNo = (new MyButton({ text: T.no, id: 'no'}));
-  mySybCompBtnNoEmit = (new MyButton({ text: T.textAlert, id: 'local'}));
-
-  constructor(arg) {
-    super(arg);
-    this.initial(arg);
-
-    On('yes', () => {
-      console.info('Trigger Btn Yes', (this));
-      let newValue = this.mySybCompBtnYes.getCounter + 1;
-      this.mySybCompBtnYes.set('counter', newValue);
-    });
-
-    On('no', () => {
-      console.info('Trigger Btn no', (this));
-      let newValue = this.mySybCompBtnNo.getCounter - 1;
-      this.mySybCompBtnNo.set('counter', newValue);
-    });
-
-    On('local', () => {
-      let newValue = this.mySybCompBtnNoEmit.getCounter - 1;
-      console.info('You can always get trigger detect by id !', (this));
-      console.info('But no trigger for props setter with { emit: false } !', (this));
-      this.mySybCompBtnNoEmit.set('counter', newValue, { emit: false });
-    });
-
-    On('change-theme', () => {
-      (this).changeTheme();
-      console.info('Trigger ChangeTheme integrated.');
-    })
-
-  }
-
-  change = this.clickBind;
-
-  /**
-   * @description
-   * Component in component case :
-   * Use renderId.
-   */
-  render = () => `
-    <div class="middle h5">
-       ${(this.mySybCompBtnYes).renderId()}
-       ${(this.mySybCompBtnNo).renderId()}
-       ${(this.mySybCompBtnNoEmit).renderId()}
-       <button onclick="(${this.change})('change-theme')">
-         Change Theme
-       </button>
-    </div>
-  `
-}
-```
-
-#### Simple list render with click catch
-```js
-import {BaseComponent} from "../../index";
-
-export default class MyList extends BaseComponent {
-  id = '';
-  // This is props
-  tableData = [
-    '👽 Modern tech',
-    '👌 Performance',
-    '🤑 Free soft',
-    '😜 Easy use',
-    '💔 Breaking',
-    '💥 Star project',
-    '👁️‍🗨️ Event oriented',
-    '🖖 No single unnecessary element',
-    '🤘 Safir rocks',
-    '👨‍🔬 Use npm service',
-    '👨‍💻 Open source',
-    '🐈 https://github.com/zlatnaspirala/safir'
-  ];
-  constructor(arg) {
-    super(arg);
-    this.initial(arg);
-  }
-  onClick = this.clickBind;
-  render = () => `
-    <div class="verCenter">
-      ${this.tableData.map((item, index) =>
-          `<h1 onclick="(${this.onClick})('${this.id}')"
-               class="middle">` + index + item + `</h1>`
-      ).join('')}
-    </div>
-  `;
-}
-```
-
-For demo2.js try in console:
-`// myBoxComp.set('tableData', ['wao', 'woow'])`
-
 ## VANILLA COMPONENT
 WEB/HTML/JS/CSS (ecma6)
 
@@ -270,46 +136,9 @@ WEB/HTML/JS/CSS (ecma6)
   - Only role is `put tag <script> after <style> and <html>`
 ```
 
-```html
-<style>
-.myFooter {
-  font-family: Accuratist;
-  position: absolute;
-  text-align: center;
-  bottom: 0;
-  width: 100%;
-  height: 30px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-</style>
-
-<div id="footer" class="theme-dark myFooter" onclick="footer.callMe()">
-  <p>maximumroulette.com</p>
-  <p>2023</p>
-</div>
-
-<script>
-  console.info('Footer load. Vanilla component is extreme html/css/js orientend.');
-  console.info('Write here javascript only, it is dynamic (async loaded script).');
-  console.info('I recommended nersted object structure!');
-
-  let footer = {
-    root: document.getElementById('footer'),
-    callMe: function(e) {
-      console.log('Call trigger on footer.', this);
-      this.root.innerHTML = 'what ever';
-    }
-  };
-</script>
-```
-
 #### Style
-Style can be used with props [from code]. Style comes with examples it is not real part safir core but it is
-deeply integrated within. It is a part of this repo also.
 
+Style can be used with props [from code].
 Safir use `scss` with themed integrated but don't include dev tools for it. You need to use Visual Code Exstension `Live Sass`.
 
 Add intro `.vscode\settings.json`
@@ -327,9 +156,8 @@ Add intro `.vscode\settings.json`
   ]
 }
 ```
-If you use in VisualCode root folder of project no need for `PREX_ROOT_FOLDER`. If you put whole project intro prefix folder then add `PREX_ROOT_FOLDER/`. This folder must be intro root of visualCode workspace `.vscode\` also can be autogenerated from VisualCode.
 
-Need to run `build-assets.sh` for any changes intro assets folder.
+If you use in VisualCode root folder of project no need for `PREX_ROOT_FOLDER`. If you put whole project intro prefix folder then add `PREX_ROOT_FOLDER/`. This folder must be intro root of visualCode workspace `.vscode\` also can be autogenerated from VisualCode.
 
 Role:
 ```json
@@ -340,10 +168,6 @@ Role:
 
 For localhost (http) web server:
 ```js
-  http-server ./dist -p 80
-```
-or
-```js
   npm run host
 ```
 
@@ -351,16 +175,12 @@ For localhost watch:
 Run watch:
 ```js
   npm run demo1
-  npm run demo2
-  npm run demo3
-  ...
 ```
 
 For production (https) web server:
 Run command:
 ```js
   npm run build.demo1
-  npm run build.demo2
 ```
 
 ## Build Library [option]
@@ -389,7 +209,7 @@ Basic examples:
  - demo5.js [How to use? Fetch for login (rocketCraftingServer)]
 
 
-## Credits 
+## Credits
 
  Used for css animation:
  -> https://webcode.tools/generators/css/keyframe-animation
