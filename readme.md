@@ -121,7 +121,7 @@ Take a look at the demo3.
 ## Note
 
   Dont use `build.all` for now its override previous build...
-  
+
 
 #### My Button
 ```js
@@ -361,7 +361,6 @@ Run command:
 ```js
   npm run build.demo1
   npm run build.demo2
-  npm run build.all
 ```
 
 ## Build Library [option]
@@ -387,6 +386,7 @@ Basic examples:
  - Demo3.js [How to use? Use input tag with ]
  - demo4.js - TicTacToe game template :
    https://maximumroulette.com/apps/safir/
+ - demo5.js [How to use? Fetch for login (rocketCraftingServer)]
 
 
 ## Credits 
