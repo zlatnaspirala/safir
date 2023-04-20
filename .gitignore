@@ -4,3 +4,4 @@ test/node_modules/
 dist/
 dist/index.html
 dist/style.css
+test/package-lock.json
