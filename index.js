@@ -11,14 +11,16 @@ import {
   Safir } from "./src/core/root";
 import { BaseComponent } from "./src/core/comp";
 import { On } from "./src/core/modifier";
-import {byID, JSON_HEADER} from "./src/core/utils";
+import {byID, JSON_HEADER, LocalSessionMemory, LocalStorageMemory} from "./src/core/utils";
 
 export {
   Safir,
   BaseComponent,
-  On,
-  T,
   getComp,
   byID,
-  JSON_HEADER
+  On,
+  T,
+  JSON_HEADER,
+  LocalSessionMemory,
+  LocalStorageMemory
 }

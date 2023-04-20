@@ -1,5 +1,4 @@
-import { BaseComponent, On } from "safir";
-import {JSON_HEADER, byID} from "../../src/core/utils";
+import { BaseComponent, On, JSON_HEADER, byID } from "safir";
 import SimpleBtn from "../components/simple-btn";
 
 export default class RocketCraftingLayout extends BaseComponent {
