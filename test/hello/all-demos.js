@@ -1,17 +1,17 @@
 
-import {Safir, QueryString} from "safir";
-import {Manager} from "safir/src/core/utils";
+import {Safir, QueryString, Manager} from "safir";
 
-if(typeof Examples[QueryString.u] != 'undefined') {
-    try {
-      Examples[QueryString.u](world);
-    } catch(err) {
-      console.warn('Safir: No demo found');
-    }
+console.warn('Safir: INIT');
+
+if(QueryString.u != null) {
+  try {
+    Manager.load(QueryString.u, 'demo');
+    console.warn('Safir: No demo found');
+  } catch(err) {
+    console.warn('Safir: No demo found');
+  }
 } else {
-  setTimeout(() => {
-    Examples['adding_color_cube'](world);
-  }, 100);
+  //
 }
 
 console.info("Query running [sync]...", Date.now());
