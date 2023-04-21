@@ -1,4 +1,4 @@
-import { BaseComponent, On, JSON_HEADER, byID } from "safir";
+import {BaseComponent, On, JSON_HEADER, byID, getComp} from "safir";
 import SimpleBtn from "../components/simple-btn";
 
 export default class RocketCraftingLayout extends BaseComponent {
@@ -8,7 +8,7 @@ export default class RocketCraftingLayout extends BaseComponent {
   loginBtn = new SimpleBtn({text: 'Login', id: 'loginBtn'}, 'w30');
   registerBtn = new SimpleBtn({text: 'Register', id: 'registerBtn'}, 'w30');
 
-  ready = () => { console.log('RocketCrafting Login form ready.') }
+  ready = () => {console.log('RocketCrafting Login form ready.')}
 
   async runApiCall(apiCallFlag) {
     let route = 'http://maximumroulette.com'
@@ -16,7 +16,7 @@ export default class RocketCraftingLayout extends BaseComponent {
       emailField: byID('arg-username').value,
       passwordField: byID('arg-password').value
     }
-    const rawResponse = await fetch(route + '/rocket/' +  apiCallFlag, {
+    const rawResponse = await fetch(route + '/rocket/' + apiCallFlag, {
       method: 'POST',
       headers: JSON_HEADER,
       body: JSON.stringify(args)
@@ -26,21 +26,47 @@ export default class RocketCraftingLayout extends BaseComponent {
   }
 
   // Best way - intergalatic
-  exploreResponse(res) {
+  exploreResponse(res,) {
     byID('apiResponse').innerHTML = '';
-    for (let key in res) {
+    for(let key in res) {
       let color = 'white';
-      if (typeof res[key] == 'object') {
-        for (let key1 in res[key]) {
+      if(typeof res[key] == 'object') {
+        for(let key1 in res[key]) {
           color = 'color:indigo;text-shadow: 0px 0px 1px #52f2ff, 1px 1px 1px #11ffff;';
           byID('apiResponse').innerHTML += `<div style='${color}' >${key} : ${res[key][key1]} </div>`;
         }
       } else {
-        if (key == 'message' && res[key] == 'Wrong Password') {
+        if(key == 'message' && res[key] == 'Wrong Password') {
           color = 'color:red;text-shadow: 0px 0px 1px #52f2ff, 1px 1px 1px #11ffff;';
           byID('apiResponse').innerHTML += `<div style='${color}' >${key} : ${res[key]}</div>`;
-        } else if (res[key] == 'USER_LOGGED') {
+        } else if(res[key] == 'USER_LOGGED') {
           byID('apiResponse').innerHTML += `<div style='${color}' >${key} : ${res[key]} 👨‍🚀</div>`;
+          // how to use sub rerender
+          console.log(" TEST #######")
+          // simple override
+          this.render = this.accountRender;
+          getComp(this.id).innerHTML = this.render();
+          this.accountData(res);
+        }
+      }
+    }
+  }
+
+  // Best way - intergalatic
+  accountData(res) {
+    byID('apiResponse').innerHTML = '';
+    for(let key in res) {
+      let color = 'white';
+      if(typeof res[key] == 'object') {
+        for(let key1 in res[key]) {
+          color = 'color:indigo;text-shadow: 0px 0px 1px #52f2ff, 1px 1px 1px #11ffff;';
+          byID('apiResponse').innerHTML += `<div style='${color}' >${key} : ${res[key][key1]} </div>`;
+        }
+      } else {
+        if(res[key] == 'USER_LOGGED') {
+          byID('apiResponse').innerHTML += `<div style='${color}' >${key} : ${res[key]} 👨‍🚀</div>`;
+          // how to use sub rerender
+          console.log(" TEST ACCOUNT #######")
         }
       }
     }
@@ -58,6 +84,12 @@ export default class RocketCraftingLayout extends BaseComponent {
       this.runApiCall('register');
     });
   }
+
+  accountRender = () => `
+    <div class='midWrapper bg-transparent' >
+      <span id="apiResponse"></span>
+    </div>
+  `;
 
   render = () => `
     <div class="paddingtop20 animate-jello2 bg-transparent textCenter">
