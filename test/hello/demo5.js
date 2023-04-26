@@ -5,6 +5,16 @@ import RocketCraftingLayout from "./layouts/rocket-crafting-account";
 let app = new Safir();
 
 On("app.ready", () => {
-  app.loadComponent(new RocketCraftingLayout(), 'bg-transparent');
-  document.body.classList.add('funnyBg2')
+
+  /**
+   * @description
+   * If you put http://localhost then you 
+   * need to run rocketCreftingServer on local mashine.
+   * You can use also `http://maximumroulette.com`
+   */
+  let apiDomain = 'https://maximumroulette.com';
+  app.loadComponent(new RocketCraftingLayout(apiDomain), 'bg-transparent');
+
+  document.body.classList.add('funnyBg2');
+
 });

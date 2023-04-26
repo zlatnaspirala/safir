@@ -8,9 +8,8 @@
 Safir use `browserify` for building final pack script.
 
 ## Objective:
-Must be simple and usefull.
-Performace must be 100% with full PWA support.
-For any platform adapted.
+- Must be simple and usefull. Performace must be 100% with full PWA support.For any platform adapted. 
+- Integrate account system using RocketCraftingServer [REST API].
 
 Test [demo4.js] tictactoe at https://maximumroulette.com/apps/safir/
 
@@ -41,6 +40,8 @@ On("app.ready", () => {
 
 console.info("App running [sync]...", Date.now());
 ```
+
+After in program you no need to use always `app.loadComponent` just use `this.mySubCom = new MYCOMP()`
 
 In index.html header add:
 ```html

@@ -17,6 +17,7 @@
     "build.demo5": "build-assets.sh | browserify hello/demo5.js -p esmify > dist/demo5.js",
     "build.all": "build-assets.sh | npm run build.demo1 | npm run build.demo2 | npm run build.demo3 | npm run build.demo4 | npm run build.demo5",
     "host": "http-server dist/ -p 80",
+    "https": "http-server ./dist/ -S -C cert.pem -o",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
