@@ -59,6 +59,7 @@ export class Safir extends BaseSafir {
     this.subComponents = [];
     this.appRoot = getComp("app");
     this.construct();
+    // return this;
   }
 
   ready = () => {

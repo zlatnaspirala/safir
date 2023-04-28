@@ -1,23 +1,46 @@
-import {BaseComponent, On, JSON_HEADER, byID, getComp} from "safir";
+import {BaseComponent, On, JSON_HEADER, byID, getComp, LocalSessionMemory} from "safir";
 import SimpleBtn from "../components/simple-btn";
+import {Avatar} from "../direct-render/imageProfile";
 
 export default class RocketCraftingLayout extends BaseComponent {
 
   id = 'my-body';
 
+  apiDomain = '';
   loginBtn = new SimpleBtn({text: 'Login', id: 'loginBtn'}, 'w30');
   registerBtn = new SimpleBtn({text: 'Register', id: 'registerBtn'}, 'w30');
 
   nickname = null;
+  email = null;
+  token = null;
+  photo = null;
 
-  email= null;
-  token= null;
-  photo= null;
+  constructor(arg) {
+    super(arg);
+    console.info('[RC ARGS]:', arg);
+    this.apiDomain = arg;
+    On('loginBtn', (data) => {
+      console.info('[login] Trigger Btn', (data).detail);
+      this.runApiCall('login');
+    });
+    On('registerBtn', (data) => {
+      console.info('[register] Trigger Btn', (data).detail);
+      this.runApiCall('register');
+    });
+  }
 
-  ready = () => {console.log('RocketCrafting Login form ready.')}
+  ready = () => {
+    console.log('RocketCrafting Login form ready.')
+
+    console.log('RocketCrafting FAST Login form ready. try this', this.email)
+
+    if(sessionStorage.getItem('my-body-email') != null && sessionStorage.getItem('my-body-token') != null) {
+      this.runApiFastLogin();
+    }
+  }
 
   async runApiCall(apiCallFlag) {
-    let route = location.origin;
+    let route = this.apiDomain || location.origin;
     const args = {
       emailField: byID('arg-username').value,
       passwordField: byID('arg-password').value
@@ -31,9 +54,23 @@ export default class RocketCraftingLayout extends BaseComponent {
     this.exploreResponse(response);
   }
 
+  async runApiFastLogin() {
+    let route = this.apiDomain || location.origin;
+    const args = {
+      email: this.email,
+      token: LocalSessionMemory.load('my-body-token')
+    }
+    const rawResponse = await fetch(route + '/rocket/fast-login', {
+      method: 'POST',
+      headers: JSON_HEADER,
+      body: JSON.stringify(args)
+    })
+    var response = await rawResponse.json();
+    this.exploreResponse(response);
+  }
+
   async runUploadAvatar(apiCallFlag) {
-    let route = 'maximumroulette.com'; // location.origin;
-    // route = route.replace('https', 'http')
+    let route = this.apiDomain || location.origin;
     const args = {
       email: this.email,
       token: this.token,
@@ -48,7 +85,7 @@ export default class RocketCraftingLayout extends BaseComponent {
     this.exploreResponse(response);
   }
 
-  // Best way - intergalatic
+  // Best way - intergalactic
   exploreResponse(res,) {
     byID('apiResponse').innerHTML = '';
     for(let key in res) {
@@ -75,33 +112,27 @@ export default class RocketCraftingLayout extends BaseComponent {
     this.accountData(res);
   }
 
-  // Best way - intergalatic
+  // Best way - intergalactic
   accountData(res) {
     byID('apiResponse').innerHTML = '';
     for(let key in res) {
       let color = 'white';
       if(typeof res[key] == 'object') {
         for(let key1 in res[key]) {
-          color = 'color:indigo;text-shadow: 0px 0px 1px #52f2ff, 1px 1px 1px #14ffff;';
-          if (key1 == 'profileImage') {
-            //                                                                         https://localhost HARD CODE 
-            // byID('apiResponse').innerHTML += `<img style='${color}' alt="${key1}" src="https://localhost/storage${res[key][key1]}" />`;
-            byID('apiResponse').innerHTML += `<img style='${color}' alt="${key1}" src="${location.origin}/storage${res[key][key1]}" />`;
+          if(key1 == 'profileImage') {
+            byID('apiResponse').innerHTML += Avatar({
+              key,
+              key1,
+              res,
+              apiDomain: this.apiDomain
+            });
             // hot to use in runtime attaching:
             byID('apiResponse').innerHTML += `<input type="file" id="avatar" />`;
             byID('apiResponse').innerHTML += `<button type="file" id="uploadAvatar">CHANGE AVATAR</button>`;
-            byID('avatar').addEventListener('change', this.handleFileUpload , { passive: true });
-            byID('uploadAvatar').addEventListener('click', this.handleAvatarUpload , { passive: true });
-          } else if (key1 == 'email') {
-            console.log('###########################')
-            this.setPropById('email', res[key][key1], 1);
-          } else if (key1 == 'token') {
-            console.log('##########token#################')
-            this.setPropById('token', res[key][key1], 1);
+            byID('avatar').addEventListener('change', this.handleFileUpload, {passive: true});
+            byID('uploadAvatar').addEventListener('click', this.handleAvatarUpload, {passive: true});
           } else {
-            if (key1 == 'nickname') { 
-              this.setPropById('nickname', res[key][key1])
-            }
+            this.setPropById(key1, res[key][key1], 1);
             byID('apiResponse').innerHTML += `<div style='${color}' >${key1} : ${res[key][key1]} </div>`;
           }
         }
@@ -114,8 +145,6 @@ export default class RocketCraftingLayout extends BaseComponent {
   }
 
   handleAvatarUpload = (e) => {
-    //
-    console.log('WHAT IS ', this.email)
     this.runUploadAvatar('profile/upload');
   }
 
@@ -125,28 +154,19 @@ export default class RocketCraftingLayout extends BaseComponent {
     reader.onloadend = () => {
       rawImg = reader.result;
       this.setPropById('photo', rawImg)
-      console.log('avatar', rawImg);
     }
     reader.readAsDataURL(e.target.files[0]);
   }
 
-  constructor(arg) {
-    super(arg);
-    console.info('[RC ARGS]:', arg);
-    On('loginBtn', (data) => {
-      console.info('[login] Trigger Btn', (data).detail);
-      this.runApiCall('login');
-    });
-    On('registerBtn', (data) => {
-      console.info('[register] Trigger Btn', (data).detail);
-      this.runApiCall('register');
-    });
-  }
-
   accountRender = () => `
     <div class='midWrapper bg-transparent'>
-      <h2>Welcome  <h2 id='nickname'>${this.nickname}</h2> </h2>
+      <div  class='middle'>
+        <h2>Welcome, <h2 id='nickname'>${this.nickname}</h2></h2>
+      </div>
       <span id="apiResponse"></span>
+      <div class='midWrapper bg-transparent'>
+       <h2> Safir Vanilla Virtual DOM</h2>
+      </div>
     </div>
   `;
 

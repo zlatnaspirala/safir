@@ -14,18 +14,15 @@ export class BaseComponent {
 
   constructor(arg) {
     setTimeout(() => {this.checkProps(arg)}, 1)
-    // this.checkProps(arg);
   }
 
   checkProps(arg) {
-    // i not sure but for now it is good.
-    // console.log('Test Base comp [arg]: ', arg)
     for(let key in this) {
       if(testKeys.indexOf(key) === -1) {
-        // console.info('Checking for props: ', key, ' for id:', this.id);
-        this.getPropById(key);
+        this.getPropById(key)
       }
     }
+    this.ready();
   };
 
   ready() {console.log(`${this.id} is ready.`)}
@@ -36,7 +33,6 @@ export class BaseComponent {
       this.text = arg;
       this.id = arg;
     } else if(typeof arg === 'object') {
-      // console.warn('Arg is object! this.id  ', arg.id );
       this.id = arg.id;
       this.text = arg.text || '';
       this.type = arg.type;
@@ -47,18 +43,9 @@ export class BaseComponent {
     } else {
       this.rootStyle = "";
     }
-
-    // setTimeout(() => {this.ready();}, 1)
-    this.ready();
   }
 
   set(arg, newValue, extraData) {
-    // const local = 'data-' + arg;
-    // console.log('test id ', this.id);
-    // const localRoot = getComp(this.id);
-    // // Double care!
-    // localRoot.setAttribute(local, newValue);
-    // localStorage.setItem(arg, newValue);
     let root = this;
     (root)[arg] = newValue;
     this.update(root, arg, extraData);
@@ -78,7 +65,6 @@ export class BaseComponent {
     }
     // No need to have DOM ID reference 
     if(getComp(id)) getComp(id).innerText = nv;
-
     if (typeof this[id] !== 'undefined') {
       this[id] = nv;
     }
@@ -86,6 +72,11 @@ export class BaseComponent {
 
   getPropById(id) {
     let name = this.id + '-' + id;
+    // console.log(
+    //   `%c Safir TEST id='${id}' '${name}' > . %c ☑ [any-props]`,
+    //   colorLog1, colorLog2
+    // );
+
     let testSessionLevel = LocalSessionMemory.load(name);
     if(testSessionLevel !== false) {
       // no need to exist always REF DOM BY ID.
@@ -116,7 +107,7 @@ export class BaseComponent {
       if(typeof this[id] !== 'undefined' && this[id] != testSessionLevel) {
         this[id] = testSessionLevel;
         console.log(
-          `%c Safir set class prop this.${this[id]} vs ${testSessionLevel} %c ☑ [session-props]`,
+          `%c Safir set class prop ${id}  ${this[id]} vs ${testSessionLevel} %c ☑ [session-props]`,
           colorLog1, colorLog2
         );
       }
