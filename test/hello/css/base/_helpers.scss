@@ -1,7 +1,0 @@
-
-@import 'variables';
-@import 'mixins';
-
-@function themed($key) {
-  @return map-get($theme-map, $key);
-}
