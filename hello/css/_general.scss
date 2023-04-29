@@ -1,11 +1,11 @@
 @font-face {
   font-family: Accuratist;
-  src: url(/assets/fonts/Accuratist.ttf);
+  src: url(assets/fonts/Accuratist.ttf);
 }
 
 @font-face {
   font-family: Closeness;
-  src: url(/assets/fonts/Closeness.ttf);
+  src: url(assets/fonts/Closeness.ttf);
 }
 
 *,
@@ -304,4 +304,10 @@ p {
 
 .blackText {
   color: black;
+}
+
+.avatarProfile {
+  color:indigo;text-shadow: 0px 0px 1px #52f2ff, 1px 1px 1px #14ffff;
+  width: 256px;
+  height: 256px;
 }

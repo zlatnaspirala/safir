@@ -12,8 +12,8 @@ On("app.ready", () => {
    * need to run rocketCreftingServer on local mashine.
    * You can use also `http://maximumroulette.com`
    */
-  // let apiDomain = 'https://maximumroulette.com';
-  let apiDomain = 'http://localhost';
+  let apiDomain = 'https://maximumroulette.com';
+  // let apiDomain = 'http://localhost';
   app.loadComponent(new RocketCraftingLayout(apiDomain), 'bg-transparent');
 
   document.body.classList.add('funnyBg2');

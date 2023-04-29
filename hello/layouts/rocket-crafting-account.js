@@ -54,7 +54,7 @@ export default class RocketCraftingLayout extends BaseComponent {
   async runApiFastLogin() {
     let route = this.apiDomain || location.origin;
     const args = {
-      email: this.email,
+      email: LocalSessionMemory.load('my-body-email'),
       token: LocalSessionMemory.load('my-body-token')
     }
     const rawResponse = await fetch(route + '/rocket/fast-login', {
