@@ -3,6 +3,8 @@ import {BaseComponent, On, JSON_HEADER, byID, getComp, LocalSessionMemory} from 
 export class singleCounter extends BaseComponent {
 
   refFunc = [];
+
+ 
   ready = () => {
     this.id= this.id;
     let slot = document.createElement('div');
@@ -30,7 +32,6 @@ export class singleCounter extends BaseComponent {
     const nums = [0,1,2,3,4,5,6,7,8,9];
     nums.forEach((num, i) => {
       this.refFunc.push(() => {
-      // num.addEventListener("click", () => {
         const numAngle = 36 * i;
         const currentAngle =
           ring.style.getPropertyValue("--deg")
@@ -39,7 +40,6 @@ export class singleCounter extends BaseComponent {
         while(nextAngle < currentAngle) {
           nextAngle += 360;
         }
-
         if (nextAngle > 360) nextAngle -= 360; 
         ring.style.setProperty("--deg", `-${nextAngle}deg`)
       })
@@ -80,7 +80,10 @@ export class singleCounter extends BaseComponent {
 
 export class SafirSlot extends BaseComponent {
 
-  VALUE = 333.55;
+  VALUE = 0;
+
+  speed = 100;
+
   constructor() {
     super();
     this.field0 = new singleCounter({ id: '0'});
@@ -139,14 +142,73 @@ export class SafirSlot extends BaseComponent {
 
     }
 
-
+    this.VALUE = str;
   }
 
-  setByCounting() {
-
-    // 
-
+  getCurrentSum() {
+    return parseFloat(this.VALUE);
   }
+
+  setByTime(newValue) {
+    let test = newValue / 10;
+    console.log('timeout', test )
+    let X = (x) => {
+      if (x == 0) {
+        this.setSum(test)
+      } else {
+        this.setSum(test * x)
+        console.log('timeout', test * x)
+        console.log('timeout x ',  x)
+      }
+    }
+    for(var x = 0; x <= 10; x++) {
+      setTimeout((x) => {
+         X(x)
+      }, this.speed * x, x)
+    }
+  }
+
+  setByLinear(newValue) {
+    console.log('getCurrentSum', this.getCurrentSum() )
+    let test = newValue / 10;
+
+    var str = String(newValue);
+    if (str.indexOf('.') != -1) {
+      console.log('Theres decimals intro number');
+      byID('slotD').style.display = 'block';
+      if (str.length < 11) {
+        let howMany = 11 - str.length;
+        for (var y=0; y < howMany; y++) {
+          str = "0" + str;
+        }
+      }
+    } else {
+      if (str.length < 10) {
+        let howMany = 10 - str.length;
+        for (var y=0; y < howMany; y++) {
+          str = "0" + str;
+        }
+      }
+    }
+
+    let X = (x) => {
+      if (x == 0) {
+        this[`field9`].setNumber(x)
+      } else {
+        this.field9.setNumber(x)
+
+
+        console.log('timeout', test * x)
+        console.log('timeout x ',  x)
+      }
+    }
+    for(var x = 0; x < 10; x++) {
+      setTimeout((x) => {
+         X(x)
+      }, this.speed * x, x)
+    }
+  }
+
   render = () => {
     return `
       <h2>Safir-Slot-UI-Component</h2>
