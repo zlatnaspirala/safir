@@ -1,0 +1,40 @@
+
+ .numAnimHolder {
+  overflow: hidden;
+  height: 40px !important;
+  width: fit-content !important;
+ }
+
+ .slot {
+  display: flex;
+  place-items: center;
+  min-height: 4vh;
+  perspective: 500px;
+  perspective-origin: 50% 50%;
+  margin: 15px;
+  width: fit-content;
+ }
+ 
+ .ring0, .ring1, .ring2, .ring3, .ring4, .ring5, .ring6, .ring7, .ring8, .ring9 {
+   text-align: center;
+   transform-style: preserve-3d;
+   transition: transform 1s;
+   transform: rotateX(var(--deg));
+ }
+
+ .panel0, .panel1, .panel2, .panel3, .panel4, .panel5, .panel6, .panel7, .panel8, .panel9 {
+   font-size: 30px !important; 
+   position: absolute;
+   transform:
+     translate(-50%, -50%)
+     rotateX(var(--angle))
+     translateZ(60.5px);
+   border-bottom: 1px solid black;
+
+   @include themify($themes) {
+    font-family: themed('fontFamily');
+    color: themed('textColor');
+    background-color: themed('backgroundColor') !important;
+  }
+   width:30px;
+ }
