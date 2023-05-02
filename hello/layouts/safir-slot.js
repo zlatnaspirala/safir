@@ -2,9 +2,7 @@ import {BaseComponent, On, JSON_HEADER, byID, getComp, LocalSessionMemory} from 
 
 export class singleCounter extends BaseComponent {
 
-  commander = [];
-
-
+  refFunc = [];
   ready = () => {
     this.id= this.id;
     let slot = document.createElement('div');
@@ -31,7 +29,7 @@ export class singleCounter extends BaseComponent {
   calcAnim (ring) {
     const nums = [0,1,2,3,4,5,6,7,8,9];
     nums.forEach((num, i) => {
-      this.commander.push(() => {
+      this.refFunc.push(() => {
       // num.addEventListener("click", () => {
         const numAngle = 36 * i;
         const currentAngle =
@@ -41,6 +39,8 @@ export class singleCounter extends BaseComponent {
         while(nextAngle < currentAngle) {
           nextAngle += 360;
         }
+
+        if (nextAngle > 360) nextAngle -= 360; 
         ring.style.setProperty("--deg", `-${nextAngle}deg`)
       })
     })
@@ -54,11 +54,10 @@ export class singleCounter extends BaseComponent {
     });
     const ring0 = $(`.ring${id}`)[0];
     this.calcAnim(ring0);
-    //jackpotPopup.counter.commander[1][2]()
   }
 
   setNumber = function(num) {
-    this.commander[num]();
+    this.refFunc[num]();
   }
 
   render = (arg) => {
@@ -97,30 +96,36 @@ export class SafirSlot extends BaseComponent {
     this.field9 = new singleCounter({ id: '9'});
   }
 
-  setN(num) {
+  setSum(num) {
     var str = String(num);
     if (str.indexOf('.') != -1) {
-      console.log('Theres decimals intro number')
+      console.log('Theres decimals intro number');
+      byID('slotD').style.display = 'block';
       if (str.length < 11) {
         let howMany = 11 - str.length;
         for (var y=0; y < howMany; y++) {
           str = "0" + str;
         }
       }
-      console.log('TEST STR = ', str)
+      // console.log('TEST STR = ', str)
+      var locHandler = false;
       for (var x=str.length-1; x >= 0; x--) {
-
         if (str[x] != '.') {
-          this[`field${x-1}`].setNumber(str[x])
+          if (locHandler == true) {
+            this[`field${x}`].setNumber(str[x])
+            console.log('DECIMAL AFTER= ', str[x] )
+          } else {
+            this[`field${x-1}`].setNumber(str[x])
+          }
         } else {
+          locHandler = true;
           console.log('DECIMAL CHAR DETECTED ', str[x] )
         }
-
       }
 
     } else {
       console.log('NO decimals intro number')
-
+      byID('slotD').style.display = 'none';
       if (str.length < 10) {
         let howMany = 10 - str.length;
         for (var y=0; y < howMany; y++) {
@@ -137,6 +142,11 @@ export class SafirSlot extends BaseComponent {
 
   }
 
+  setByCounting() {
+
+    // 
+
+  }
   render = () => {
     return `
       <h2>Safir-Slot-UI-Component</h2>
