@@ -8,15 +8,13 @@
 Safir use `browserify` for building final pack script.
 
 ## Objective:
-- Must be simple and usefull. Performace must be 100% with full PWA support.For any platform adapted. 
+- Must be simple and usefull. Performace must be 100% with full PWA support.For any platform adapted.
 - Integrate account system using RocketCraftingServer [REST API].
-
-Test [demo4.js] tictactoe at https://maximumroulette.com/apps/safir/
 
 
 ### There are two way for creating web components:
-### - From code
-### - Vanilla component
+ - Safir Component
+ - Vanilla component
 
 ## Basic Example
 
@@ -41,7 +39,7 @@ On("app.ready", () => {
 console.info("App running [sync]...", Date.now());
 ```
 
-After in program you no need to use always `app.loadComponent` just use `this.mySubCom = new MYCOMP()`
+After in program you no need to use always `app.loadComponent` just use `this.mySubCom = new MYCOMP()` and put in render `${MYCOMP.renderById()}`.
 
 In index.html header add:
 ```html
@@ -54,19 +52,39 @@ Add main dom holder:
   <div id="app" class="theme-light app fill"></div>
 ```
 
-## Create component from code 
-It is very similar to the reactjs and vue but it is not. There is no jsx support.
-This software use already exist feature Template Literal ECMA6 vs CustomEvents.
-This is the best way to organize web app in easy and progressive way.
-Performance and simplity are main objective in this project.
+## Create component from code
 
-Next level will be improvements in custom tag field.
+SIMPLE BUTTON COMPONENT:
+```js
+import {BaseComponent} from "../../index";
+
+export default class SimpleBtn extends BaseComponent {
+
+  id = '';
+  text = '';
+  ready = () => {};
+
+  constructor(arg, arg2 = '') {
+    super(arg);
+    this.initial(arg, arg2);
+  }
+  onClick = this.clickBind;
+
+  render = () => `
+    <button class="fill bg-transparent" onclick="(${this.onClick})('${this.id}')">
+      ${this.text}
+    </button>
+  `;
+}
+
+```
 
 How works app updates?
+
 When you create Safir Component use `class MyNewClass extends BaseComponent`.
 BaseComponent will handle situation. Safir have only function `set`
 for updating class props. Calling the `set` function will cause a rerender
-and dispach event with `on-<name_of_prop>` name.
+and dispach event with `on-<name_of_prop>`.
 
 To create props just add it normally intro class eg. `counter = 0'.
 
@@ -76,6 +94,7 @@ To create props just add it normally intro class eg. `counter = 0'.
     - newValue -> New value / what ever
     - extraData -> it is object with only `{ emit: true }`
                    it is optimal arg.
+    [rerender]
 
   Usage:
   mySybCompBtnNoEmit.set('counter', newValue, { emit: false });
@@ -96,7 +115,11 @@ To create props just add it normally intro class eg. `counter = 0'.
 
 ```
 
-#### @Note About direct update
+```json
+Best way is to use this function only for end component.
+```
+
+#### @Note About direct update [no rerender] Recommented
 
 Rerender DOM method is ok for simple[pages] tasks. Safir need to handle massive or deep structure.
 In that point rerendering is bad praticle.
@@ -121,14 +144,10 @@ Take a look at the demo3.
   this.myInput2.setPropById('value', r.detail.value, 2);
 ```
 
-
-## Note
-
-  Dont use `build.all` for now its override previous build...
-
-
 ## VANILLA COMPONENT
 WEB/HTML/JS/CSS (ecma6)
+
+It is not focus on vanilla component but it is good to use any js code.
 
  - Perfect for async app flow.
  - Css is local scoped (loaded only when the vanilla component is loaded).
@@ -169,12 +188,9 @@ scss settings:
   "liveSassCompile.settings.formats": [{
     "format": "expanded",
     "extensionName": ".css",
-    // "savePath": "/safir/dist/css/"
-    "savePath": "/safir/test/dist/css/"
+    "savePath": "/safir/dist/css/"
   }],
   "liveSassCompile.settings.excludeList": [
-    // "safir/test/**",
-    "safir/hello/**",
     "**/node_modules/**",
     ".vscode/**",
     "./dist/**"
@@ -183,8 +199,7 @@ scss settings:
 ```
 
 
-
-Role:
+### Role:
 ```json
  Any other (except scss) changes in assets/ folder need run `build-assets.sh`
 ```
@@ -232,6 +247,8 @@ Basic examples:
  - demo4.js - TicTacToe game template :
    https://maximumroulette.com/apps/safir/
  - demo5.js [How to use? Fetch for login (rocketCraftingServer)]
+ - demo6.js - Counter animator
+ 
 
 
 ## Credits

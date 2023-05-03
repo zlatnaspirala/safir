@@ -88,7 +88,14 @@ export class Safir extends BaseSafir {
     let x = document.createElement('div');
     x.setAttribute("id", arg.id);
     // if (rootStyle) x.setAttribute("style", rootStyle);
-    if (rootStyle) x.classList.add(rootStyle);
+    if (rootStyle && rootStyle.indexOf(' ') !== -1) {
+      let classes = rootStyle.split(' ');
+      classes.forEach(c => {
+        if (rootStyle) x.classList.add(c);
+      });
+    } else {
+      if (rootStyle) x.classList.add(rootStyle);
+    }
     this.appRoot?.append(x);
     x.innerHTML = arg.render(arg);
     this.subComponents.push(arg);

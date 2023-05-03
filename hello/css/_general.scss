@@ -178,7 +178,6 @@ p {
   align-items: center;
   width: 100%;
   height: auto;
-
   &.column {
     flex-direction: column;
   }
@@ -227,6 +226,11 @@ p {
 .fit {
   width: fit-content !important;
   height: fit-content !important;
+}
+
+.mySlot {
+  width: 500px;
+  margin: auto;
 }
 
 .hey {

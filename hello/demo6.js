@@ -6,6 +6,6 @@ let app = new Safir();
 
 
 On("app.ready", () => {
-  window.NIK = app.loadComponent(new SafirSlot({id : 'bla'}), 'bg-transparent');
+  window.NIK = app.loadComponent(new SafirSlot({id : 'bla'}), 'middle mySlot');
   document.body.classList.add('funnyBg2')
 });

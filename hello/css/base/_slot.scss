@@ -2,7 +2,7 @@
  .numAnimHolder {
   overflow: hidden;
   height: 40px !important;
-  width: fit-content !important;
+  // width: fit-content !important;
  }
 
  .slot {
@@ -12,13 +12,13 @@
   perspective: 500px;
   perspective-origin: 50% 50%;
   margin: 15px;
-  width: fit-content;
+  width: inherit;
  }
  
  .ring0, .ring1, .ring2, .ring3, .ring4, .ring5, .ring6, .ring7, .ring8, .ring9 {
    text-align: center;
    transform-style: preserve-3d;
-   transition: transform 1s;
+   transition: transform 0.1s;
    transform: rotateX(var(--deg));
  }
 
