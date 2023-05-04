@@ -178,6 +178,8 @@ export class SafirSlot extends BaseComponent {
 
   setByTime(newValue) {
 
+    this.speed = 100;
+
     if(newValue.toString().indexOf('.') !== -1 &&
       newValue.toString().split('.')[1].length < 2) {
       newValue = newValue + "0";
@@ -191,16 +193,18 @@ export class SafirSlot extends BaseComponent {
         CO = -1;
       }
 
-      this.setSum(parseFloat( (this.getCurrentSum() + 0.01 * CO).toFixed(2)))
+      
 
-      if(test < 1) {
-
+      if(test < 0.5) {
+        this.setSum(this.getCurrentSum() + 0.01 * CO)
+      }else if(test < 1) {
+        this.setSum(this.getCurrentSum() + 0.10 * CO)
       } else if(test < 100) {
-        this.setSum(this.getCurrentSum() + 1 * CO)
+        this.setSum(this.getCurrentSum() + 2.12 * CO)
       } else if(test < 500) {
-        this.setSum(this.getCurrentSum() + 10 * CO)
+        this.setSum(this.getCurrentSum() + 20.12 * CO)
       } else {
-        this.setSum(this.getCurrentSum() + 100 * CO)
+        this.setSum(this.getCurrentSum() + 100.12 * CO)
       }
 
     }
