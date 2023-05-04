@@ -1,14 +1,15 @@
-import {BaseComponent, On, JSON_HEADER, byID, getComp, LocalSessionMemory} from "../../index";
+import {BaseComponent, On, JSON_HEADER, byID, byClass, getComp, LocalSessionMemory} from "../../index";
 
 export class singleCounter extends BaseComponent {
+
   refFunc = [];
   ready = () => {
-    this.id= this.id;
+    this.id = this.id;
     let slot = document.createElement('div');
     slot.id = `slot${this.id}`;
     slot.classList.add('slot');
     byID('numAnimHolder').append(slot);
-    if (this.id.indexOf('D') != -1) {
+    if(this.id.indexOf('D') != -1) {
       slot.innerHTML = ',';
       slot.style.margin = '10px';
       slot.style.fontSize = '20px';
@@ -24,8 +25,8 @@ export class singleCounter extends BaseComponent {
     this.initial(arg);
   }
 
-  calcAnim (ring) {
-    const nums = [0,1,2,3,4,5,6,7,8,9];
+  calcAnim(ring) {
+    const nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     nums.forEach((num, i) => {
       this.refFunc.push(() => {
         const numAngle = 36 * i;
@@ -36,8 +37,10 @@ export class singleCounter extends BaseComponent {
         while(nextAngle < currentAngle) {
           nextAngle += 360;
         }
-        if (nextAngle > 360) nextAngle -= 360; 
+        if(nextAngle > 360) nextAngle -= 360;
+        console.log('nextAngle', nextAngle);
         ring.style.setProperty("--deg", `-${nextAngle}deg`)
+        ring.setAttribute('data-slot', i)
       })
     })
   }
@@ -58,17 +61,17 @@ export class singleCounter extends BaseComponent {
 
   render = (arg) => {
     return `
-    <div class="ring${arg}">
-      <div class="panel${arg}">0</div>
-      <div class="panel${arg}">1</div>
-      <div class="panel${arg}">2</div>
-      <div class="panel${arg}">3</div>
-      <div class="panel${arg}">4</div>
-      <div class="panel${arg}">5</div>
-      <div class="panel${arg}">6</div>
-      <div class="panel${arg}">7</div>
-      <div class="panel${arg}">8</div>
-      <div class="panel${arg}">9</div>
+    <div class="ring${arg}" data-slot="0">
+      <div class="panel${arg}" >0</div>
+      <div class="panel${arg}" >1</div>
+      <div class="panel${arg}" >2</div>
+      <div class="panel${arg}" >3</div>
+      <div class="panel${arg}" >4</div>
+      <div class="panel${arg}" >5</div>
+      <div class="panel${arg}" >6</div>
+      <div class="panel${arg}" >7</div>
+      <div class="panel${arg}" >8</div>
+      <div class="panel${arg}" >9</div>
     </div>
     `;
   }
@@ -82,33 +85,39 @@ export class SafirSlot extends BaseComponent {
   constructor(arg) {
     super();
     this.initial(arg);
-    this.field0 = new singleCounter({ id: '0'});
-    this.field1 = new singleCounter({ id: '1'});
-    this.field2 = new singleCounter({ id: '2'});
-    this.field3 = new singleCounter({ id: '3'});
-    this.field4 = new singleCounter({ id: '4'});
-    this.field5 = new singleCounter({ id: '5'});
-    this.field6 = new singleCounter({ id: '6'});
-    this.field7 = new singleCounter({ id: '7'});
-    this.dot    = new singleCounter({ id: 'D'});
-    this.field8 = new singleCounter({ id: '8'});
-    this.field9 = new singleCounter({ id: '9'});
+    this.field0 = new singleCounter({id: '0'});
+    this.field1 = new singleCounter({id: '1'});
+    this.field2 = new singleCounter({id: '2'});
+    this.field3 = new singleCounter({id: '3'});
+    this.field4 = new singleCounter({id: '4'});
+    this.field5 = new singleCounter({id: '5'});
+    this.field6 = new singleCounter({id: '6'});
+    this.field7 = new singleCounter({id: '7'});
+    this.dot = new singleCounter({id: 'D'});
+    this.field8 = new singleCounter({id: '8'});
+    this.field9 = new singleCounter({id: '9'});
   }
 
   setSum(num) {
 
     num = parseFloat(num.toFixed(2));
-
     var str = String(num);
-    if (str.indexOf('.') != -1) {
-      console.log('Theres decimals intro number');
+
+    if(str.indexOf('.') == -1) {
+       str = str + ".00"
+    }
+
+    if(str.indexOf('.') != -1) {
+      console.log('Theres decimals intro number str.length;', str.length);
       byID('slotD').style.display = 'block';
       let delta = 0;
-      if (str.length < 11) {
+      if(str.length < 11) {
         let howMany = 11 - str.length;
-        for (var y=0; y < howMany; y++) {
+        if(str.split('.')[1].length < 2) howMany--;
+
+        for(var y = 0;y < howMany;y++) {
           str = "0" + str;
-          if (str.split('.')[1].length < 2) {
+          if(str.split('.')[1].length < 2) {
             console.log('TEST STRRIGHT LINGTH = ', str.split('.')[1].length)
             str = str + "0";
             delta = -1;
@@ -116,30 +125,38 @@ export class SafirSlot extends BaseComponent {
         }
       }
       var locHandler = false;
-      for (var x=str.length-1+delta; x >= 0; x--) {
-        if (str[x] != '.') {
-          if (locHandler == true) {
+      for(var x = 10;x >= 0;x--) {
+        if(str[x] != '.') {
+          if(locHandler == true) {
             this[`field${x}`].setNumber(str[x])
-            console.log('DECIMAL AFTER= ', str[x] )
+            console.log('DECIMAL AFTER= ', str[x])
           } else {
-            this[`field${x-1}`].setNumber(str[x])
+
+            console.log('DECIMAL X ', x)
+            if (x == 11) {
+              this[`field${x - 2}`].setNumber(str[x])
+            } else {
+              console.log('DECIMAL AFTER str[x - 2]= ', str[x])
+              this[`field${x - 1}`].setNumber(str[x])
+            }
+
           }
         } else {
           locHandler = true;
-          console.log('DECIMAL CHAR DETECTED ', str[x] )
+          console.log('DECIMAL CHAR DETECTED ', str[x])
         }
       }
 
     } else {
       console.log('NO decimals intro number')
       byID('slotD').style.display = 'none';
-      if (str.length < 10) {
+      if(str.length < 10) {
         let howMany = 10 - str.length;
-        for (var y=0; y < howMany; y++) {
+        for(var y = 0;y < howMany;y++) {
           str = "0" + str;
         }
       }
-      for (var x=str.length-1; x >= 0; x--) {
+      for(var x = str.length - 1;x >= 0;x--) {
         this[`field${x}`].setNumber(str[x])
       }
     }
@@ -148,33 +165,42 @@ export class SafirSlot extends BaseComponent {
   }
 
   getCurrentSum() {
-    return parseFloat(this.VALUE);
+    return parseFloat( parseFloat(this.VALUE).toFixed(2) );
+  }
+
+  getNumByPosition(n) {
+    let C = byClass(`ring${n}`)
+    console.log('Get individual index value: ', C[x].getAttribute('data-slot'))
+    return C[x].getAttribute('data-slot');
   }
 
   myX = 0;
 
   setByTime(newValue) {
 
-    if (newValue.toString().indexOf('.') !== -1 &&
-        newValue.toString().split('.')[1].length < 2) {
+    if(newValue.toString().indexOf('.') !== -1 &&
+      newValue.toString().split('.')[1].length < 2) {
       newValue = newValue + "0";
     }
-
-    // console.log('current value:', this.getCurrentSum());
+    console.log('newValue value:', newValue);
+    console.log('current value:', this.getCurrentSum());
     let test = parseFloat((newValue - this.getCurrentSum()).toFixed(2));
     let X = (x) => {
       var CO = 1;
-      if (test < 0) {
-        CO= -1;
+      if(test < 0) {
+        CO = -1;
       }
-      if (test < 1) {
-        this.setSum(this.getCurrentSum() + 0.01*CO)
-      } else if (test < 100) {
-        this.setSum(this.getCurrentSum() + 1*CO)
-      } else if (test < 500) {
-        this.setSum(this.getCurrentSum() + 10*CO)
+
+      this.setSum(parseFloat( (this.getCurrentSum() + 0.01 * CO).toFixed(2)))
+
+      if(test < 1) {
+
+      } else if(test < 100) {
+        this.setSum(this.getCurrentSum() + 1 * CO)
+      } else if(test < 500) {
+        this.setSum(this.getCurrentSum() + 10 * CO)
       } else {
-        this.setSum(this.getCurrentSum() + 100*CO)
+        this.setSum(this.getCurrentSum() + 100 * CO)
       }
 
     }
@@ -182,60 +208,49 @@ export class SafirSlot extends BaseComponent {
     if(this.getCurrentSum() < newValue && test > 0) {
       this.myX++;
       setTimeout((x) => {
-         X(x);
-         this.setByTime(newValue);
+        X(x);
+        this.setByTime(newValue);
       }, this.speed, this.myX)
     } else if(this.getCurrentSum() > newValue && test < 0) {
       this.myX++;
       setTimeout((x) => {
-         X(x);
-         this.setByTime(newValue);
+        X(x);
+        this.setByTime(newValue);
       }, this.speed, this.myX)
     }
   }
 
   setByLinear(newValue) {
-    console.log('setByLinear getCurrentSum', this.getCurrentSum() )
+    // console.log('setByLinear getCurrentSum', this.getCurrentSum() )
 
     let X9 = (x) => {
-      if (x == 0) {
+      if(x == 0) {
         this[`field9`].setNumber(x)
-        console.log('[9]timeout x  kad je nula ',  x)
+        console.log('[9] nula ', x, ' ] ', byClass('ring9')[0].getAttribute('data-slot'))
+
+        this.getNumByPosition(9)
+
       } else {
         this.field9.setNumber(x)
         // console.log('timeout', test * x)
-        console.log('[9]timeout x ',  x)
-      }
-    }
-
-    let X8 = (x) => {
-      if (x == 0) {
-        this[`field8`].setNumber(x)
-      } else {
-        this.field8.setNumber(x)
-        // console.log('timeout', test * x)
-        // console.log('[8]timeout x ',  x)
+        // console.log('[9]timeout x ',  byClass('ring9')[0].getAttribute('data-slot'))
       }
     }
 
     let loopMe = () => {
-      for(var x9 = 0; x9 < 10; x9++) {
-
+      for(var x9 = 0;x9 < 10;x9++) {
         setTimeout((x) => {
           X9(x)
-          if (x == 9) {
+          if(x == 9) {
             setTimeout((x) => {
-              console.log('this.field8', this.field8)
-              
+              console.log('this.field8 xxxxx ', this.getCurrentSum())
               // X8(x)
-              loopMe()
-
+              // loopMe()
             }, this.speed * 10, x9)
           }
         }, this.speed * x9, x9)
-
-         }
       }
+    }
 
     loopMe()
 
