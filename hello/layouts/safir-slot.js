@@ -4,25 +4,29 @@ export class singleCounter extends BaseComponent {
 
   refFunc = [];
   ready = () => {
+
     this.id = this.id;
     let slot = document.createElement('div');
     slot.id = `slot${this.id}`;
     slot.classList.add('slot');
-    byID('numAnimHolder').append(slot);
+    console.log("ROOT DOM" , this.rootDom)
+    byID(this.rootDom).append(slot);
     if(this.id.indexOf('D') != -1) {
       slot.innerHTML = ',';
-      slot.style.margin = '10px';
-      slot.style.fontSize = '20px';
-      // console.log('ADD CHAR DOT')
+      slot.style.margin = '0';
+      slot.style.padding = '0';
       return;
     }
     slot.innerHTML = this.render(this.id);
     this.myAnim(this.id);
+
   }
 
   constructor(arg) {
     super(arg);
     this.initial(arg);
+
+    this.rootDom = arg.rootDom;
   }
 
   calcAnim(ring) {
@@ -85,17 +89,19 @@ export class SafirSlot extends BaseComponent {
   constructor(arg) {
     super();
     this.initial(arg);
-    this.field0 = new singleCounter({id: '0'});
-    this.field1 = new singleCounter({id: '1'});
-    this.field2 = new singleCounter({id: '2'});
-    this.field3 = new singleCounter({id: '3'});
-    this.field4 = new singleCounter({id: '4'});
-    this.field5 = new singleCounter({id: '5'});
-    this.field6 = new singleCounter({id: '6'});
-    this.field7 = new singleCounter({id: '7'});
-    this.dot = new singleCounter({id: 'D'});
-    this.field8 = new singleCounter({id: '8'});
-    this.field9 = new singleCounter({id: '9'});
+    console.log('ARG', arg);
+    this.rootDom = arg.rootDom;
+    this.field0 = new singleCounter({id: '0', rootDom: arg.rootDom});
+    this.field1 = new singleCounter({id: '1', rootDom: arg.rootDom});
+    this.field2 = new singleCounter({id: '2', rootDom: arg.rootDom});
+    this.field3 = new singleCounter({id: '3', rootDom: arg.rootDom});
+    this.field4 = new singleCounter({id: '4', rootDom: arg.rootDom});
+    this.field5 = new singleCounter({id: '5', rootDom: arg.rootDom});
+    this.field6 = new singleCounter({id: '6', rootDom: arg.rootDom});
+    this.field7 = new singleCounter({id: '7', rootDom: arg.rootDom});
+    this.dot    = new singleCounter({id: 'D', rootDom: arg.rootDom});
+    this.field8 = new singleCounter({id: '8', rootDom: arg.rootDom});
+    this.field9 = new singleCounter({id: '9', rootDom: arg.rootDom});
   }
 
   setSum(num) {
@@ -176,39 +182,45 @@ export class SafirSlot extends BaseComponent {
 
   myX = 0;
 
-  setByTime(newValue) {
-
-    this.speed = 100;
-
+  setByTime(newValue, speed) {
+    if (typeof speed !== 'undefined') this.speed = speed;
     if(newValue.toString().indexOf('.') !== -1 &&
       newValue.toString().split('.')[1].length < 2) {
       newValue = newValue + "0";
     }
-    console.log('newValue value:', newValue);
-    console.log('current value:', this.getCurrentSum());
     let test = parseFloat((newValue - this.getCurrentSum()).toFixed(2));
     let X = (x) => {
       var CO = 1;
       if(test < 0) {
         CO = -1;
       }
-
-      
-
-      if(test < 0.5) {
+     if(CO == 1) {
+      if(test < 0.5 ) {
         this.setSum(this.getCurrentSum() + 0.01 * CO)
       }else if(test < 1) {
         this.setSum(this.getCurrentSum() + 0.10 * CO)
-      } else if(test < 100) {
+      } else if(test < 100 ) {
         this.setSum(this.getCurrentSum() + 2.12 * CO)
       } else if(test < 500) {
-        this.setSum(this.getCurrentSum() + 20.12 * CO)
-      } else {
         this.setSum(this.getCurrentSum() + 100.12 * CO)
+      } else {
+        this.setSum(this.getCurrentSum() + 200.12 * CO)
       }
-
+    } else {
+      if(test > -0.5 ) {
+        this.setSum(this.getCurrentSum() + 0.01 * CO)
+      }else if(test > -1) {
+        this.setSum(this.getCurrentSum() + 0.10 * CO)
+      } else if(test > -100 ) {
+        this.setSum(this.getCurrentSum() + 2.12 * CO)
+      } else if(test > -500) {
+        this.setSum(this.getCurrentSum() + 100.12 * CO)
+      } else {
+        this.setSum(this.getCurrentSum() + 200.12 * CO)
+      }
     }
 
+    }
     if(this.getCurrentSum() < newValue && test > 0) {
       this.myX++;
       setTimeout((x) => {
@@ -263,7 +275,7 @@ export class SafirSlot extends BaseComponent {
   render = () => {
     return `
       <h2>Safir-Slot-UI-Component</h2>
-      <div id="numAnimHolder" class="horCenter numAnimHolder"></div>
+      <div id="${this.rootDom}" class="horCenter numAnimHolder"></div>
     `;
   }
 }

@@ -1,7 +1,7 @@
 
  .numAnimHolder {
   overflow: hidden;
-  height: 40px !important;
+  height: 5vw !important;
   // width: fit-content !important;
  }
 
@@ -23,12 +23,12 @@
  }
 
  .panel0, .panel1, .panel2, .panel3, .panel4, .panel5, .panel6, .panel7, .panel8, .panel9 {
-   font-size: 30px !important; 
+   font-size: 3vw !important;
    position: absolute;
    transform:
      translate(-50%, -50%)
      rotateX(var(--angle))
-     translateZ(60.5px);
+     translateZ(150.5px);
    border-bottom: 1px solid black;
 
    @include themify($themes) {
@@ -36,5 +36,5 @@
     color: themed('textColor');
     background-color: themed('backgroundColor') !important;
   }
-   width:30px;
+   width:22px;
  }
