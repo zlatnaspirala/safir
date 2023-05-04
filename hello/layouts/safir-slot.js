@@ -1,16 +1,16 @@
 import {BaseComponent, On, JSON_HEADER, byID, byClass, getComp, LocalSessionMemory} from "../../index";
 
-export class singleCounter extends BaseComponent {
+export class SingleCounter extends BaseComponent {
 
   refFunc = [];
   ready = () => {
 
     this.id = this.id;
     let slot = document.createElement('div');
-    slot.id = `slot${this.id}`;
+    slot.id = `${this.rootDom}slot${this.id}`;
     slot.classList.add('slot');
     console.log("ROOT DOM" , this.rootDom)
-    byID(this.rootDom).append(slot);
+    byID(this.rootDom + '-holder').append(slot);
     if(this.id.indexOf('D') != -1) {
       slot.innerHTML = ',';
       slot.style.margin = '0';
@@ -19,13 +19,11 @@ export class singleCounter extends BaseComponent {
     }
     slot.innerHTML = this.render(this.id);
     this.myAnim(this.id);
-
   }
 
   constructor(arg) {
     super(arg);
     this.initial(arg);
-
     this.rootDom = arg.rootDom;
   }
 
@@ -51,31 +49,31 @@ export class singleCounter extends BaseComponent {
 
   myAnim = function(id) {
     const $ = (str, dom = document) => [...dom.querySelectorAll(str)];
-    const panels = $(`.panel${id}`);
+    const panels = $(`[data-root-${this.rootDom}-${id}]`);
     panels.forEach((panel, i) => {
-      panel.style.setProperty("--angle", `${360 / panels.length * i}deg`)
+        panel.style.setProperty("--angle", `${360 / panels.length * i}deg`)
     });
-    const ring0 = $(`.ring${id}`)[0];
+    const ring0 = $(`.ring-${this.rootDom}-${id}`)[0];
     this.calcAnim(ring0);
   }
-
+ 
   setNumber = function(num) {
     this.refFunc[num]();
   }
 
   render = (arg) => {
     return `
-    <div class="ring${arg}" data-slot="0">
-      <div class="panel${arg}" >0</div>
-      <div class="panel${arg}" >1</div>
-      <div class="panel${arg}" >2</div>
-      <div class="panel${arg}" >3</div>
-      <div class="panel${arg}" >4</div>
-      <div class="panel${arg}" >5</div>
-      <div class="panel${arg}" >6</div>
-      <div class="panel${arg}" >7</div>
-      <div class="panel${arg}" >8</div>
-      <div class="panel${arg}" >9</div>
+    <div class="ring-${this.rootDom}-${arg} ring${arg}" data-slot="0" data-root="${this.rootDom}">
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >0</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >1</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >2</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >3</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >4</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >5</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >6</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >7</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >8</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >9</div>
     </div>
     `;
   }
@@ -91,17 +89,17 @@ export class SafirSlot extends BaseComponent {
     this.initial(arg);
     console.log('ARG', arg);
     this.rootDom = arg.rootDom;
-    this.field0 = new singleCounter({id: '0', rootDom: arg.rootDom});
-    this.field1 = new singleCounter({id: '1', rootDom: arg.rootDom});
-    this.field2 = new singleCounter({id: '2', rootDom: arg.rootDom});
-    this.field3 = new singleCounter({id: '3', rootDom: arg.rootDom});
-    this.field4 = new singleCounter({id: '4', rootDom: arg.rootDom});
-    this.field5 = new singleCounter({id: '5', rootDom: arg.rootDom});
-    this.field6 = new singleCounter({id: '6', rootDom: arg.rootDom});
-    this.field7 = new singleCounter({id: '7', rootDom: arg.rootDom});
-    this.dot    = new singleCounter({id: 'D', rootDom: arg.rootDom});
-    this.field8 = new singleCounter({id: '8', rootDom: arg.rootDom});
-    this.field9 = new singleCounter({id: '9', rootDom: arg.rootDom});
+    this.field0 = new SingleCounter({id: '0', rootDom: arg.rootDom});
+    this.field1 = new SingleCounter({id: '1', rootDom: arg.rootDom});
+    this.field2 = new SingleCounter({id: '2', rootDom: arg.rootDom});
+    this.field3 = new SingleCounter({id: '3', rootDom: arg.rootDom});
+    this.field4 = new SingleCounter({id: '4', rootDom: arg.rootDom});
+    this.field5 = new SingleCounter({id: '5', rootDom: arg.rootDom});
+    this.field6 = new SingleCounter({id: '6', rootDom: arg.rootDom});
+    this.field7 = new SingleCounter({id: '7', rootDom: arg.rootDom});
+    this.dot    = new SingleCounter({id: 'D', rootDom: arg.rootDom});
+    this.field8 = new SingleCounter({id: '8', rootDom: arg.rootDom});
+    this.field9 = new SingleCounter({id: '9', rootDom: arg.rootDom});
   }
 
   setSum(num) {
@@ -115,7 +113,7 @@ export class SafirSlot extends BaseComponent {
 
     if(str.indexOf('.') != -1) {
       console.log('Theres decimals intro number str.length;', str.length);
-      byID('slotD').style.display = 'block';
+      byID(`${this.rootDom}slotD`).style.display = 'block';
       let delta = 0;
       if(str.length < 11) {
         let howMany = 11 - str.length;
@@ -135,27 +133,21 @@ export class SafirSlot extends BaseComponent {
         if(str[x] != '.') {
           if(locHandler == true) {
             this[`field${x}`].setNumber(str[x])
-            console.log('DECIMAL AFTER= ', str[x])
           } else {
-
-            console.log('DECIMAL X ', x)
             if (x == 11) {
               this[`field${x - 2}`].setNumber(str[x])
             } else {
-              console.log('DECIMAL AFTER str[x - 2]= ', str[x])
               this[`field${x - 1}`].setNumber(str[x])
             }
-
           }
         } else {
           locHandler = true;
-          console.log('DECIMAL CHAR DETECTED ', str[x])
+          // console.log('DECIMAL CHAR DETECTED ', str[x])
         }
       }
-
     } else {
       console.log('NO decimals intro number')
-      byID('slotD').style.display = 'none';
+      byID(`${this.rootDom}slotD`).style.display = 'none';
       if(str.length < 10) {
         let howMany = 10 - str.length;
         for(var y = 0;y < howMany;y++) {
@@ -175,7 +167,7 @@ export class SafirSlot extends BaseComponent {
   }
 
   getNumByPosition(n) {
-    let C = byClass(`ring${n}`)
+    let C = byClass(`ring-${this.rootDom}-${n}`)
     console.log('Get individual index value: ', C[x].getAttribute('data-slot'))
     return C[x].getAttribute('data-slot');
   }
@@ -236,46 +228,10 @@ export class SafirSlot extends BaseComponent {
     }
   }
 
-  setByLinear(newValue) {
-    // console.log('setByLinear getCurrentSum', this.getCurrentSum() )
-
-    let X9 = (x) => {
-      if(x == 0) {
-        this[`field9`].setNumber(x)
-        console.log('[9] nula ', x, ' ] ', byClass('ring9')[0].getAttribute('data-slot'))
-
-        this.getNumByPosition(9)
-
-      } else {
-        this.field9.setNumber(x)
-        // console.log('timeout', test * x)
-        // console.log('[9]timeout x ',  byClass('ring9')[0].getAttribute('data-slot'))
-      }
-    }
-
-    let loopMe = () => {
-      for(var x9 = 0;x9 < 10;x9++) {
-        setTimeout((x) => {
-          X9(x)
-          if(x == 9) {
-            setTimeout((x) => {
-              console.log('this.field8 xxxxx ', this.getCurrentSum())
-              // X8(x)
-              // loopMe()
-            }, this.speed * 10, x9)
-          }
-        }, this.speed * x9, x9)
-      }
-    }
-
-    loopMe()
-
-  }
-
   render = () => {
     return `
-      <h2>Safir-Slot-UI-Component</h2>
-      <div id="${this.rootDom}" class="horCenter numAnimHolder"></div>
+      <h2 data-label="welcome" >Safir-Slot-UI-Component</h2>
+      <div id="${this.rootDom}-holder" class="horCenter numAnimHolder"></div>
     `;
   }
 }

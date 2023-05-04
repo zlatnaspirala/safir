@@ -1,8 +1,8 @@
 {
-  "changeTheme": "Change Theme",
+  "changeTheme": "Promeni Temu",
   "yes": "Yes",
   "no": "No",
   "destroyer": "Safir",
-  "welcome":"Welcome",
-  "textAlert": "This is modal ! Why not !"
+  "welcome":"Dobro dosli",
+  "textAlert": "Vanila JS"
 }

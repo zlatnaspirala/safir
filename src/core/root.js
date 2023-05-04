@@ -7,6 +7,7 @@ import {Vertical, Horizontal} from "./custom-com";
 import {Manager, colorLog1, colorLog2, getComp} from "./utils";
 import {On} from "./modifier";
 export {getComp} from "./utils";
+
 export let T = {};
 
 /**
@@ -31,8 +32,18 @@ class BaseSafir {
     }));
   }
 
+  translate = {
+    update: function() {
+      var allTranDoms = document.querySelectorAll('[data-label]');
+      console.log(allTranDoms)
+      allTranDoms.forEach((i) => {
+      i.innerHTML = T[i.getAttribute('data-label')]
+      })
+    }
+  };
+
   loadMultilang = async function(path = 'assets/multilang/en.json') {
-    // console.info("Multilang integrated component... ");
+    console.info("Multilang integrated component... ");
     try {
       const r = await fetch(path, {
         headers: {
@@ -59,7 +70,7 @@ export class Safir extends BaseSafir {
     this.subComponents = [];
     this.appRoot = getComp("app");
     this.construct();
-    // return this;
+    return this;
   }
 
   ready = () => {
@@ -88,13 +99,13 @@ export class Safir extends BaseSafir {
     let x = document.createElement('div');
     x.setAttribute("id", arg.id);
     // if (rootStyle) x.setAttribute("style", rootStyle);
-    if (rootStyle && rootStyle.indexOf(' ') !== -1) {
+    if(rootStyle && rootStyle.indexOf(' ') !== -1) {
       let classes = rootStyle.split(' ');
       classes.forEach(c => {
-        if (rootStyle) x.classList.add(c);
+        if(rootStyle) x.classList.add(c);
       });
     } else {
-      if (rootStyle) x.classList.add(rootStyle);
+      if(rootStyle) x.classList.add(rootStyle);
     }
     this.appRoot?.append(x);
     x.innerHTML = arg.render(arg);
