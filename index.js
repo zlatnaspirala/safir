@@ -13,6 +13,12 @@ import { BaseComponent } from "./src/core/comp";
 import { On } from "./src/core/modifier";
 import {byID, byClass, byTag, JSON_HEADER, LocalSessionMemory, LocalStorageMemory, Manager, QueryString} from "./src/core/utils";
 
+import { SafirSlot } from "./src/controls/safir-slot";
+
+let SafirBuildInPlugins = {
+  SafirSlot: SafirSlot
+};
+
 export {
   Safir,
   BaseComponent,
@@ -20,6 +26,7 @@ export {
   byID,
   byClass,
   byTag,
+  SafirBuildInPlugins,
   On,
   T,
   JSON_HEADER,
