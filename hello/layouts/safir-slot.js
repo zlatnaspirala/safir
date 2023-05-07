@@ -106,13 +106,13 @@ export class SafirSlot extends BaseComponent {
     this.field8 = new SingleCounter({id: '8', rootDom: this.rootDom});
     this.field9 = new SingleCounter({id: '9', rootDom: this.rootDom});
 
-    On('SafirSlot1-plus', (e) => {
-      console.log( ">>>>>",  e.detail)
-    })
-  
-    On('SafirSlot1-minus', (e) => {
-      console.log( ">>>>>",  e.detail)
-    })
+    On(`${this.rootDom}-plus`, (e) => {
+      this.setSum( this.getCurrentSum() + 1);
+    });
+
+    On(`${this.rootDom}-minus`, (e) => {
+      this.setSum( this.getCurrentSum() - 1);
+    });
     
     // setTimeout(() => {
     //   dispatchEvent(new CustomEvent(`${this.rootDom}`, {
@@ -126,7 +126,7 @@ export class SafirSlot extends BaseComponent {
   constructor(arg) {
     super();
     this.initial(arg);
-    console.log('ARG', arg);
+    // console.log('ARG', arg);
     this.rootDom = arg.rootDom;
     this.myConstruct(arg);
   }
