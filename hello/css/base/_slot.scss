@@ -11,7 +11,8 @@
   min-height: 4vh;
   perspective: 500px;
   perspective-origin: 50% 50%;
-  margin: 15px;
+  margin: 1vw;
+  padding: 5px;
   width: inherit;
  }
  
@@ -34,7 +35,11 @@
    @include themify($themes) {
     font-family: themed('fontFamily');
     color: themed('textColor');
-    background-color: themed('backgroundColor') !important;
+    // background: themed('backgroundColor') !important;
   }
    width:22px;
+ }
+
+ .slotThemeBlack {
+  background-color: black !important;
  }
