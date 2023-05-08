@@ -1,6 +1,7 @@
 
 import { Safir, On, byID } from "../index";
 import { SafirSlot } from "./layouts/safir-slot";
+import SlotLayout from "./layouts/slot-body";
 
 /**
  * @note Exspose vars on window only for dev stage.
@@ -8,22 +9,21 @@ import { SafirSlot } from "./layouts/safir-slot";
 let app = new Safir();
 window.App = app;
 
+window.slotLayout = app.loadComponent(
+  new SlotLayout({id : 'SlotExamples' }),
+'middleScroll');
+
+
 On("app.ready", () => {
 
-  window.safirSlot1 = app.loadComponent(
-    new SafirSlot({id : 'SafirSlot1', rootDom: 'SafirSlot1'}),
-  'middle mySlot');
-
-  window.safirSlot2 = app.loadComponent(
-    new SafirSlot({id : 'SafirSlot2', rootDom: 'SafirSlot2', editBtns: true }),
-  'middle mySlot')
+  App.translate.update();
+  App.subComponents[0].safirSlot1.setSlotClass('funnyBg2');
+  App.subComponents[0].safirSlot1.setSum(123,45);
 
   // Make it fancy!
-  safirSlot1.setSlotClass('funnyBg2');
-  // Make smooth effect with delay
   setTimeout(()=> {
-    safirSlot2.setSlotClass('funnyBg2');
-  },1500);
+    App.subComponents[0].safirSlot2.setSlotClass('funnyBg2');
+  },1000);
 
   document.body.classList.add('funnyBg2');
 

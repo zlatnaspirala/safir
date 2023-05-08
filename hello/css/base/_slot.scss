@@ -14,6 +14,7 @@
   margin: 1vw;
   padding: 5px;
   width: inherit;
+  background-color: transparent !important;
  }
  
  .ring0, .ring1, .ring2, .ring3, .ring4, .ring5, .ring6, .ring7, .ring8, .ring9 {
@@ -37,7 +38,7 @@
     color: themed('textColor');
     // background: themed('backgroundColor') !important;
   }
-   width:22px;
+   width:2vw;
  }
 
  .slotThemeBlack {

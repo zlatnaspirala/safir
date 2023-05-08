@@ -183,6 +183,20 @@ p {
   }
 }
 
+.middleScroll {
+  display: flex;
+  flex-direction: row;
+  padding: 20vw 20vw 20vw 20vw;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(90vh);
+  overflow-y: scroll;
+  &.column {
+    flex-direction: column;
+  }
+}
+
 .verCenter {
   display: flex;
   flex-direction: column;

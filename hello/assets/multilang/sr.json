@@ -3,6 +3,7 @@
   "yes": "Yes",
   "no": "No",
   "destroyer": "Safir",
-  "welcome":"Dobro dosli",
+  "SafirSlot1SlotTitle": "With default value:",
+  "SafirSlot2SlotTitle": "Default value :",
   "textAlert": "Vanila JS"
 }
