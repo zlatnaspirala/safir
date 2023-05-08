@@ -3,6 +3,7 @@
   "yes": "Yes",
   "no": "No",
   "destroyer": "Safir",
-  "welcome":"Welcome",
+  "SafirSlot1SlotTitle": "Default value :",
+  "SafirSlot2SlotTitle": "Default value :",
   "textAlert": "No emit"
 }

@@ -247,9 +247,8 @@ Basic examples:
  - demo4.js - TicTacToe game template :
    https://maximumroulette.com/apps/safir/
  - demo5.js [How to use? Fetch for login (rocketCraftingServer)]
- - demo6.js - Counter animator
+ - demo6.js - Slots mashine counter animator
  
-
 
 ## Credits
 

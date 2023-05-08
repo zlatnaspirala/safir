@@ -132,8 +132,8 @@ export class SafirSlot extends BaseComponent {
   }
 
   setSlotClass(c) {
-    function setByIndex(i, c) {
-      let l0 = document.querySelectorAll(`[data-root-safirslot1-${i}]`)
+    let setByIndex = (i, c) => {
+      let l0 = document.querySelectorAll(`[data-root-${this.rootDom.toLowerCase()}-${i}]`)
       for(var x = 0;x < l0.length;x++) {
         l0[x].classList.add(c)
       }
@@ -146,7 +146,7 @@ export class SafirSlot extends BaseComponent {
 
   setSlotColor(c) {
     function setByIndex(i, c) {
-      let l0 = document.querySelectorAll(`[data-root-safirslot1-${i}]`)
+      let l0 = document.querySelectorAll(`[data-root-${this.rootDom.toLowerCase()}-${i}]`)
       for(var x = 0;x < l0.length;x++) {
         l0[x].style.background = c;
       }
@@ -274,7 +274,7 @@ export class SafirSlot extends BaseComponent {
   
   render = () => {
     return `
-      <h2 data-label="welcome">Safir-Slot-UI-Component</h2>
+      <h2 data-label="${this.rootDom}SlotTitle">Safir-Slot-UI-Component</h2>
       <div id="${this.rootDom}-holder" class="horCenter numAnimHolder" style="background-color:transparent"></div>
       ${(this.editBtns == true ? 
         `<button id="${this.rootDom}-minus" onclick="(${this.inc})('${this.rootDom+"-minus"}')" >-</button>
