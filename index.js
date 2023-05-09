@@ -11,7 +11,7 @@ import {
   Safir } from "./src/core/root";
 import { BaseComponent } from "./src/core/comp";
 import { On } from "./src/core/modifier";
-import {byID, byClass, byTag, JSON_HEADER, LocalSessionMemory, LocalStorageMemory, Manager, QueryString} from "./src/core/utils";
+import {byID, emit, byClass, byTag, JSON_HEADER, LocalSessionMemory, LocalStorageMemory, Manager, QueryString} from "./src/core/utils";
 
 import { SafirSlot } from "./src/controls/safir-slot";
 
@@ -26,6 +26,7 @@ export {
   byID,
   byClass,
   byTag,
+  emit,
   SafirBuildInPlugins,
   On,
   T,

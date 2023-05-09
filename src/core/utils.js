@@ -232,3 +232,11 @@ export const JSON_HEADER = {
   'Accept': 'application/json',
   'Content-Type': 'application/json'
 }
+
+export const emit = (en, d) => {
+  if (typeof d == 'undefined') d = {};
+  let e = new CustomEvent(en, {
+    detail: d
+  });
+  dispatchEvent(e);
+}
