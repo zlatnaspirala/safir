@@ -3,18 +3,21 @@ import {BaseComponent, On, JSON_HEADER, byID, byClass, getComp, LocalSessionMemo
 export class SingleCounter extends BaseComponent {
 
   refFunc = [];
+
   ready = () => {
 
     this.id = this.id;
     let slot = document.createElement('div');
     slot.id = `${this.rootDom}slot${this.id}`;
     slot.classList.add('slot');
-    console.log("ROOT DOM" , this.rootDom)
+    console.log("ROOT DOM", this.rootDom)
     byID(this.rootDom + '-holder').append(slot);
     if(this.id.indexOf('D') != -1) {
       slot.innerHTML = ',';
-      slot.style.margin = '0';
-      slot.style.padding = '0';
+      slot.style.margin = '1px';
+      slot.style.padding = '1px';
+      slot.style.fontSize = 'xxx-large';
+      slot.style.background = 'transparent';
       return;
     }
     slot.innerHTML = this.render(this.id);
@@ -23,6 +26,12 @@ export class SingleCounter extends BaseComponent {
 
   constructor(arg) {
     super(arg);
+    this.content = arg.content;
+    console.log('slot layout ready ', this.content);
+    if (this.content.length == 0) {
+      this.content = [0,1,2,3,4,5,6,7,8,9];
+      console.log('slot layout ready ', this.content);
+    }
     this.initial(arg);
     this.rootDom = arg.rootDom;
   }
@@ -40,23 +49,23 @@ export class SingleCounter extends BaseComponent {
           nextAngle += 360;
         }
         if(nextAngle > 360) nextAngle -= 360;
-        console.log('nextAngle', nextAngle);
+        // console.log('nextAngle', nextAngle);
         ring.style.setProperty("--deg", `-${nextAngle}deg`)
         ring.setAttribute('data-slot', i)
       })
-    })
+    });
   }
 
   myAnim = function(id) {
     const $ = (str, dom = document) => [...dom.querySelectorAll(str)];
     const panels = $(`[data-root-${this.rootDom}-${id}]`);
     panels.forEach((panel, i) => {
-        panel.style.setProperty("--angle", `${360 / panels.length * i}deg`)
+      panel.style.setProperty("--angle", `${360 / panels.length * i}deg`)
     });
     const ring0 = $(`.ring-${this.rootDom}-${id}`)[0];
     this.calcAnim(ring0);
   }
- 
+
   setNumber = function(num) {
     this.refFunc[num]();
   }
@@ -64,16 +73,16 @@ export class SingleCounter extends BaseComponent {
   render = (arg) => {
     return `
     <div class="ring-${this.rootDom}-${arg} ring${arg}" data-slot="0" data-root="${this.rootDom}">
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >0</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >1</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >2</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >3</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >4</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >5</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >6</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >7</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >8</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >9</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[0]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[1]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[2]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[3]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[4]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[5]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[6]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[7]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[8]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[9]}</div>
     </div>
     `;
   }
@@ -83,23 +92,81 @@ export class SafirSlot extends BaseComponent {
 
   VALUE = 0;
   speed = 100;
+  editBtns = false;
 
-  constructor(arg) {
+  myConstruct(arg) {
+
+    if (typeof arg.editBtns !== 'undefined') {
+      this.editBtns = arg.editBtns;
+    }
+
+    if (typeof arg.content !== 'undefined') {
+      this.content = arg.content;
+    } else {
+      this.content = [];
+    }
+
+    this.field0 = new SingleCounter({id: '0', rootDom: this.rootDom, content: this.content });
+    this.field1 = new SingleCounter({id: '1', rootDom: this.rootDom, content: this.content });
+    this.field2 = new SingleCounter({id: '2', rootDom: this.rootDom, content: this.content });
+    this.field3 = new SingleCounter({id: '3', rootDom: this.rootDom, content: this.content });
+    this.field4 = new SingleCounter({id: '4', rootDom: this.rootDom, content: this.content });
+    this.field5 = new SingleCounter({id: '5', rootDom: this.rootDom, content: this.content });
+    this.field6 = new SingleCounter({id: '6', rootDom: this.rootDom, content: this.content });
+    this.field7 = new SingleCounter({id: '7', rootDom: this.rootDom, content: this.content });
+    this.dot = new SingleCounter({id: 'D', rootDom: this.rootDom, content: this.content });
+    this.field8 = new SingleCounter({id: '8', rootDom: this.rootDom, content: this.content });
+    this.field9 = new SingleCounter({id: '9', rootDom: this.rootDom, content: this.content });
+
+    On(`${this.rootDom}-plus`, (e) => {
+      this.setSum( this.getCurrentSum() + 1);
+    });
+
+    On(`${this.rootDom}-minus`, (e) => {
+      this.setSum( this.getCurrentSum() - 1);
+    });
+    
+    // setTimeout(() => {
+    //   dispatchEvent(new CustomEvent(`${this.rootDom}`, {
+    //     bubbles: true,
+    //     detail: {
+    //       rootDom: this.rootDom,
+    //     }
+    //   }));
+    // }, 1)
+  }
+  constructor(arg, classArg) {
     super();
-    this.initial(arg);
-    console.log('ARG', arg);
+    this.initial(arg, classArg);
+    console.log('ARG classArg', classArg);
     this.rootDom = arg.rootDom;
-    this.field0 = new SingleCounter({id: '0', rootDom: arg.rootDom});
-    this.field1 = new SingleCounter({id: '1', rootDom: arg.rootDom});
-    this.field2 = new SingleCounter({id: '2', rootDom: arg.rootDom});
-    this.field3 = new SingleCounter({id: '3', rootDom: arg.rootDom});
-    this.field4 = new SingleCounter({id: '4', rootDom: arg.rootDom});
-    this.field5 = new SingleCounter({id: '5', rootDom: arg.rootDom});
-    this.field6 = new SingleCounter({id: '6', rootDom: arg.rootDom});
-    this.field7 = new SingleCounter({id: '7', rootDom: arg.rootDom});
-    this.dot    = new SingleCounter({id: 'D', rootDom: arg.rootDom});
-    this.field8 = new SingleCounter({id: '8', rootDom: arg.rootDom});
-    this.field9 = new SingleCounter({id: '9', rootDom: arg.rootDom});
+    this.myConstruct(arg);
+  }
+
+  setSlotClass(c) {
+    let setByIndex = (i, c) => {
+      let l0 = document.querySelectorAll(`[data-root-${this.rootDom.toLowerCase()}-${i}]`)
+      for(var x = 0;x < l0.length;x++) {
+        l0[x].classList.add(c)
+      }
+    }
+    for(var x = 0;x < 10;x++) {
+      setByIndex(x, c);
+    }
+    byID(this.id).classList.add(c);
+  }
+
+  setSlotColor(c) {
+    const setByIndex = (i, c) => {
+      let l0 = document.querySelectorAll(`[data-root-${this.rootDom.toLowerCase()}-${i}]`)
+      for(var x = 0;x < l0.length;x++) {
+        l0[x].style.background = c;
+      }
+    }
+    for(var x = 0;x < 10;x++) {
+      setByIndex(x, c);
+    }
+    byID(this.id).style.background = c;
   }
 
   setSum(num) {
@@ -108,11 +175,11 @@ export class SafirSlot extends BaseComponent {
     var str = String(num);
 
     if(str.indexOf('.') == -1) {
-       str = str + ".00"
+      str = str + ".00"
     }
 
     if(str.indexOf('.') != -1) {
-      console.log('Theres decimals intro number str.length;', str.length);
+      // console.log('Theres decimals intro number str.length;', str.length);
       byID(`${this.rootDom}slotD`).style.display = 'block';
       let delta = 0;
       if(str.length < 11) {
@@ -134,7 +201,7 @@ export class SafirSlot extends BaseComponent {
           if(locHandler == true) {
             this[`field${x}`].setNumber(str[x])
           } else {
-            if (x == 11) {
+            if(x == 11) {
               this[`field${x - 2}`].setNumber(str[x])
             } else {
               this[`field${x - 1}`].setNumber(str[x])
@@ -145,25 +212,12 @@ export class SafirSlot extends BaseComponent {
           // console.log('DECIMAL CHAR DETECTED ', str[x])
         }
       }
-    } else {
-      console.log('NO decimals intro number')
-      byID(`${this.rootDom}slotD`).style.display = 'none';
-      if(str.length < 10) {
-        let howMany = 10 - str.length;
-        for(var y = 0;y < howMany;y++) {
-          str = "0" + str;
-        }
-      }
-      for(var x = str.length - 1;x >= 0;x--) {
-        this[`field${x}`].setNumber(str[x])
-      }
     }
-
     this.VALUE = str;
   }
 
   getCurrentSum() {
-    return parseFloat( parseFloat(this.VALUE).toFixed(2) );
+    return parseFloat(parseFloat(this.VALUE).toFixed(2));
   }
 
   getNumByPosition(n) {
@@ -175,7 +229,7 @@ export class SafirSlot extends BaseComponent {
   myX = 0;
 
   setByTime(newValue, speed) {
-    if (typeof speed !== 'undefined') this.speed = speed;
+    if(typeof speed !== 'undefined') this.speed = speed;
     if(newValue.toString().indexOf('.') !== -1 &&
       newValue.toString().split('.')[1].length < 2) {
       newValue = newValue + "0";
@@ -186,31 +240,31 @@ export class SafirSlot extends BaseComponent {
       if(test < 0) {
         CO = -1;
       }
-     if(CO == 1) {
-      if(test < 0.5 ) {
-        this.setSum(this.getCurrentSum() + 0.01 * CO)
-      }else if(test < 1) {
-        this.setSum(this.getCurrentSum() + 0.10 * CO)
-      } else if(test < 100 ) {
-        this.setSum(this.getCurrentSum() + 2.12 * CO)
-      } else if(test < 500) {
-        this.setSum(this.getCurrentSum() + 100.12 * CO)
+      if(CO == 1) {
+        if(test < 0.5) {
+          this.setSum(this.getCurrentSum() + 0.01 * CO)
+        } else if(test < 1) {
+          this.setSum(this.getCurrentSum() + 0.10 * CO)
+        } else if(test < 100) {
+          this.setSum(this.getCurrentSum() + 2.12 * CO)
+        } else if(test < 500) {
+          this.setSum(this.getCurrentSum() + 112.12 * CO)
+        } else {
+          this.setSum(this.getCurrentSum() + 212.12 * CO)
+        }
       } else {
-        this.setSum(this.getCurrentSum() + 200.12 * CO)
+        if(test > -0.5) {
+          this.setSum(this.getCurrentSum() + 0.01 * CO)
+        } else if(test > -1) {
+          this.setSum(this.getCurrentSum() + 0.10 * CO)
+        } else if(test > -100) {
+          this.setSum(this.getCurrentSum() + 2.12 * CO)
+        } else if(test > -500) {
+          this.setSum(this.getCurrentSum() + 112.12 * CO)
+        } else {
+          this.setSum(this.getCurrentSum() + 212.12 * CO)
+        }
       }
-    } else {
-      if(test > -0.5 ) {
-        this.setSum(this.getCurrentSum() + 0.01 * CO)
-      }else if(test > -1) {
-        this.setSum(this.getCurrentSum() + 0.10 * CO)
-      } else if(test > -100 ) {
-        this.setSum(this.getCurrentSum() + 2.12 * CO)
-      } else if(test > -500) {
-        this.setSum(this.getCurrentSum() + 100.12 * CO)
-      } else {
-        this.setSum(this.getCurrentSum() + 200.12 * CO)
-      }
-    }
 
     }
     if(this.getCurrentSum() < newValue && test > 0) {
@@ -228,10 +282,16 @@ export class SafirSlot extends BaseComponent {
     }
   }
 
+  inc = this.clickBind;
+  
   render = () => {
     return `
-      <h2 data-label="welcome" >Safir-Slot-UI-Component</h2>
-      <div id="${this.rootDom}-holder" class="horCenter numAnimHolder"></div>
+      <h2 data-label="${this.rootDom}SlotTitle">Safir-Slot-UI-Component</h2>
+      <div id="${this.rootDom}-holder" class="horCenter numAnimHolder" style="background-color:transparent"></div>
+      ${(this.editBtns == true ? 
+        `<button id="${this.rootDom}-minus" onclick="(${this.inc})('${this.rootDom+"-minus"}')" >-</button>
+         <button id="${this.rootDom}-plus" onclick="(${this.inc})('${this.rootDom+"-plus"}')" >+</button>`
+      : "")}
     `;
   }
 }

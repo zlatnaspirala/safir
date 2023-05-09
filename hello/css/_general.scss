@@ -191,6 +191,7 @@ p {
   align-items: center;
   width: 100%;
   height: calc(90vh);
+  background-color: transparent !important;
   overflow-y: scroll;
   &.column {
     flex-direction: column;

@@ -26,6 +26,12 @@ export class SingleCounter extends BaseComponent {
 
   constructor(arg) {
     super(arg);
+    this.content = arg.content;
+    console.log('slot layout ready ', this.content);
+    if (this.content.length == 0) {
+      this.content = [0,1,2,3,4,5,6,7,8,9];
+      console.log('slot layout ready ', this.content);
+    }
     this.initial(arg);
     this.rootDom = arg.rootDom;
   }
@@ -43,7 +49,7 @@ export class SingleCounter extends BaseComponent {
           nextAngle += 360;
         }
         if(nextAngle > 360) nextAngle -= 360;
-        console.log('nextAngle', nextAngle);
+        // console.log('nextAngle', nextAngle);
         ring.style.setProperty("--deg", `-${nextAngle}deg`)
         ring.setAttribute('data-slot', i)
       })
@@ -67,16 +73,16 @@ export class SingleCounter extends BaseComponent {
   render = (arg) => {
     return `
     <div class="ring-${this.rootDom}-${arg} ring${arg}" data-slot="0" data-root="${this.rootDom}">
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >0</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >1</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >2</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >3</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >4</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >5</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >6</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >7</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >8</div>
-      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >9</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[0]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[1]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[2]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[3]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[4]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[5]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[6]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[7]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[8]}</div>
+      <div class="panel${arg} ring${arg}" data-root-${this.rootDom}-${arg}="" >${this.content[9]}</div>
     </div>
     `;
   }
@@ -94,17 +100,23 @@ export class SafirSlot extends BaseComponent {
       this.editBtns = arg.editBtns;
     }
 
-    this.field0 = new SingleCounter({id: '0', rootDom: this.rootDom});
-    this.field1 = new SingleCounter({id: '1', rootDom: this.rootDom});
-    this.field2 = new SingleCounter({id: '2', rootDom: this.rootDom});
-    this.field3 = new SingleCounter({id: '3', rootDom: this.rootDom});
-    this.field4 = new SingleCounter({id: '4', rootDom: this.rootDom});
-    this.field5 = new SingleCounter({id: '5', rootDom: this.rootDom});
-    this.field6 = new SingleCounter({id: '6', rootDom: this.rootDom});
-    this.field7 = new SingleCounter({id: '7', rootDom: this.rootDom});
-    this.dot = new SingleCounter({id: 'D', rootDom: this.rootDom});
-    this.field8 = new SingleCounter({id: '8', rootDom: this.rootDom});
-    this.field9 = new SingleCounter({id: '9', rootDom: this.rootDom});
+    if (typeof arg.content !== 'undefined') {
+      this.content = arg.content;
+    } else {
+      this.content = [];
+    }
+
+    this.field0 = new SingleCounter({id: '0', rootDom: this.rootDom, content: this.content });
+    this.field1 = new SingleCounter({id: '1', rootDom: this.rootDom, content: this.content });
+    this.field2 = new SingleCounter({id: '2', rootDom: this.rootDom, content: this.content });
+    this.field3 = new SingleCounter({id: '3', rootDom: this.rootDom, content: this.content });
+    this.field4 = new SingleCounter({id: '4', rootDom: this.rootDom, content: this.content });
+    this.field5 = new SingleCounter({id: '5', rootDom: this.rootDom, content: this.content });
+    this.field6 = new SingleCounter({id: '6', rootDom: this.rootDom, content: this.content });
+    this.field7 = new SingleCounter({id: '7', rootDom: this.rootDom, content: this.content });
+    this.dot = new SingleCounter({id: 'D', rootDom: this.rootDom, content: this.content });
+    this.field8 = new SingleCounter({id: '8', rootDom: this.rootDom, content: this.content });
+    this.field9 = new SingleCounter({id: '9', rootDom: this.rootDom, content: this.content });
 
     On(`${this.rootDom}-plus`, (e) => {
       this.setSum( this.getCurrentSum() + 1);
@@ -123,10 +135,10 @@ export class SafirSlot extends BaseComponent {
     //   }));
     // }, 1)
   }
-  constructor(arg) {
+  constructor(arg, classArg) {
     super();
-    this.initial(arg);
-    // console.log('ARG', arg);
+    this.initial(arg, classArg);
+    console.log('ARG classArg', classArg);
     this.rootDom = arg.rootDom;
     this.myConstruct(arg);
   }
@@ -145,7 +157,7 @@ export class SafirSlot extends BaseComponent {
   }
 
   setSlotColor(c) {
-    function setByIndex(i, c) {
+    const setByIndex = (i, c) => {
       let l0 = document.querySelectorAll(`[data-root-${this.rootDom.toLowerCase()}-${i}]`)
       for(var x = 0;x < l0.length;x++) {
         l0[x].style.background = c;
@@ -167,7 +179,7 @@ export class SafirSlot extends BaseComponent {
     }
 
     if(str.indexOf('.') != -1) {
-      console.log('Theres decimals intro number str.length;', str.length);
+      // console.log('Theres decimals intro number str.length;', str.length);
       byID(`${this.rootDom}slotD`).style.display = 'block';
       let delta = 0;
       if(str.length < 11) {

@@ -5,5 +5,7 @@
   "destroyer": "Safir",
   "SafirSlot1SlotTitle": "With default value:",
   "SafirSlot2SlotTitle": "Default value :",
+  "SafirSlot3SlotTitle": "SetByTime :",
+  "SafirSlot4SlotTitle": "Multi page slot",
   "textAlert": "No emit"
 }

@@ -1,6 +1,5 @@
 
 import { Safir, On, byID } from "../index";
-import { SafirSlot } from "./layouts/safir-slot";
 import SlotLayout from "./layouts/slot-body";
 
 /**
@@ -13,18 +12,17 @@ window.slotLayout = app.loadComponent(
   new SlotLayout({id : 'SlotExamples' }),
 'middleScroll');
 
-
 On("app.ready", () => {
 
   App.translate.update();
-  App.subComponents[0].safirSlot1.setSlotClass('funnyBg2');
+  App.subComponents[0].safirSlot1.setSlotColor('orangered');
+  App.subComponents[0].safirSlot3.setSlotClass('funnyBg2');
   App.subComponents[0].safirSlot1.setSum(123,45);
 
-  // Make it fancy!
-  setTimeout(()=> {
-    App.subComponents[0].safirSlot2.setSlotClass('funnyBg2');
-  },1000);
+  // App.subComponents[0].safirSlot4.
+  byID('safirSlot1-holder').classList.remove('numAnimHolder')
+  byID('safirSlot1-holder').classList.add('numAnimHolderFit')
 
-  document.body.classList.add('funnyBg2');
+  document.body.classList.add('funnyBg1');
 
 });

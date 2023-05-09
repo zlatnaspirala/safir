@@ -5,6 +5,12 @@
   // width: fit-content !important;
  }
 
+ .numAnimHolderFit {
+  overflow: hidden;
+  // height: 5vw !important;
+  width: fit-content !important;
+ }
+
  .slot {
   display: flex;
   place-items: center;
