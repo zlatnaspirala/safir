@@ -10,7 +10,6 @@ export class SingleCounter extends BaseComponent {
     let slot = document.createElement('div');
     slot.id = `${this.rootDom}slot${this.id}`;
     slot.classList.add('slot');
-    console.log("ROOT DOM", this.rootDom)
     byID(this.rootDom + '-holder').append(slot);
     if(this.id.indexOf('D') != -1) {
       slot.innerHTML = ',';
@@ -27,10 +26,8 @@ export class SingleCounter extends BaseComponent {
   constructor(arg) {
     super(arg);
     this.content = arg.content;
-    console.log('slot layout ready ', this.content);
     if (this.content.length == 0) {
       this.content = [0,1,2,3,4,5,6,7,8,9];
-      console.log('slot layout ready ', this.content);
     }
     this.initial(arg);
     this.rootDom = arg.rootDom;
@@ -138,7 +135,6 @@ export class SafirSlot extends BaseComponent {
   constructor(arg, classArg) {
     super();
     this.initial(arg, classArg);
-    console.log('ARG classArg', classArg);
     this.rootDom = arg.rootDom;
     this.myConstruct(arg);
   }

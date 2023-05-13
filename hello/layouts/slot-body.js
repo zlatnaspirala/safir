@@ -26,8 +26,6 @@ export default class SlotLayout extends BaseComponent {
    }, 'middle fill');
 
   ready = () => { 
-    console.log('slot layout ready') 
-
     setTimeout(()=> {
       this.safirSlot3.setByTime(1234.54)
     }, 2000)

@@ -1,4 +1,4 @@
-# SAFIR [1.1.6]
+# SAFIR [1.1.7]
 
 ### Tech: Based on ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.
 ### Alternative software - High Performace
@@ -15,6 +15,12 @@ Safir use `browserify` for building final pack script.
 ### There are two way for creating web components:
  - Safir Component
  - Vanilla component
+
+## NPM users
+ There is no profesional documentation about safir so best way is to see examples from:
+ - https://github.com/zlatnaspirala/safir
+ - https://github.com/RocketCraftingServer/kickstart
+
 
 ## Basic Example
 
@@ -81,6 +87,7 @@ export default class SimpleBtn extends BaseComponent {
 
 How works app updates?
 
+[Recommended for end point components]
 When you create Safir Component use `class MyNewClass extends BaseComponent`.
 BaseComponent will handle situation. Safir have only function `set`
 for updating class props. Calling the `set` function will cause a rerender
@@ -248,7 +255,14 @@ Basic examples:
    https://maximumroulette.com/apps/safir/
  - demo5.js [How to use? Fetch for login (rocketCraftingServer)]
  - demo6.js - Slots mashine counter animator
- 
+
+
+## Where is used
+
+   Kickstart is full standalone web app platform based on
+   Safir vs RocketCraftingServer.
+  - https://github.com/RocketCraftingServer/kickstart
+
 
 ## Credits
 

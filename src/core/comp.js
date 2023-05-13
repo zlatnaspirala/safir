@@ -29,7 +29,7 @@ export class BaseComponent {
 
   initial(arg, rootStyle) {
     if(typeof arg === 'string') {
-      console.info('Arg is string!');
+      // console.info('Arg is string!');
       this.text = arg;
       this.id = arg;
     } else if(typeof arg === 'object') {
