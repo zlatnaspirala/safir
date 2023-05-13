@@ -1,6 +1,6 @@
 {
   "name": "safir",
-  "version": "1.1.18",
+  "version": "1.1.19",
   "description": "Ultimate web app perfomance. Tech: Based on Template Literals & CustomEvents",
   "main": "index.js",
   "scripts": {

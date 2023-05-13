@@ -181,11 +181,17 @@ export class BaseComponent {
       if(getComp('app')?.classList.contains(newTheme)) {
         console.info('already containe theme!');
       } else {
-        getComp('app')?.classList.remove('theme-light');
-        getComp('app')?.classList.remove('theme-dark');
+        console.info('already new theme!');
+        getComp('app').classList = 'app fill';
         getComp('app')?.classList.add(newTheme);
       }
     } else {
+      if(!getComp('app')?.classList.contains('theme-light') && !getComp('app')?.classList.contains('theme-dark')) { 
+        getComp('app').classList = 'app fill';
+        getComp('app')?.classList.add('theme-dark');
+        return;
+      }
+
       if(getComp('app')?.classList.contains('theme-light')) {
         console.info('Change theme !');
         getComp('app')?.classList.remove('theme-light');

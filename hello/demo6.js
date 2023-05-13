@@ -20,9 +20,8 @@ On("app.ready", () => {
   App.subComponents[0].safirSlot1.setSum(123,45);
 
   // App.subComponents[0].safirSlot4.
-  byID('safirSlot1-holder').classList.remove('numAnimHolder')
-  byID('safirSlot1-holder').classList.add('numAnimHolderFit')
-
+  // byID('safirSlot1-holder').classList.remove('numAnimHolder')
+  // byID('safirSlot1-holder').classList.add('numAnimHolderFit')
   document.body.classList.add('funnyBg1');
 
 });

@@ -40,11 +40,19 @@ export default class MyHeader extends BaseComponent {
     On('change-theme', () => {
       (this).changeTheme();
       console.info('Trigger ChangeTheme integrated.');
-    })
+    });
+
+    On('set-theme', (e) => {
+      (this).changeTheme('theme-' + e.detail.target.value);
+      console.info('Trigger SetTheme integrated.', e.detail.target.value);
+    });
+
+    
 
   }
 
   change = this.clickBind;
+  selectTheme = this.clickBind;
 
   render = () => `
     <div class="middle h5">
@@ -52,9 +60,17 @@ export default class MyHeader extends BaseComponent {
        ${(this.mySybCompBtnNo).renderId()}
        ${(this.mySybCompBtnNoEmit).renderId()}
        <div class="fill">
-        <button class="fill" onclick="(${this.change})('change-theme')">
+        <button data-label="changeTheme" class="fill" onclick="(${this.change})('change-theme')">
           Change Theme
         </button>
+        </div>
+        <div class="fill">
+        <select class="fill" onchange="(${this.selectTheme})('set-theme')">
+          <option>dark</option>
+          <option>light</option>
+          <option>orange</option>
+          <option>blue</option>
+        </select>
        </div>
     </div>
   `

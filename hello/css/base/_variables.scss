@@ -50,5 +50,22 @@ $themes: (
     buttonBorder: 1px solid rgb(255, 194, 40),
     buttonBorderHover: 1px solid rgb(255, 139, 100),
     inputBorder: 1px solid #fce14a
+  ),
+  blue: (
+    fontFamily: 'Closeness',
+    fontSize: 1.6vw,
+    backgroundColor: rgb(56, 56, 56),
+    divShadowColor: #0088ff14,
+    scrollBar: inset 0 0 5px rgb(32, 116, 135),
+    scrollbarThumbHover: rgb(0, 136, 255),
+    textColor: rgb(0, 238, 255),
+    textShadow: 0px 0px 1px #52f2ff,
+    buttonTextColor: rgb(106, 43, 243),
+    buttonTextTransform: uppercase,
+    buttonTextHoverColor: rgb(255, 255, 255),
+    buttonColor: #161130,
+    buttonBorder: 1px solid rgb(255, 194, 40),
+    buttonBorderHover: 1px solid rgb(255, 139, 100),
+    inputBorder: 1px solid #fce14a
   )
 );
