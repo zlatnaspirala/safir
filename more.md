@@ -1,4 +1,19 @@
 
+## CHANGES
+
+Added modifiers 
+```js
+(window).On = window.addEventListener;
+(window).Off = window.removeEventListener;
+(window).getAllEvents = window.getEventListeners;
+
+export const On = (window).On;
+export const Off = (window).Off;
+export const getAllEvents = (window).getAllEvents;
+```
+
+
+
 ## About SafirSlot
 
 For SafirSlotUI control you must have multilang label by
