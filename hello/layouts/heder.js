@@ -11,7 +11,6 @@ export default class MyHeader extends BaseComponent {
   mySybCompBtnYes = new MyButton({ text: T.yes, id: 'yes'}, 'fill');
   mySybCompBtnNo = (new MyButton({ text: T.no, id: 'no'}, 'fill'));
   mySybCompBtnNoEmit = (new MyButton({ text: T.textAlert, id: 'local'}, 'fill'));
-
   // mm = new SafirBuildInPlugins.SafirSlot({id : 'SafirSlot2', rootDom: 'SafirSlot2'}, 'middle mySlot');
 
   constructor(arg) {
@@ -46,9 +45,6 @@ export default class MyHeader extends BaseComponent {
       (this).changeTheme('theme-' + e.detail.target.value);
       console.info('Trigger SetTheme integrated.', e.detail.target.value);
     });
-
-    
-
   }
 
   change = this.clickBind;

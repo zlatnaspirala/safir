@@ -1,4 +1,4 @@
-# SAFIR [1.1.7]
+# SAFIR [1.1.20]
 
 ### Tech: Based on ECMA6 programming paradigms builded on Template Literals, CustomEvents, Custom Tags.
 ### Alternative software - High Performace
@@ -262,6 +262,11 @@ Basic examples:
    Kickstart is full standalone web app platform based on
    Safir vs RocketCraftingServer.
   - https://github.com/RocketCraftingServer/kickstart
+
+
+## Changes
+
+ - from ver[1.1.20] fixed double call of ready() callback function.
 
 
 ## Credits

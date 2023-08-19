@@ -83,7 +83,7 @@ export class Safir extends BaseSafir {
   construct = () => {
     // Translation Enabled.
     this.emitML(this);
-    // console.info("Multilang integrated component.ROOT. Still not resolved (pass arg) for services eg. codepen etc.");
+    console.info("Multilang integrated wwith component root.");
     window.customElements.define('ver-box', Vertical);
     window.customElements.define('hor-box', Horizontal);
     // console.info("Custom Base Dom elements integrated => [Vertical, Horizontal].");
@@ -110,7 +110,7 @@ export class Safir extends BaseSafir {
     this.appRoot?.append(x);
     x.innerHTML = arg.render(arg);
     this.subComponents.push(arg);
-    arg.ready();
+    // arg.ready();
     return arg;
   };
 
