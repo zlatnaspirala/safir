@@ -10,7 +10,7 @@ import {
   T,
   Safir } from "./src/core/root";
 import { BaseComponent } from "./src/core/comp";
-import { On , Off, getAllEvents} from "./src/core/modifier";
+import { On , Off, GetAllEvents} from "./src/core/modifier";
 import {byID, emit, byClass, byTag, JSON_HEADER, LocalSessionMemory, LocalStorageMemory, Manager, QueryString} from "./src/core/utils";
 
 import { SafirSlot } from "./src/controls/safir-slot";
@@ -30,7 +30,7 @@ export {
   SafirBuildInPlugins,
   On,
   Off,
-  getAllEvents,
+  GetAllEvents,
   T,
   JSON_HEADER,
   LocalSessionMemory,
