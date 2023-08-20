@@ -65,7 +65,7 @@ export class BaseComponent {
     }
     // No need to have DOM ID reference 
     if(getComp(id)) getComp(id).innerText = nv;
-    if (typeof this[id] !== 'undefined') {
+    if(typeof this[id] !== 'undefined') {
       this[id] = nv;
     }
   }
@@ -139,7 +139,7 @@ export class BaseComponent {
           getComp(this.id + '-' + id).value = testLocalLevel;
         }
       }
-     
+
       if(typeof this[id] !== 'undefined' && this[id] != testLocalLevel) {
         this[id] = testLocalLevel;
         console.log(
@@ -186,7 +186,7 @@ export class BaseComponent {
         getComp('app')?.classList.add(newTheme);
       }
     } else {
-      if(!getComp('app')?.classList.contains('theme-light') && !getComp('app')?.classList.contains('theme-dark')) { 
+      if(!getComp('app')?.classList.contains('theme-light') && !getComp('app')?.classList.contains('theme-dark')) {
         getComp('app').classList = 'app fill';
         getComp('app')?.classList.add('theme-dark');
         return;

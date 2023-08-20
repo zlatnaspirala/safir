@@ -67,19 +67,7 @@ export class Safir extends BaseSafir {
 
   constructor() {
     super();
-
-    this.listeners = []
-    const originalDoc = window.addEventListener
-    window.addEventListener = function(type, listener, options) {
-      this.listeners.push({
-        element: this,
-        type,
-        listener,
-        options
-      })
-      return originalDoc.call(this, type, listener, options)
-    }
-
+    this.listeners = [];
     this.subComponents = [];
     this.appRoot = getComp("app");
     this.construct();

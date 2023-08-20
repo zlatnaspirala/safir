@@ -1,3 +1,21 @@
+/**
+ * Top priory!
+ */
+let listeners = [];
+const oDoc = window.addEventListener;
+window.addEventListener = function(type, listener, options) {
+  if (typeof app.listeners !== 'undefined' && app.listeners.length == 0) {
+    console.log('app.listeners once')
+    app.listeners = listeners;
+  }
+  app.listeners.push({
+    element: this,
+    type,
+    listener,
+    options
+  })
+  return oDoc.call(this, type, app.listener, options)
+}
 
 /**
  * @description
