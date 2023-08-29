@@ -11,7 +11,7 @@ import {
   Safir } from "./src/core/root";
 import { BaseComponent } from "./src/core/comp";
 import { On , Off, GetAllEvents} from "./src/core/modifier";
-import {byID, emit, byClass, byTag, JSON_HEADER, LocalSessionMemory, LocalStorageMemory, Manager, QueryString} from "./src/core/utils";
+import { urlVar, byID, emit, byClass, byTag, JSON_HEADER, LocalSessionMemory, LocalStorageMemory, Manager} from "./src/core/utils";
 
 import { SafirSlot } from "./src/controls/safir-slot";
 
@@ -31,10 +31,11 @@ export {
   On,
   Off,
   GetAllEvents,
-  T,
   JSON_HEADER,
+  T,
   LocalSessionMemory,
   LocalStorageMemory,
-  QueryString,
-  Manager
+  urlVar,
+  Manager,
+  QueryString
 }

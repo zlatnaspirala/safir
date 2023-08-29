@@ -91,7 +91,7 @@ export let Manager = {
   },
 };
 
-export let QueryString = (function () {
+export let urlVar = (function () {
   var query_string = {};
   var query = window.location.search.substring(1);
   var vars = query.split('&');
