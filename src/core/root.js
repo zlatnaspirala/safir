@@ -21,9 +21,19 @@ class BaseSafir {
    * Multi language system is already deep integrated like common feature
    * in developing apps proccess.
    */
-  emitML = async function(r) {
-    const x = await r.loadMultilang();
+
+  T = {};
+
+  emitML = async (r, path) => {
+    let x = null;
+    if (path) {
+      x = await r.loadMultilang(path);
+    } else {
+      x = await r.loadMultilang();
+    }
+    
     // Internal exspose to the global obj
+    this.T = x;
     T = x;
     dispatchEvent(new CustomEvent('app.ready', {
       detail: {
@@ -43,7 +53,7 @@ class BaseSafir {
   };
 
   loadMultilang = async function(path = 'assets/multilang/en.json') {
-    console.info("Multilang integrated component... ");
+    console.info("Multilang: ", path);
     try {
       const r = await fetch(path, {
         headers: {
