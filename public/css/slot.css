@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: monospace;
+}
+
+.slot {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  place-items: center;
+  min-height: 4vh;
+  -webkit-perspective: 500px;
+          perspective: 500px;
+  -webkit-perspective-origin: 50% 50%;
+          perspective-origin: 50% 50%;
+  margin: 10px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.ring0, .ring1, .ring2, .ring3, .ring4, .ring5, .ring6, .ring7, .ring8, .ring9 {
+  text-align: center;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+  -webkit-transform: rotateX(var(--deg));
+          transform: rotateX(var(--deg));
+}
+
+.panel0, .panel1, .panel2, .panel3, .panel4, .panel5, .panel6, .panel7, .panel8, .panel9 {
+  font-size: 20px !important;
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%) rotateX(var(--angle)) translateZ(30.5px);
+          transform: translate(-50%, -50%) rotateX(var(--angle)) translateZ(30.5px);
+  border-bottom: 1px solid black;
+  background-color: white;
+}
+/*# sourceMappingURL=slot.css.map */
