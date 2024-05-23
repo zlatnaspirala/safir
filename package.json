@@ -4,6 +4,7 @@
   "description": "Ultimate web app perfomance. Tech: Based on Template Literals & CustomEvents - adapted for sandbox",
   "main": "index.js",
   "scripts": {
+    "start": "watchify hello/demo1.js -p [esmify --noImplicitAny] -o public/bundle.js",
     "demo1": "build-assets.sh | watchify hello/demo1.js -p [esmify --noImplicitAny] -o public/bundle.js",
     "demo2": "build-assets.sh | watchify hello/demo2.js -p [esmify --noImplicitAny] -o public/bundle.js",
     "demo3": "build-assets.sh | watchify hello/demo3.js -p [esmify --noImplicitAny] -o public/bundle.js",
