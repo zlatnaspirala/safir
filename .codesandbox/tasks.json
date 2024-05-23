@@ -1,0 +1,87 @@
+{
+  // These tasks will run in order when initializing your CodeSandbox project.
+  "setupTasks": [
+    {
+      "name": "Install Dependencies",
+      "command": "npm install"
+    }
+  ],
+
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
+  "tasks": {
+    "demo1": {
+      "name": "demo1",
+      "command": "npm run demo1",
+      "runAtStart": false
+    },
+    "demo2": {
+      "name": "demo2",
+      "command": "npm run demo2",
+      "runAtStart": false
+    },
+    "demo3": {
+      "name": "demo3",
+      "command": "npm run demo3",
+      "runAtStart": false
+    },
+    "demo4": {
+      "name": "demo4",
+      "command": "npm run demo4",
+      "runAtStart": false
+    },
+    "demo5": {
+      "name": "demo5",
+      "command": "npm run demo5",
+      "runAtStart": false
+    },
+    "demo6": {
+      "name": "demo6",
+      "command": "npm run demo6",
+      "runAtStart": false
+    },
+    "build.demo1": {
+      "name": "build.demo1",
+      "command": "npm run build.demo1",
+      "runAtStart": false
+    },
+    "build.demo2": {
+      "name": "build.demo2",
+      "command": "npm run build.demo2",
+      "runAtStart": false
+    },
+    "build.all": {
+      "name": "build.all",
+      "command": "npm run build.all",
+      "runAtStart": false
+    },
+    "build.lib": {
+      "name": "build.lib",
+      "command": "npm run build.lib",
+      "runAtStart": false
+    },
+    "host": {
+      "name": "host",
+      "command": "npm run host",
+      "runAtStart": false
+    },
+    "hosts": {
+      "name": "hosts",
+      "command": "npm run hosts",
+      "runAtStart": false
+    },
+    "host.npm": {
+      "name": "host.npm",
+      "command": "npm run host.npm",
+      "runAtStart": false
+    },
+    "test": {
+      "name": "test",
+      "command": "npm run test",
+      "runAtStart": false
+    },
+    "npm i": {
+      "name": "INSTALL",
+      "command": "npm i"
+    }
+  }
+}
