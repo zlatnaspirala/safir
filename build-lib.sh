@@ -9,7 +9,7 @@ echo
 echo -e "$(tput bold) Detected Minify. $(tput sgr0)";
 echo
 echo Start compressing javascript file with minify safir.min.js;
-minify dist/safir.lib.js > dist/safir.min.js;
+minify public/safir.lib.js > public/safir.min.js;
 echo -e "$(tput setaf 2)Compressing javascript files done$(tput sgr0).";
 echo -e "Safir is compressed! $(tput sgr0).";
 echo
