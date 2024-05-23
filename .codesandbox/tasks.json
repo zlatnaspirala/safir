@@ -11,73 +11,59 @@
   "tasks": {
     "demo1": {
       "name": "demo1",
-      "command": "npm run demo1",
-      "runAtStart": false
+      "command": "npm run demo1"
     },
     "demo2": {
       "name": "demo2",
-      "command": "npm run demo2",
-      "runAtStart": false
+      "command": "npm run demo2"
     },
     "demo3": {
       "name": "demo3",
-      "command": "npm run demo3",
-      "runAtStart": false
+      "command": "npm run demo3"
     },
     "demo4": {
       "name": "demo4",
-      "command": "npm run demo4",
-      "runAtStart": false
+      "command": "npm run demo4"
     },
     "demo5": {
       "name": "demo5",
-      "command": "npm run demo5",
-      "runAtStart": false
+      "command": "npm run demo5"
     },
     "demo6": {
       "name": "demo6",
-      "command": "npm run demo6",
-      "runAtStart": false
+      "command": "npm run demo6"
     },
     "build.demo1": {
       "name": "build.demo1",
-      "command": "npm run build.demo1",
-      "runAtStart": false
+      "command": "npm run build.demo1"
     },
     "build.demo2": {
       "name": "build.demo2",
-      "command": "npm run build.demo2",
-      "runAtStart": false
+      "command": "npm run build.demo2"
     },
     "build.all": {
       "name": "build.all",
-      "command": "npm run build.all",
-      "runAtStart": false
+      "command": "npm run build.all"
     },
     "build.lib": {
       "name": "build.lib",
-      "command": "npm run build.lib",
-      "runAtStart": false
+      "command": "npm run build.lib"
     },
     "host": {
       "name": "host",
-      "command": "npm run host",
-      "runAtStart": false
+      "command": "npm run host"
     },
     "hosts": {
       "name": "hosts",
-      "command": "npm run hosts",
-      "runAtStart": false
+      "command": "npm run hosts"
     },
     "host.npm": {
       "name": "host.npm",
-      "command": "npm run host.npm",
-      "runAtStart": false
+      "command": "npm run host.npm"
     },
     "test": {
       "name": "test",
-      "command": "npm run test",
-      "runAtStart": false
+      "command": "npm run test"
     },
     "npm i": {
       "name": "INSTALL",
