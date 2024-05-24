@@ -243,6 +243,14 @@ Import intro HTML direct:
   <script defer src="safir.lib.js"></script>
 ```
 
+## Adaptation
+
+ - For codesandbox.
+ 
+ Edit and contribute direct online:
+ https://codesandbox.io/p/github/zlatnaspirala/safir/main?file=%2Fpackage.json
+
+
 ## Links
 
 Basic examples:
