@@ -55,7 +55,10 @@
     },
     "hosts": {
       "name": "hosts",
-      "command": "npm run hosts"
+      "command": "npm run hosts",
+      "preview": {
+        "port": 3000
+      }
     },
     "host.npm": {
       "name": "host.npm",

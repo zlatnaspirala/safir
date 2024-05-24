@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "browser-resolve": "^2.0.0",
+    "http-server": "^14.1.1",
     "watchify": "^4.0.0"
   },
   "devDependencies": {
