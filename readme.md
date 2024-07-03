@@ -274,6 +274,7 @@ Basic examples:
 
 ## Changes
 
+ - from ver[1.2.17] new buildin plugin notify box.
  - from ver[1.1.20] fixed double call of ready() callback function.
 
 

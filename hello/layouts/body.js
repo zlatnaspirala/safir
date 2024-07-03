@@ -1,4 +1,5 @@
 import { BaseComponent, On } from "../../index";
+import {notify} from "../../src/controls/safir-notify";
 
 export default class Layout extends BaseComponent {
 
@@ -6,6 +7,7 @@ export default class Layout extends BaseComponent {
   statusCounterYes = '0';
   statusCounterNo = '0';
 
+  notify = notify;
   ready = () => { console.log('layout ready') }
 
   constructor(arg) {
@@ -19,8 +21,10 @@ export default class Layout extends BaseComponent {
       // detail.emitter to determinate by id who is for real
       if (t.emitter === "yes") {
         this.set('statusCounterYes', t.newValue);
+				this.notify.show("You answered Yes", "ok")
       } else if (t.emitter === "no") {
         this.set('statusCounterNo', t.newValue);
+				this.notify.show("You answered No", "err")
       }
       // local tbn (no-emit) never emitted!
     });

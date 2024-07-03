@@ -14,9 +14,11 @@ import { On , Off, GetAllEvents} from "./src/core/modifier";
 import { urlVar, byID, emit, byClass, byTag, JSON_HEADER, LocalSessionMemory, LocalStorageMemory, Manager} from "./src/core/utils";
 
 import { SafirSlot } from "./src/controls/safir-slot";
+import {notify} from "./src/controls/safir-notify";
 
 let SafirBuildInPlugins = {
-  SafirSlot: SafirSlot
+  SafirSlot: SafirSlot,
+	notify: notify
 };
 
 export {

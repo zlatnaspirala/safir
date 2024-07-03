@@ -62,10 +62,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _index = require("../../index");
+var _safirNotify = require("../../src/controls/safir-notify");
 class Layout extends _index.BaseComponent {
   id = 'my-body';
   statusCounterYes = '0';
   statusCounterNo = '0';
+  notify = _safirNotify.notify;
   ready = () => {
     console.log('layout ready');
   };
@@ -79,8 +81,10 @@ class Layout extends _index.BaseComponent {
       // detail.emitter to determinate by id who is for real
       if (t.emitter === "yes") {
         this.set('statusCounterYes', t.newValue);
+        this.notify.show("You answered Yes", "ok");
       } else if (t.emitter === "no") {
         this.set('statusCounterNo', t.newValue);
+        this.notify.show("You answered No", "err");
       }
       // local tbn (no-emit) never emitted!
     });
@@ -101,7 +105,7 @@ class Layout extends _index.BaseComponent {
 }
 exports.default = Layout;
 
-},{"../../index":5}],4:[function(require,module,exports){
+},{"../../index":5,"../../src/controls/safir-notify":6}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -295,12 +299,80 @@ var _comp = require("./src/core/comp");
 var _modifier = require("./src/core/modifier");
 var _utils = require("./src/core/utils");
 var _safirSlot = require("./src/controls/safir-slot");
+var _safirNotify = require("./src/controls/safir-notify");
 let SafirBuildInPlugins = {
-  SafirSlot: _safirSlot.SafirSlot
+  SafirSlot: _safirSlot.SafirSlot,
+  notify: _safirNotify.notify
 };
 exports.SafirBuildInPlugins = SafirBuildInPlugins;
 
-},{"./src/controls/safir-slot":6,"./src/core/comp":7,"./src/core/modifier":9,"./src/core/root":10,"./src/core/utils":11}],6:[function(require,module,exports){
+},{"./src/controls/safir-notify":6,"./src/controls/safir-slot":7,"./src/core/comp":8,"./src/core/modifier":10,"./src/core/root":11,"./src/core/utils":12}],6:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.notify = void 0;
+var _utils = require("../core/utils");
+let notify = {
+  root: () => (0, _utils.byID)('msgBox'),
+  pContent: () => (0, _utils.byID)('not-content'),
+  copy: function () {
+    navigator.clipboard.writeText(notify.root().children[0].innerText);
+  },
+  c: 0,
+  ic: 0,
+  t: {},
+  setContent: function (content, t) {
+    var iMsg = document.createElement('div');
+    iMsg.innerHTML = content;
+    iMsg.id = `msgbox-loc-${notify.c}`;
+    notify.root().appendChild(iMsg);
+    iMsg.classList.add('animate1');
+    if (t == 'ok') {
+      iMsg.style = 'font-family: stormfaze;color:white;padding:7px;margin:2px';
+    } else {
+      iMsg.style = 'font-family: stormfaze;color:white;padding:7px;margin:2px';
+    }
+  },
+  kill: function () {
+    notify.root().remove();
+  },
+  show: function (content, t) {
+    notify.setContent(content, t);
+    notify.root().style.display = "block";
+    var loc2 = notify.c;
+    setTimeout(function () {
+      (0, _utils.byID)(`msgbox-loc-${loc2}`).classList.remove("fadeInDown");
+      (0, _utils.byID)(`msgbox-loc-${loc2}`).classList.add("fadeOut");
+      setTimeout(function () {
+        (0, _utils.byID)(`msgbox-loc-${loc2}`).style.display = "none";
+        (0, _utils.byID)(`msgbox-loc-${loc2}`).classList.remove("fadeOut");
+        (0, _utils.byID)(`msgbox-loc-${loc2}`).remove();
+        notify.ic++;
+        if (notify.c == notify.ic) {
+          notify.root().style.display = 'none';
+        }
+      }, 1000);
+    }, 3000);
+    notify.c++;
+  },
+  error: function (content) {
+    notify.root().classList.remove("success");
+    notify.root().classList.add("error");
+    notify.root().classList.add("fadeInDown");
+    notify.show(content, 'err');
+  },
+  success: function (content) {
+    notify.root().classList.remove("error");
+    notify.root().classList.add("success");
+    notify.root().classList.add("fadeInDown");
+    notify.show(content, 'ok');
+  }
+};
+exports.notify = notify;
+
+},{"../core/utils":12}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -613,7 +685,7 @@ class SafirSlot extends _index.BaseComponent {
 }
 exports.SafirSlot = SafirSlot;
 
-},{"../../index":5}],7:[function(require,module,exports){
+},{"../../index":5}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -823,7 +895,7 @@ class BaseComponent {
 }
 exports.BaseComponent = BaseComponent;
 
-},{"./utils":11}],8:[function(require,module,exports){
+},{"./utils":12}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -884,7 +956,7 @@ class Horizontal extends Base {
 }
 exports.Horizontal = Horizontal;
 
-},{"../style/base":12}],9:[function(require,module,exports){
+},{"../style/base":13}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -901,7 +973,7 @@ exports.Off = Off;
 const GetAllEvents = window.GetAllEvents;
 exports.GetAllEvents = GetAllEvents;
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1043,7 +1115,7 @@ class Safir extends BaseSafir {
 }
 exports.Safir = Safir;
 
-},{"./custom-com":8,"./modifier":9,"./utils":11}],11:[function(require,module,exports){
+},{"./custom-com":9,"./modifier":10,"./utils":12}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1286,7 +1358,7 @@ const emit = (en, d) => {
 };
 exports.emit = emit;
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
